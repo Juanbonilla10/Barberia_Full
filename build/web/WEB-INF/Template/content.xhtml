@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <h2>
+                        Home
+                        <small>Rendimiento</small>
+                    </h2>
+                </div>
+                <div class="row clearfix">
+                    <!-- Pie Chart -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="but">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Productos más vendidos</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);" onclick="demoFromHTML();">Descargar</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+
+                                <canvas id="pie_chart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #END# Pie Chart -->
+                    <!-- Line Chart -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Venta mensual</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);" onclick="demoFromHTML();">Descargar</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <canvas id="line_chart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #END# Line Chart -->
+
+
+
+                    <!-- Bar Chart -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Cortes dama y caballero</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);" onclick="demoFromHTML();">Descargar</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <canvas id="bar_chart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>
+                                    Reportes
+                                </h2>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix">
+                                    <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+                                        <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-col-teal">
+                                                <div class="panel-heading" role="tab" id="headingOne_17">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseOne_17" aria-expanded="true" aria-controls="collapseOne_17">
+                                                            <i class="material-icons">assessment</i> Inventario
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseOne_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_17">
+                                                    <div class="panel-body">
+                                                        <p>Podras acceder a los reportes previstos por el sistema entorno al inventario y todo lo relacionado con productos de la empresa</p>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Inventario actual</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo mensual</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo semanal</button>
+                                                        <br> </br>
+                                                        <br> </br>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo diario</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Ordenes de compra</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Ordenes devueltas</button>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-col-teal">
+                                                <div class="panel-heading" role="tab" id="headingTwo_17">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseTwo_17" aria-expanded="false"
+                                                           aria-controls="collapseTwo_17">
+                                                            <i class="material-icons">assessment</i> Gestión humana
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseTwo_17" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo_17">
+                                                    <div class="panel-body">
+                                                        <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Registros mensuales (C.L)</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Pago nomina</button>
+                                                        <br> </br>
+                                                        <br> </br>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Gastos mensuales</button>
+                                                        <br> </br>
+                                                        <br> </br>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-col-teal">
+                                                <div class="panel-heading" role="tab" id="headingThree_17">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseThree_17" aria-expanded="false"
+                                                           aria-controls="collapseThree_17">
+                                                            <i class="material-icons">assessment</i> Clientes
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseThree_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_17">
+                                                    <div class="panel-body">
+                                                        <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Compras realizadas</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Compras devuelltas</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Historial servicio</button>
+                                                        <br> </br>
+                                                        <br> </br>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Historial PQRS</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-col-teal">
+                                                <div class="panel-heading" role="tab" id="headingFour_17">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseFour_17" aria-expanded="false"
+                                                           aria-controls="collapseFour_17">
+                                                            <i class="material-icons">assessment</i> PQRS
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFour_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour_17">
+                                                    <div class="panel-body">
+                                                        <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">PQRS pendientes</button>
+                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">PQRS resueltas</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #END# Bar Chart -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--aqui termina todo lo de las grafias y repoprtes-->
+
+                    <div class="row clearfix" style="display: none;">
+                        <!-- Radar Chart -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>RADAR CHART</h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);">Action</a></li>
+                                                <li><a href="javascript:void(0);">Another action</a></li>
+                                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="body">
+                                    <canvas id="radar_chart" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #END# Radar Chart -->
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </h:body>
+</html>
+

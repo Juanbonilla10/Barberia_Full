@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
+        <!-- Favicon-->
+        <link rel="icon" href="../../favicon.ico" type="image/x-icon"/>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"/>
+
+        <!-- Bootstrap Core Css -->
+        <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Waves Effect Css -->
+        <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+        <!-- Animation Css -->
+        <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+        <!-- Custom Css -->
+        <link href="css/style.css" rel="stylesheet"/>
+
+    </h:head>
+    <h:body class="signup-page" style="background-image: url(http://labarberia.com/wp-content/uploads/2019/12/bg_barberia.jpg)">
+
+
+        <div class="signup-box">
+            <div class="logo">
+                <center>
+
+                </center>
+
+            </div>
+            <div class="card">
+                <div class="body">
+                    <h:form id="sign_up">
+                        <div class="msg">
+                            <img src="images/AYT.png" alt="Logo de Codigo Genial" width="100"/>
+                            <a href="javascript:void(0);" style="font-size: 20px;"><b>AyT Information</b></a>   
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">pan_tool</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisId" requiredMessage="Ingrese su numero de identificación" html5:autofocus="autofocus" html5:placeholder="Numero de identificación" html5:type="text" value="#{inicioRequest.objusu.numIdentificacion}" required="true" class="form-control"/>               
+                                <h:message style="color:red" for="regisId"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">account_circle</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisNombre" requiredMessage="Ingrese su nombre" class="form-control" html5:type="text" value="#{inicioRequest.objusu.nombres}" required="true" html5:placeholder="Nombres" />
+                                <h:message style="color:red" for="regisNombre"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">account_circle</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisApellido" requiredMessage="Ingrese sus apellidos"  html5:placeholder="Apellidos" class="form-control"  value="#{inicioRequest.objusu.apellidos}"  required="true" />
+                                <h:message style="color:red" for="regisApellido"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">contact_phone</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisTelefono" requiredMessage="Ingrese su numero de telefono" html5:type="number" class="form-control"  value="#{inicioRequest.objusu.telefono}" required="true" html5:placeholder="3154520992"/>                                            
+                                <h:message style="color:red" for="regisTelefono"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">place</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisDireccion" requiredMessage="Ingrese su dirección" html5:placeholder="Calle 10 sur #38-70" value="#{inicioRequest.objusu.direccion}"  required="true" class="form-control"/>              
+                                <h:message style="color:red" for="regisDireccion"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                            </span>
+                            <div class="form-line">
+                                <h:inputText id="regisCorreo" requiredMessage="Ingrese un correo electronico " html5:placeholder="ejemplo@gmail.com" value="#{inicioRequest.objusu.email}"  required="true" class="form-control" />            
+                                <h:message style="color:red" for="regisCorreo"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">             
+                                <h:inputSecret id="regisContrasena" requiredMessage="Ingrese su contraseña" html5:placeholder="*******" value="#{inicioRequest.objusu.contrasena}"  required="true" class="form-control" />            
+                                <h:message style="color:red" for="regisContrasena"></h:message>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">wc</i>
+                            </span>
+                            <div>             
+                                <h:selectOneMenu value="#{inicioRequest.objusu.genero}" class="form-control">
+                                    <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+                                    <f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+                                </h:selectOneMenu>        
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink"/>
+                            <label for="terms">Acepta las politicas de privacidad<a href="javascript:void(0);"> terminos y condiciones</a>.</label>
+                        </div>
+                        <h:commandButton value="Registrar" action="#{inicioRequest.registrarUser()}" class="btn btn-block btn-lg bg-pink waves-effect"/>
+                        <div class="m-t-25 m-b--5 align-center">
+                            <a href="index_1.xhtml">Ya tienes una cuenta</a>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Validation Plugin Js -->
+        <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+        <!-- Custom Js -->
+        <script src="js/admin.js"></script>
+        <script src="js/pages/examples/sign-in.js"></script>
+    </h:body>
+</html>
+
