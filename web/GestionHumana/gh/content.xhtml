@@ -61,7 +61,6 @@
                                                                 <td>#{usu.direccion}</td>
                                                                 <td>#{usu.genero}</td>
                                                                 <td>#{usu.email}</td>
-
                                                                 <td>
                                                                     <c:if test="#{usu.numIdentificacion != inicioRequest.objusu.numIdentificacion}">
                                                                         <h:commandButton  action="#{listaUsuarioView.cargaUsuarioEditar(usu)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar">

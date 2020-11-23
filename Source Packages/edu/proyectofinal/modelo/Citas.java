@@ -42,7 +42,7 @@ public class Citas implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "Telefono")
-    private int telefono;
+    private double telefono;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -70,7 +70,7 @@ public class Citas implements Serializable {
         this.idCitas = idCitas;
     }
 
-    public Citas(Integer idCitas, int telefono, String fecha, String hora) {
+    public Citas(Integer idCitas, double telefono, String fecha, String hora) {
         this.idCitas = idCitas;
         this.telefono = telefono;
         this.fecha = fecha;
@@ -85,11 +85,11 @@ public class Citas implements Serializable {
         this.idCitas = idCitas;
     }
 
-    public int getTelefono() {
+    public double getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(double telefono) {
         this.telefono = telefono;
     }
 

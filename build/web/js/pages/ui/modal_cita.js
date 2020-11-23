@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 	$('.ter').click(function(e){
 		e.preventDefault();

@@ -101,6 +101,20 @@ public class VentaView implements Serializable {
         objproduct = new VentaProducto();
         
     }
+    
+    public void retornarDatos(VentaProducto objkl){
+        this.objproduct = objkl;       
+    }
+     
+    public void actualizarDatos(){
+        try {
+            ventaProductoFacadeLocal.edit(objproduct);
+            listaventa.clear();
+            listaventa.addAll(ventaProductoFacadeLocal.findAll());
+        } catch (Exception e) {
+            System.out.println("Error al actualizar:" + e);
+        }
+    }
 
     public TipoPago getObjtpg() {
         return objtpg;

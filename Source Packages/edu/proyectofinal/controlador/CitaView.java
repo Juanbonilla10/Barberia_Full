@@ -58,9 +58,11 @@ public class CitaView implements Serializable{
     
     @PostConstruct
     public void cargadatos(){
+        
         listauser.addAll(usuariosFacadeLocal.findAll());
         listaservicios.addAll(serviciosFacadeLocal.findAll());
         listapagos.addAll(tipoPagoFacadeLocal.findAll());
+        listacitas.addAll(citasFacadeLocal.findAll());
         
         citas.setServiciosIdservicio(new Servicios());
         citas.setUsuariosidUsuarios(new Usuarios());
@@ -79,6 +81,10 @@ public class CitaView implements Serializable{
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+    
+    public void cargaDatos(Citas objcitasp){
+         this.citas = objcitasp;
     }
 
     public Usuarios getUsuarios() {

@@ -64,26 +64,6 @@ public class InicioRequest implements Serializable {
         PrimeFaces.current().executeScript(mensaje);
     }
     
-    public void inicioSesion(){
-        String mensajeSw = " ";
-        
-        try {
-         objusu =  usuariosFacadeLocal.loginUsuario(correoIn, contrasenaIn);
-         
-         if (objusu.getIdUsuarios() == null) {
-                mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
-               
-            } else {
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.getExternalContext().redirect("Inventario/index.xhtml");
-
-            }
-            
-       } catch (Exception e) {
-            mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
-        }
-        PrimeFaces.current().executeScript(mensajeSw);
-    }
     
     public void ventas(){
     
