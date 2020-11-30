@@ -29,5 +29,7 @@ public interface CitasFacadeLocal {
     List<Citas> findRange(int[] range);
 
     int count();
+
+    public Citas eliminarDatos(Integer citasid);
     
 }

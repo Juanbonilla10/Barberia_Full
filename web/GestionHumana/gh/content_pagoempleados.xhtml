@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>PAGOS</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        PAGOS EMPLEADOS
+                                        <small>En este modulo se puede realizar los pagos de servicios a los empleados</small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
+                                                margin-right: 95px;">
+                                        Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Fecha atención</th>
+                                                            <th scope="col">Valor final servicio</th>
+                                                            <th scope="col">Fecha Pago al barbero</th>
+                                                            <th scope="col">Abono</th>
+                                                            <th scope="col">Saldo pendiente</th>
+                                                            <th scope="col">Nombre servicio</th>
+                                                            <th scope="col">Nombre empleado</th>
+
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{pagoempleadosView.listapagoservicios}" var="objspago">
+                                                            <tr>
+                                                                <td>#{objspago.fechaAtencion}</td>
+                                                                <td>#{objspago.valorServicio}</td>
+                                                                <td>#{objspago.fechaPagoBarbero}</td>
+                                                                <td>#{objspago.abono}</td>
+                                                                <td>#{objspago.saldoPendiente}</td>
+                                                                <td>#{objspago.serviciosIdservicio.nombreServicio}</td>
+                                                                <td>#{objspago.usuariosidUsuarios.nombres}</td>
+                                                                
+                                                                <td>
+                                                                    <h:commandButton  action="#{pagoempleadosView.cargaDatos(objspago)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton action="#{pagoempleadosView.removerPago(objspago)}" class="btn btn-danger" value="Remover" style="margin-left: 5px;"/>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                    <!--MODEL DE PAGOS-->
+                    
+                    <!--ACTUALIZAR-->
+                    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar pago</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form id="formModal">
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label>Fecha atención</label>
+                                            <h:inputText id="pagFechaA" required="true" requiredMessage="Ingrese la fecha de atención del servicio" value="#{pagoempleadosView.objpago.fechaAtencion}" html5:type="date" class="form-control" html5:placeholder="Fecha atención"/>
+                                            <h:message style="color: red" for="pagFechaA"></h:message>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Valor servicio </label>
+                                            <h:inputText required="true" requiredMessage="Ingrese el valor del servicio" id="pagValor" value="#{pagoempleadosView.objpago.valorServicio}" class="form-control" html5:placeholder="Valor servicio"/>
+                                            <h:message style="color: red" for="pagValor"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha pago empleado </label>
+                                            <h:inputText required="true" requiredMessage="Ingrese fecha pago al empleado" id="pagFechaE" value="#{pagoempleadosView.objpago.fechaPagoBarbero}" html5:type="date" class="form-control" html5:placeholder="Fecha pago empleado"/>
+                                            <h:message style="color: red" for="pagFechaE"></h:message>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Abono </label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el abono" id="pagAbono" value="#{pagoempleadosView.objpago.abono}" class="form-control" html5:placeholder="Abono"/>
+                                            <h:message style="color: red" for="pagAbono"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre empleado</label>
+                                            <h:selectOneMenu value="#{pagoempleadosView.objpago.usuariosidUsuarios.idUsuarios}" class="form-control">
+                                                <f:selectItems value="#{pagoempleadosView.listausuario}" var="objpg" itemValue="#{objpg.idUsuarios}" itemLabel="#{objpg.nombres}" />
+                                            </h:selectOneMenu> 
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Saldo pendiente</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el saldo pendiente" id="pagSaldo" value="#{pagoempleadosView.objpago.saldoPendiente}" class="form-control" html5:placeholder="Saldo pendiente"/>
+                                            <h:message style="color: red" for="pagSaldo"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre servicio</label>
+                                            <h:selectOneMenu value="#{pagoempleadosView.objpago.serviciosIdservicio.idservicio}" class="form-control">
+                                                <f:selectItems value="#{pagoempleadosView.listaservicios}" var="objpg" itemValue="#{objpg.idservicio}" itemLabel="#{objpg.nombreServicio}"/>
+                                            </h:selectOneMenu>                       
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <h:commandButton action="#{pagoempleadosView.editarPago()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Actualizar"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza Usuario
+                    </button>
+                    <!--CREAR CITA-->
+
+                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Registro nuevo pago</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form >
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label>Fecha atención</label>
+                                            <h:inputText id="pagFechaA" required="true" requiredMessage="Ingrese la fecha de atención del servicio" value="#{pagoempleadosView.objpago.fechaAtencion}" html5:type="date" class="form-control" html5:placeholder="Fecha atención"/>
+                                            <h:message style="color: red" for="pagFechaA"></h:message>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Valor servicio </label>
+                                            <h:inputText required="true" requiredMessage="Ingrese el valor del servicio" id="pagValor" value="#{pagoempleadosView.objpago.valorServicio}" class="form-control" html5:placeholder="Valor servicio"/>
+                                            <h:message style="color: red" for="pagValor"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha pago empleado </label>
+                                            <h:inputText required="true" requiredMessage="Ingrese fecha pago al empleado" id="pagFechaE" value="#{pagoempleadosView.objpago.fechaPagoBarbero}" html5:type="date" class="form-control" html5:placeholder="Fecha pago empleado"/>
+                                            <h:message style="color: red" for="pagFechaE"></h:message>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Abono </label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el abono" id="pagAbono" value="#{pagoempleadosView.objpago.abono}" class="form-control" html5:placeholder="Abono"/>
+                                            <h:message style="color: red" for="pagAbono"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre empleado</label>
+                                            <h:selectOneMenu value="#{pagoempleadosView.objpago.usuariosidUsuarios.idUsuarios}" class="form-control">
+                                                <f:selectItems value="#{pagoempleadosView.listausuario}" var="objpg" itemValue="#{objpg.idUsuarios}" itemLabel="#{objpg.nombres}" />
+                                            </h:selectOneMenu> 
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Saldo pendiente</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el saldo pendiente" id="pagSaldo" value="#{pagoempleadosView.objpago.saldoPendiente}" class="form-control" html5:placeholder="Saldo pendiente"/>
+                                            <h:message style="color: red" for="pagSaldo"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre servicio</label>
+                                            <h:selectOneMenu value="#{pagoempleadosView.objpago.serviciosIdservicio.idservicio}" class="form-control">
+                                                <f:selectItems value="#{pagoempleadosView.listaservicios}" var="objpg" itemValue="#{objpg.idservicio}" itemLabel="#{objpg.nombreServicio}"/>
+                                            </h:selectOneMenu>                       
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <h:commandButton action="#{pagoempleadosView.crearPago()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Registrarse"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

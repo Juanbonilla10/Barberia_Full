@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Lista de servicios</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        SERVICIOS
+                                        <small>En este modulo podras realizar el registro de servicios de la empresa </small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
+                                                margin-right: 95px;">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre servicio</th>
+                                                            <th scope="col">Tipo de servicio</th>
+                                                            <th scope="col">Valor</th>
+                                                            <th scope="col">Codigo servicio</th>
+                                                            <th scope="col">Fecha creación</th>
+                                                            <th scope="col">Descripción</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{servicioView.listaservicios}" var="objser">
+                                                            <tr>
+                                                                <td>#{objser.nombreServicio}</td>
+                                                                <td>#{objser.categoriaservicioidCategoriaServicio.tipoServicio}</td>
+                                                                <td>#{objser.valorServicio}</td>
+                                                                <td>#{objser.codigoServicio}</td>
+                                                                <td>#{objser.fechaCreacion}</td>
+                                                                <td>#{objser.descripción}</td>
+                                                                <td>
+                                                                    <h:commandButton  action="#{servicioView.cargaDatos(objser)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton action="#{servicioView.removerServicio(objser)}" class="btn btn-danger" value="Remover" style="margin-left: 5px;"/>
+                                                                </td>
+                                                               
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                    <!--MODEL DE SERVICIOS-->
+                    <!--ACTUALIZAR-->
+                    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form id="formModal">
+                                    <div class="modal-body">
+
+                                       <div class="form-group">
+                                            <label>Nombre servicio </label>
+                                            <h:inputText id="serNom" required="true" requiredMessage="Ingrese el nombre del servicio" value="#{servicioView.servicios.nombreServicio}" class="form-control" html5:placeholder="Nombre servicio"/>
+                                            <h:message style="color: red" for="serNom"></h:message>
+                                        </div>
+
+
+                                        <div class="form-group">    
+                                            <label>Tipo de servicio</label>
+                                               <h:selectOneMenu value="#{servicioView.servicios.categoriaservicioidCategoriaServicio.idCategoriaServicio}" class="form-control">
+                                                <f:selectItems value="#{servicioView.listacategoraservicio}" var="objservicios" itemValue="#{objservicios.idCategoriaServicio}" itemLabel="#{objservicios.tipoServicio}"/>
+                                            </h:selectOneMenu>                   
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Valor</label>
+                                            <h:inputText required="true" requiredMessage="Ingrese el valor" id="serVal" value="#{servicioView.servicios.valorServicio}" class="form-control" html5:placeholder="Valor"/>
+                                            <h:message style="color: red" for="serVal"></h:message>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Codigo servicio</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese un codigo de servicio" id="serCod" value="#{servicioView.servicios.codigoServicio}" class="form-control" html5:placeholder="Codigo servicio"/>
+                                            <h:message style="color: red" for="serCod"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha</label>
+                                            <h:inputText required="true" requiredMessage="Ingrese la fecha" id="serFecha" value="#{servicioView.servicios.fechaCreacion}" html5:type="date" class="form-control" html5:placeholder="Fecha"/>
+                                            <h:message style="color: red" for="serFecha"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese una descripción" id="serDes" value="#{servicioView.servicios.descripción}" class="form-control" html5:placeholder="Descripción"/>
+                                            <h:message style="color: red" for="serDes"></h:message>
+                                        </div>
+                                        
+                                        <div class="modal-footer" >
+                                        <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <h:commandButton action="#{servicioView.editarServicio()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Actualizar"/>
+                                        </div> 
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza Usuario
+                    </button>
+                    <!--CREAR SERVICIO-->
+                    
+                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Registro servicios</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label>Nombre servicio </label>
+                                            <h:inputText id="serNom" required="true" requiredMessage="Ingrese el nombre del servicio" value="#{servicioView.servicios.nombreServicio}" class="form-control" html5:placeholder="Nombre servicio"/>
+                                            <h:message style="color: red" for="serNom"></h:message>
+                                        </div>
+
+
+                                        <div class="form-group">    
+                                            <label>Tipo de servicio</label>
+                                               <h:selectOneMenu value="#{servicioView.servicios.categoriaservicioidCategoriaServicio.idCategoriaServicio}" class="form-control">
+                                                <f:selectItems value="#{servicioView.listacategoraservicio}" var="objservicios" itemValue="#{objservicios.idCategoriaServicio}" itemLabel="#{objservicios.tipoServicio}"/>
+                                            </h:selectOneMenu>                   
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Valor</label>
+                                            <h:inputText required="true" requiredMessage="Ingrese el valor" id="serVal" value="#{servicioView.servicios.valorServicio}" class="form-control" html5:placeholder="Valor"/>
+                                            <h:message style="color: red" for="serVal"></h:message>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Codigo servicio</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese un codigo de servicio" id="serCod" value="#{servicioView.servicios.codigoServicio}" class="form-control" html5:placeholder="Codigo servicio"/>
+                                            <h:message style="color: red" for="serCod"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha</label>
+                                            <h:inputText required="true" requiredMessage="Ingrese la fecha" id="serFecha" value="#{servicioView.servicios.fechaCreacion}" html5:type="date" class="form-control" html5:placeholder="Fecha"/>
+                                            <h:message style="color: red" for="serFecha"></h:message>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <h:inputText required="true"  requiredMessage="Ingrese una descripción" id="serDes" value="#{servicioView.servicios.descripción}" class="form-control" html5:placeholder="Descripción"/>
+                                            <h:message style="color: red" for="serDes"></h:message>
+                                        </div>
+                                        
+                                        <div class="modal-footer" >
+                                        <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <h:commandButton action="#{servicioView.crearServicio()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Registrarse"/>
+                                        </div> 
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </section>
+
+        </ui:composition>
+    </h:body>
+
+</html>

@@ -57,7 +57,7 @@ public class Cronograma implements Serializable {
     @JoinColumn(name = "categoria_servicio_idCategoria_Servicio", referencedColumnName = "idCategoria_Servicio")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoriaServicio categoriaservicioidCategoriaServicio;
-    @JoinColumn(name = "usuarios_idUsuarios", referencedColumnName = "Num_Identificacion")
+    @JoinColumn(name = "usuarios_idUsuarios", referencedColumnName = "idUsuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios usuariosidUsuarios;
 

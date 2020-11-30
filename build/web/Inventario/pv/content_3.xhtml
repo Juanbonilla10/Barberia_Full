@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+           <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Inventario</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        INVENTARIO
+                                        <small>En este modulo podras verificar las existencias de los productos ademas de hacer ingreso y salidas de  productos del inventario </small>
+                                    </h2>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Item</th>
+                                                            <th scope="col">Referencia</th>
+                                                            <th scope="col">Cod. Barras</th>
+                                                            <th scope="col">Descripcion</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Detalle</th>
+                                                          
+                                                            
+                                                            <th scope="col">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      
+                                                        
+                                                        
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                   <td></td>
+                                                                <td><h:commandButton  style="margin-right: 10px" class="btn btn-success" onclick="$('#btnModal').click();" value="Ingreso" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton style="margin-right: 10px" class="btn btn-danger" onclick="$('').click();" value="Salida" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                
+                                                                 </td>
+                                                                
+                                                            </tr>
+                                                   
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                   
+                  
+      <!--ACTUALIZAR-->
+      <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">INGRESOS</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    
+                                    <h:form id="formModal">
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputIng">Ingreso</label>
+                                            <h:inputText value="" html5:type="number" class="form-control" id="exampleInputIng"  html5:placeholder="Ing +1"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputDe">Detalle</label>
+                                            <h:inputText value="" html5:type="text" class="form-control" id="exampleInputDe"  html5:placeholder="Detalle"/>
+                                        </div>
+                                            <div class="modal-footer" >
+                                            <h:commandButton  type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                        </div>            
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        Ingreso
+                    </button>
+      
+          <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">INGRESOS</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    
+                                    <h:form id="formModal">
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputIng">Ingreso</label>
+                                            <h:inputText value="" html5:type="number" class="form-control" id="exampleInputIng"  html5:placeholder="Ing +1"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputDe">Detalle</label>
+                                            <h:inputText value="" html5:type="text" class="form-control" id="exampleInputDe"  html5:placeholder="Detalle"/>
+                                        </div>
+                                            <div class="modal-footer" >
+                                            <h:commandButton  type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                        </div>            
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" style="display: none" id="" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModals">
+                        Salida
+                    </button>
+                </div>
+              
+           </section>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

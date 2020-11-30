@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")})
 public class Proveedor implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedorIdProveedor", fetch = FetchType.LAZY)
+    private Collection<CrearProducto> crearProductoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,8 +85,6 @@ public class Proveedor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nit")
     private String nit;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedorIdProveedor", fetch = FetchType.LAZY)
-    private Collection<CrearProducto> crearProductoCollection;
     @JoinColumn(name = "usuarios_idUsuarios1", referencedColumnName = "idUsuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios usuariosidUsuarios1;
@@ -206,15 +207,6 @@ public class Proveedor implements Serializable {
         this.nit = nit;
     }
 
-    @XmlTransient
-    public Collection<CrearProducto> getCrearProductoCollection() {
-        return crearProductoCollection;
-    }
-
-    public void setCrearProductoCollection(Collection<CrearProducto> crearProductoCollection) {
-        this.crearProductoCollection = crearProductoCollection;
-    }
-
     public Usuarios getUsuariosidUsuarios1() {
         return usuariosidUsuarios1;
     }
@@ -246,6 +238,15 @@ public class Proveedor implements Serializable {
     @Override
     public String toString() {
         return "edu.proyectofinal.modelo.Proveedor[ idProveedor=" + idProveedor + " ]";
+    }
+
+    @XmlTransient
+    public Collection<CrearProducto> getCrearProductoCollection() {
+        return crearProductoCollection;
+    }
+
+    public void setCrearProductoCollection(Collection<CrearProducto> crearProductoCollection) {
+        this.crearProductoCollection = crearProductoCollection;
     }
     
 }

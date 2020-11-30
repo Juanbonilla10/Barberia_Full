@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -28,6 +29,10 @@ import javax.faces.view.ViewScoped;
 @Named(value = "ventaView")
 @ViewScoped
 public class VentaView implements Serializable {
+    
+    private Integer idventa;
+    private String mensaje=""; 
+    private boolean verdad;
 
     public VentaView() {
 
@@ -81,6 +86,8 @@ public class VentaView implements Serializable {
 
     public void crearVenta() {  
         
+        String mensaje="";
+        
         try {
             
             objproduct.setCrearproductoidCrearProducto(cpf.find(objproduct.getCrearproductoidCrearProducto().getIdCrearProducto()));
@@ -93,11 +100,16 @@ public class VentaView implements Serializable {
             
             listaventa.add(objproduct);
             
+            mensaje="Swal.fire('¡Venta creada con exito!','','success')";
+            
         } catch (Exception e) {
             //System.out.println("Error al regustrar" + getClientedocu() + e);
             System.out.println("Erro"+ e );
+            
+             mensaje="Swal.fire('¡No se pudo crear la venta!','','error')";
+            
         }
-        
+        PrimeFaces.current().executeScript(mensaje);
         objproduct = new VentaProducto();
         
     }
@@ -108,12 +120,38 @@ public class VentaView implements Serializable {
      
     public void actualizarDatos(){
         try {
+            objproduct.setCrearproductoidCrearProducto(cpf.find(objproduct.getCrearproductoidCrearProducto().getIdCrearProducto()));
+            
+            objproduct.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(objproduct.getTipopagoidTipoPago().getIdTipoPago()));
+            
+            objproduct.setIdUsuarios(usuariosFacadeLocal.find(objproduct.getIdUsuarios().getIdUsuarios()));
+            
             ventaProductoFacadeLocal.edit(objproduct);
             listaventa.clear();
             listaventa.addAll(ventaProductoFacadeLocal.findAll());
         } catch (Exception e) {
             System.out.println("Error al actualizar:" + e);
         }
+    }
+    
+    public void eliminar (){
+              
+        try {         
+           ventaProductoFacadeLocal.eliminarPorId(idventa);
+           listaventa.clear();
+           listaventa.addAll(ventaProductoFacadeLocal.findAll()); 
+           this.verdad=true;
+           this.mensaje="swal('Usuario modificado' , ' con exito ', 'success')";
+           System.out.println(this.mensaje + this.verdad);
+           
+                  
+        } catch (Exception e) {
+            System.out.println("Error al eliminar la venta: " + e.getMessage());
+            mensaje="Swal.fire('¡No se pudo eliminar!','','error')";
+        }
+         
+        PrimeFaces.current().executeScript(this.mensaje);
+        
     }
 
     public TipoPago getObjtpg() {
@@ -178,6 +216,30 @@ public class VentaView implements Serializable {
 
     public void setListaventa(ArrayList<VentaProducto> listaventa) {
         this.listaventa = listaventa;
+    }
+
+    public Integer getIdventa() {
+        return idventa;
+    }
+
+    public void setIdventa(Integer idventa) {
+        this.idventa = idventa;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public boolean isVerdad() {
+        return verdad;
+    }
+
+    public void setVerdad(boolean verdad) {
+        this.verdad = verdad;
     }
 
 

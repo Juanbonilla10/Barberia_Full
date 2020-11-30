@@ -20,15 +20,16 @@
                             <div class="card">
                                 <div class="header">
                                     <h2>
-                                         CITAS RESERVADAS 
+                                        CITAS RESERVADAS 
                                         <small>En este modulo se puede realizar gestión para las citas </small>
                                     </h2>
 
-                                    <div class="row clearfix js-sweetalert">
+                                    <div class="row clearfix js-sweetalert">                                        
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#mediumModaleli" style="width: 100px; float: right;
                                                 margin-right: 95px;">Eliminar</button>
                                         <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#defaultModalcrear" style="width: 100px; float: right;
                                                 margin-right: 95px;">Crear</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -59,6 +60,7 @@
                                                     </thead>
                                                     <tfoot>
                                                         <tr>
+                                                            <th>Id</th>
                                                             <th>Name</th>
                                                             <th>Tipo de pago</th>
                                                             <th>Servicio</th>
@@ -71,6 +73,7 @@
                                                     <tbody>
                                                         <c:forEach items="#{citaView.listacitas}" var="objcitasp">
                                                             <tr>
+                                                                <td>#{objcitasp.idCitas}</td>
                                                                 <td>#{objcitasp.usuariosidUsuarios.nombres}</td>
                                                                 <td>#{objcitasp.tipopagoidTipoPago.descripcion}</td>
                                                                 <td>#{objcitasp.serviciosIdservicio.nombreServicio}</td>
@@ -81,7 +84,6 @@
                                                                     <h:commandButton type="button" class="btn btn-warning" action="#{citaView.cargaDatos(objcitasp)}" onclick="$('#btnModal').click();" value="Editar" >
                                                                         <f:ajax render=":formModal"></f:ajax>
                                                                     </h:commandButton>
-                                                                    <h:commandButton type="button" class="btn btn-danger" value="Eliminar" style="margin-left: 5px;"/>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
@@ -251,7 +253,7 @@
                                         </div>
 
                                         <div class="modal-footer" >
-                                            <h:commandButton  action="#" class="btn btn-primary btn-flat m-b-30 m-t-30 " value="Actualizar" />
+                                            <h:commandButton  action="#{citaView.actualizarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30 " value="Actualizar" />
                                         </div> 
                                     </div>
                                 </h:form>
@@ -279,40 +281,12 @@
                                     <div class="modal-body">
                                         <div class="col-md-4">
                                             <label for="exampleInputClientes">Clientes</label>
-                                            <h:selectOneMenu value="#{ventaView.objproduct.idUsuarios.idUsuarios}" class="form-control form-control-sm" >
-                                                <f:selectItems  value="#{ventaView.listausuario}" var="objkl" itemValue="#{objkl.idUsuarios}" itemLabel="#{objkl.numIdentificacion}"  />
+                                            <h:selectOneMenu value="#{citaView.idcita}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{citaView.listacitas}" var="objkll" itemValue="#{objkll.idCitas}" itemLabel="#{objkll.idCitas}"  />
                                             </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputProducto">Producto</label>
-                                            <h:selectOneMenu value="#{ventaView.objproduct.crearproductoidCrearProducto.idCrearProducto}" class="form-control form-control-sm" >
-                                                <f:selectItems  value="#{ventaView.listaprducts}" var="objtlo" itemValue="#{objtlo.idCrearProducto}" itemLabel="#{objtlo.descripcion}"  />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputPago">Tipo de pago</label>
-                                            <h:selectOneMenu value="#{ventaView.objproduct.tipopagoidTipoPago.idTipoPago}" class="form-control form-control-sm">
-                                                <f:selectItems  value="#{ventaView.listapagos}" var="objlp" itemValue="#{objlp.idTipoPago}" itemLabel="#{objlp.descripcion}"  />
-                                            </h:selectOneMenu>  
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputFecha">Fecha</label>
-                                            <h:inputText value="#{ventaView.objproduct.fechaVenta}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputCantidad">Cantidad</label>
-                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.cantidad}" class="form-control" id="exampleInputCantidad" html5:placeholder="Cantidad"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputTotal">Total</label>
-                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.total}" class="form-control" id="exampleInputTotal" html5:placeholder="Total"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputIva">Iva</label>
-                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.iva}" class="form-control" id="exampleInputIva" html5:placeholder="Iva"/>
                                         </div>
                                         <div class="modal-footer" >
-                                            <h:commandButton  action="#{ventaView.crearVenta()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Eliminar" />
+                                            <h:commandButton  action="#{citaView.eliminarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Eliminar" />
                                         </div>             
                                     </div>
                                 </h:form>

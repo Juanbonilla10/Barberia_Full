@@ -9,6 +9,7 @@ import edu.proyectofinal.modelo.Cronograma;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,20 @@ public class CronogramaFacade extends AbstractFacade<Cronograma> implements Cron
 
     public CronogramaFacade() {
         super(Cronograma.class);
+    }
+    
+  
+    public Cronograma eliminarDatos(Integer cronogramaid){
+        
+        try {
+            Query cg = em.createQuery("DELETE FROM Cronograma c WHERE c.idCronograma = :cronogramaid");
+            cg.setParameter("cronogramaid", cronogramaid).executeUpdate();
+            return new Cronograma();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar desde el facade: " + e.getMessage());
+            return new Cronograma();
+        }
+        
     }
     
 }

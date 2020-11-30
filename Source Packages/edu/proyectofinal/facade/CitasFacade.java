@@ -9,6 +9,7 @@ import edu.proyectofinal.modelo.Citas;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,20 @@ public class CitasFacade extends AbstractFacade<Citas> implements CitasFacadeLoc
 
     public CitasFacade() {
         super(Citas.class);
+    }
+    
+    @Override
+    public Citas eliminarDatos(Integer citasid){
+        
+        try {
+            Query ct = em.createQuery("DELETE FROM Citas c WHERE c.idCitas = :citasid");
+            ct.setParameter("citasid", citasid).executeUpdate();
+            return new Citas();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar desde el facade: " + e.getMessage());
+            return new Citas();
+        }
+        
     }
     
 }

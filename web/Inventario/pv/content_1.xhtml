@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+           <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Productos</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        PRODUCTOS
+                                        <small>En este modulo podras realizar el registro de un nuevo producto </small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
+                                                margin-right: 95px;">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            
+                                                            <th scope="col">Item</th>
+                                                            <th scope="col">Referencia</th>
+                                                            <th scope="col">Codigo Barras</th>
+                                                            <th scope="col">Descripcion</th>
+                                                            <th scope="col">Proveedor</th>
+                                                            <th scope="col">Precio proveedor</th>
+                                                            <th scope="col">Precio publico</th>
+                                                            <th scope="col">Fecha</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{productosView.listaCrearProducto}" var="objpro"> 
+                                                            <tr>
+                                                                <td>#{objpro.idCrearProducto}</td>
+                                                                <td>#{objpro.referencia}</td>
+                                                                <td>#{objpro.codigoBarras}</td>
+                                                                <td>#{objpro.descripcion}</td>
+                                                                <td>#{objpro.proveedorIdProveedor.idProveedor}</td>
+                                                                <td>#{objpro.precioProveedor}</td>
+                                                                <td>#{objpro.precioPublico}</td>
+                                                                <td>#{objpro.fechaRegistro}</td>
+                                                                <td><h:commandButton action="#{productosView.retornaProducto(objpro)}" style="margin-right: 10px" class="btn btn-success" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton action="#{productosView.eliminarprod(objpro)}" style="margin-right: 10px" class="btn btn-danger" value="Eliminar" >
+                                                                        
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+                                                           </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Registrar Producto</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputRef">Referencia</label>
+                                            <h:inputText value="#{productosView.objcrpro.referencia}" requiredMessage="Ingrese una refenrencia valida  " required="true" html5:type="text" class="form-control" id="exampleInputRef"  html5:placeholder="000 Prove"/>
+                                          <h:message style="color: red" for="exampleInputRef"></h:message>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCod">Codigo de barras</label>
+                                            <h:inputText value="#{productosView.objcrpro.codigoBarras}" requiredMessage="Ingrese un codigo de barras valido  " required="true" html5:type="text" class="form-control" id="exampleInputCod"  html5:placeholder="770000000"/>
+                                          <h:message style="color: red" for="exampleInputCod"></h:message>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputDescrip">Descripcion</label>
+                                            <h:inputText value="#{productosView.objcrpro.descripcion}" requiredMessage="Ingrese una descripcion valida  " required="true" html5:type="text" class="form-control" id="exampleInputDescrip"  html5:placeholder="Descripcion"/>
+                                          <h:message style="color: red" for="exampleInputDescrip"></h:message>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Fecha</label>
+                                            <h:inputText value="#{productosView.objcrpro.fechaRegistro}" requiredMessage="Ingrese una fecha valida " required="true" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                          <h:message style="color: red" for="exampleInputFecha"></h:message>
+                                        </div>
+                                              <div class="col-md-4">
+                                 <b>Proveedor</b>
+                            <div class="form-line">
+                                <h:selectOneMenu value="#{productosView.objcrpro.proveedorIdProveedor.idProveedor}" class="form-control">
+                                  <f:selectItems value="#{productosView.listaproveedor}" var="objprovduc" itemValue="#{objprovduc.idProveedor}" itemLabel="#{objprovduc.nombre}" />
+                                     </h:selectOneMenu>  
+                                            
+                            </div>
+                                         </div>
+
+                                        <div class="col-md-4">
+                                            <label for="exampleInputPrePro">Precio proveedor</label>
+                                            <h:inputText html5:type="text" value="#{productosView.objcrpro.precioProveedor}" requiredMessage="Ingrese un precio valido" required="true" class="form-control" id="exampleInputPrePro" html5:placeholder="$ 00000"/>
+                                         <h:message style="color: red" for="exampleInputPrePro"></h:message>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="examplePubli">Precio publico</label>
+                                            <h:inputText html5:type="text" value="#{productosView.objcrpro.precioPublico}" requiredMessage="Ingrese un precio publico valido" required="true" class="form-control" id="exampleInputPubli" html5:placeholder="$ 00000"/>
+                                          <h:message style="color: red" for="examplePubli"></h:message>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton type="submit" action="#{productosView.registraProd()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+               
+               
+               
+               
+               
+               
+                <!--ACTUALIZAR-->
+      <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar Proveedor</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    
+                                    <h:form id="formModal">
+                                      <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputRef">Referencia</label>
+                                            <h:inputText value="#{productosView.objcrpro.referencia}" html5:type="text" class="form-control" id="exampleInputRef"  html5:placeholder="000 Prove"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCod">Codigo de barras</label>
+                                            <h:inputText value="#{productosView.objcrpro.codigoBarras}" html5:type="text" class="form-control" id="exampleInputCod"  html5:placeholder="770000000"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputDescrip">Descripcion</label>
+                                            <h:inputText value="#{productosView.objcrpro.descripcion}" html5:type="text" class="form-control" id="exampleInputDescrip"  html5:placeholder="Descripcion"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Fecha</label>
+                                            <h:inputText value="#{productosView.objcrpro.fechaRegistro}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                        </div>
+                                              <div class="col-md-4">
+                                 <b>Proveedor</b>
+                            <div class="form-line">
+                                <h:selectOneMenu value="#{productosView.objcrpro.proveedorIdProveedor.idProveedor}" class="form-control">
+                                  <f:selectItems value="#{productosView.listaproveedor}" var="objprovduc" itemValue="#{objprovduc.idProveedor}" itemLabel="#{objprovduc.nombre}" />
+                                     </h:selectOneMenu>  
+                                            </div>
+                                         </div>
+
+                                        <div class="col-md-4">
+                                            <label for="exampleInputPrePro">Precio proveedor</label>
+                                            <h:inputText html5:type="text" value="#{productosView.objcrpro.precioProveedor}" class="form-control" id="exampleInputPrePro" html5:placeholder="$ 00000"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="examplePubli">Precio publico</label>
+                                            <h:inputText html5:type="text" value="#{productosView.objcrpro.precioPublico}" class="form-control" id="exampleInputPubli" html5:placeholder="$ 00000"/>
+                                        </div>
+                                        
+                                        <div class="modal-footer" >
+                                            <h:commandButton action="#{proveedorView.actualizarProv()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza proveedor
+                    </button>
+            
+           </section>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

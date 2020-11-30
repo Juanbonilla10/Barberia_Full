@@ -6,9 +6,7 @@
 package edu.proyectofinal.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -55,30 +51,27 @@ public class CrearProducto implements Serializable {
     private String referencia;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "Codigo_Barras")
-    private int codigoBarras;
+    private String codigoBarras;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "Precio_Proveedor")
-    private double precioProveedor;
+    private String precioProveedor;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "Precio_Publico")
-    private double precioPublico;
+    private String precioPublico;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "Fecha_Registro")
     private String fechaRegistro;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
-    private Collection<IngresoProducto> ingresoProductoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
-    private Collection<VentaProducto> ventaProductoCollection;
     @JoinColumn(name = "proveedor_id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Proveedor proveedorIdProveedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
-    private Collection<Inventario> inventarioCollection;
 
     public CrearProducto() {
     }
@@ -87,7 +80,7 @@ public class CrearProducto implements Serializable {
         this.idCrearProducto = idCrearProducto;
     }
 
-    public CrearProducto(Integer idCrearProducto, String descripcion, String referencia, int codigoBarras, double precioProveedor, double precioPublico, String fechaRegistro) {
+    public CrearProducto(Integer idCrearProducto, String descripcion, String referencia, String codigoBarras, String precioProveedor, String precioPublico, String fechaRegistro) {
         this.idCrearProducto = idCrearProducto;
         this.descripcion = descripcion;
         this.referencia = referencia;
@@ -121,27 +114,27 @@ public class CrearProducto implements Serializable {
         this.referencia = referencia;
     }
 
-    public int getCodigoBarras() {
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(int codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         this.codigoBarras = codigoBarras;
     }
 
-    public double getPrecioProveedor() {
+    public String getPrecioProveedor() {
         return precioProveedor;
     }
 
-    public void setPrecioProveedor(double precioProveedor) {
+    public void setPrecioProveedor(String precioProveedor) {
         this.precioProveedor = precioProveedor;
     }
 
-    public double getPrecioPublico() {
+    public String getPrecioPublico() {
         return precioPublico;
     }
 
-    public void setPrecioPublico(double precioPublico) {
+    public void setPrecioPublico(String precioPublico) {
         this.precioPublico = precioPublico;
     }
 
@@ -153,39 +146,12 @@ public class CrearProducto implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
-    @XmlTransient
-    public Collection<IngresoProducto> getIngresoProductoCollection() {
-        return ingresoProductoCollection;
-    }
-
-    public void setIngresoProductoCollection(Collection<IngresoProducto> ingresoProductoCollection) {
-        this.ingresoProductoCollection = ingresoProductoCollection;
-    }
-
-    @XmlTransient
-    public Collection<VentaProducto> getVentaProductoCollection() {
-        return ventaProductoCollection;
-    }
-
-    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
-        this.ventaProductoCollection = ventaProductoCollection;
-    }
-
     public Proveedor getProveedorIdProveedor() {
         return proveedorIdProveedor;
     }
 
     public void setProveedorIdProveedor(Proveedor proveedorIdProveedor) {
         this.proveedorIdProveedor = proveedorIdProveedor;
-    }
-
-    @XmlTransient
-    public Collection<Inventario> getInventarioCollection() {
-        return inventarioCollection;
-    }
-
-    public void setInventarioCollection(Collection<Inventario> inventarioCollection) {
-        this.inventarioCollection = inventarioCollection;
     }
 
     @Override

@@ -14,8 +14,8 @@
                         <img src="https://www.mcgilltribune.com/wp-content/uploads/2020/02/hacker.png" width="48" height="48" alt="User" />
                     </div>
                     <div class="info-container">
-                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Juan Carlos</div>
-                        <div class="email">jccoronado29@misena.edu.co</div>
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#{usuarioSession.usuLogin.nombres}</div>
+                        <div class="email">#{usuarioSession.correoIn}</div>
                         <div class="btn-group user-helper-dropdown">
                             <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                             <ul class="dropdown-menu pull-right">
@@ -32,7 +32,7 @@
                     <ul class="list">
                         <li class="header">Menu de navegación</li>
                         <li>
-                            <a href="home.html">
+                            <a href="../Inventario/index.xhtml">
                                 <i class="material-icons">home</i>
                                 <span>Home</span>
                             </a>
@@ -44,81 +44,19 @@
                             </a>
                             <ul class="ml-menu">
                                 <li>
-                                    <a href="javascript:void(0);" class="menu-toggle">
-                                        <span>Productos</span>
-                                    </a>
-                                    <ul class="ml-menu">
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Crear_Producto.html">Registrar Nuevos Productos</a></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Consultar%20productos%20creados.html">Consultar Productos</a></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Ingreso_Productos.html">Ingresar Productos</a></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Consulta_Ingreso.html">Consultar Ingresos</a></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="menu-toggle">
-                                        <span>Inventario</span>
-                                    </a>
-                                    <ul class="ml-menu">
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Inventario.html">Consultar Inventario</a></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Consulta_mod.html">Consultar Modificaciones</a></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-
-
-                                    <a href="javascript:void(0);" class="menu-toggle">
-                                        <span>Proveedor</span>
-                                    </a>
-                                    <ul class="ml-menu">
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Pro.html">Registrar Nuevo Proveedor</a></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <span><a href="../../pages/ui/Consulta_proveedor.html">Consultar Provedor</a></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
+                                    <a href="../Inventario/index_1_1.xhtml">Productos</a>
+                                </li>
+                                <li style="display: none">
+                                    <a href="#">Inventario</a>
+                                </li>
+                                <li>
+                                    <a href="../Inventario/index_1.xhtml">Proveedores</a>
+                                </li>
+                                <li>
+                                    <a href="../Inventario/index_1_1_1.xhtml">Orden de compra (O.C)</a>
                                 </li>
                             </ul>
-                            <ul class="ml-menu">
-                                <li>
-                                    <a href="Ingreso_Productos.html">Productos</a>
-                                </li>
-                                <li>
-                                    <a href="pages/medias/carousel.html">Inventario</a>
-                                </li>
-                                <li>
-                                    <a href="pages/medias/image-gallery.html">Proveedores</a>
-                                </li>
-                                <li>
-                                    <a href="pages/medias/carousel.html">Orden de cmopra (O.C)</a>
-                                </li>
-                            </ul>
+
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
@@ -130,10 +68,10 @@
                                     <a href="../GestionHumana/index.xhtml">Registro de usuarios</a>
                                 </li>
                                 <li>
-                                    <a href="Pago_Servicio.html">Pagos</a>
+                                    <a href="../GestionHumana/index_pagoempleados.xhtml">Pagos</a>
                                 </li>
                                 <li>
-                                    <a href="Nuevo_Servicio.html">Nuevo servicio</a>
+                                    <a href="../GestionHumana/servicios.xhtml">Nuevo servicio</a>
                                 </li>
                             </ul>
                         </li>

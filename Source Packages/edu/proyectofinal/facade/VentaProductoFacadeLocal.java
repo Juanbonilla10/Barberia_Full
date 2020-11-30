@@ -29,5 +29,7 @@ public interface VentaProductoFacadeLocal {
     List<VentaProducto> findRange(int[] range);
 
     int count();
+
+    public VentaProducto eliminarPorId(Integer numeroid);
     
 }

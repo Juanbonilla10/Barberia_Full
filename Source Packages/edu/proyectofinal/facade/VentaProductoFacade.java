@@ -9,6 +9,7 @@ import edu.proyectofinal.modelo.VentaProducto;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,19 @@ public class VentaProductoFacade extends AbstractFacade<VentaProducto> implement
 
     public VentaProductoFacade() {
         super(VentaProducto.class);
+    }
+    
+    
+    @Override
+    public VentaProducto eliminarPorId(Integer numeroid){
+        try {
+            Query di = em.createQuery("DELETE FROM VentaProducto j WHERE j.idventaProducto = :numeroid");
+            di.setParameter("numeroid", numeroid).executeUpdate();
+            return new VentaProducto();
+        } catch (Exception e) {
+            System.out.println("Error al realizar sentencia" + e);
+            return new VentaProducto();
+        }
     }
     
 }

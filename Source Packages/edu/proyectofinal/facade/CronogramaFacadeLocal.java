@@ -29,5 +29,7 @@ public interface CronogramaFacadeLocal {
     List<Cronograma> findRange(int[] range);
 
     int count();
+
+    public Cronograma eliminarDatos(Integer cronogramaid);
     
 }

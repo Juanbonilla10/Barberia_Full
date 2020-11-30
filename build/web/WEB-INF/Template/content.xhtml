@@ -127,7 +127,7 @@
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseTwo_17" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo_17">
+                                                <div id="collapseTwo_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_17">
                                                     <div class="panel-body">
                                                         <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
                                                         <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Registros mensuales (C.L)</button>
@@ -154,32 +154,18 @@
                                                 <div id="collapseThree_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_17">
                                                     <div class="panel-body">
                                                         <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Compras realizadas</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Compras devuelltas</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Historial servicio</button>
-                                                        <br> </br>
-                                                        <br> </br>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Historial PQRS</button>
+                                                        <h:form>
+                                                            <h:commandButton value="Citas Reservadas" class="btn btn-primary waves-effect" action="#{citaView.reporteCitas()}">
+                                                            </h:commandButton>
+                                                            <br></br>
+                                                            <br></br>
+                                                            <h:commandButton value="Cronograma" class="btn btn-primary waves-effect" action="#{cronogramaView.reporteCronograma()}">
+                                                            </h:commandButton>
+                                                        </h:form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="panel panel-col-teal">
-                                                <div class="panel-heading" role="tab" id="headingFour_17">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseFour_17" aria-expanded="false"
-                                                           aria-controls="collapseFour_17">
-                                                            <i class="material-icons">assessment</i> PQRS
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseFour_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour_17">
-                                                    <div class="panel-body">
-                                                        <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">PQRS pendientes</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">PQRS resueltas</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
