@@ -136,6 +136,7 @@ public class CronogramaView implements Serializable {
         try {
             Map parametro = new HashMap();
             parametro.put("Elaborado", usuarioSession.getUsuLogin().getNombres() + " " + usuarioSession.getUsuLogin().getApellidos());
+            parametro.put("Imagen", context.getRealPath("/images/AYT.png"));
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
             

@@ -14,6 +14,7 @@
 		</conditionalStyle>
 	</style>
 	<parameter name="Elaborado" class="java.lang.String"/>
+	<parameter name="Imagen" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      cronograma.`Fecha_Inicio` AS cronograma_Fecha_Inicio,
@@ -66,7 +67,7 @@ FROM
 					<textElement>
 						<font size="14" isBold="false" isItalic="true" isUnderline="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[ "generado por :" + " " + $P{Elaborado}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["generado por :" + " " + $P{Elaborado}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -120,7 +121,7 @@ FROM
 			</staticText>
 			<image>
 				<reportElement x="697" y="-106" width="107" height="106" uuid="07e0b53e-23c1-4158-94e2-b7612938c879"/>
-				<imageExpression><![CDATA["C:\\Users\\soporte\\Desktop\\clase_java\\Barberia-AYT-\\Source Packages\\edu\\proyectofinal\\reports\\AYT.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Imagen}]]></imageExpression>
 			</image>
 		</band>
 	</columnHeader>

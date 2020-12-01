@@ -105,16 +105,16 @@
                                                 <div id="collapseOne_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_17">
                                                     <div class="panel-body">
                                                         <p>Podras acceder a los reportes previstos por el sistema entorno al inventario y todo lo relacionado con productos de la empresa</p>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Inventario actual</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo mensual</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo semanal</button>
-                                                        <br> </br>
-                                                        <br> </br>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Consumo diario</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Ordenes de compra</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Ordenes devueltas</button>
+                                                        <h:form>
+                                                            <h:commandButton value="Listado de Productos" class="btn btn-primary waves-effect" action="#{productosView.reporteProductos()}">
+                                                            </h:commandButton>
+                                                            <br></br>
+                                                            <br></br>
+                                                            <h:commandButton value="Listado de Proveedor" class="btn btn-primary waves-effect" action="#{proveedorView.reporteProveedor()}">
+                                                            </h:commandButton>
 
-
+                                                        </h:form>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,13 +130,11 @@
                                                 <div id="collapseTwo_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_17">
                                                     <div class="panel-body">
                                                         <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Registros mensuales (C.L)</button>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Pago nomina</button>
-                                                        <br> </br>
-                                                        <br> </br>
-                                                        <button class="btn btn-primary  waves-effect" data-toggle="tooltip" data-placement="top" title="PDF" onclick="demoFromHTML();">Gastos mensuales</button>
-                                                        <br> </br>
-                                                        <br> </br>
+                                                        <h:form>
+                                                            <h:commandButton value="Listado de Usuarios" class="btn btn-primary waves-effect" action="#{listaUsuarioView.reporteUsuarios()}">
+                                                            </h:commandButton>
+
+                                                        </h:form>
 
 
                                                     </div>
@@ -165,7 +163,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>

@@ -14,6 +14,7 @@
 		</conditionalStyle>
 	</style>
 	<parameter name="Elaborado" class="java.lang.String"/>
+	<parameter name="Img" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      citas.`Telefono` AS citas_Telefono,
@@ -74,6 +75,10 @@ FROM
 					<textFieldExpression><![CDATA[$P{Elaborado}]]></textFieldExpression>
 				</textField>
 			</frame>
+			<image>
+				<reportElement x="721" y="0" width="81" height="102" uuid="05112bea-5dd1-4362-8e82-81460caf7511"/>
+				<imageExpression><![CDATA[$P{Img}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

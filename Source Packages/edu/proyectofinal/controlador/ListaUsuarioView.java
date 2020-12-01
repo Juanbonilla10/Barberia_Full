@@ -9,13 +9,30 @@ package edu.proyectofinal.controlador;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
 import edu.proyectofinal.modelo.Usuarios;
 import edu.proyectofinal.utilidades.Email;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -38,6 +55,10 @@ public class ListaUsuarioView implements Serializable {
     private ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     
     private Usuarios usReg = new Usuarios();
+    
+    
+    @Inject
+    UsuarioSession usuarioSession;
 
     /**
      * Creates a new instance of AdministradorView
@@ -106,6 +127,44 @@ public class ListaUsuarioView implements Serializable {
             }
         } catch (Exception e) {
         }
+        
+    }
+    
+    public void reporteUsuarios(){
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext context = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) context.getRequest();
+
+        HttpServletResponse response = (HttpServletResponse) context.getResponse();
+        response.setContentType("application/pdf");
+
+        try {
+            Map parametro = new HashMap();
+            parametro.put("UsuariosReporte", usuarioSession.getUsuLogin().getNombres() + " " + usuarioSession.getUsuLogin().getApellidos());
+            Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
+            System.out.println("Catalogo : " + conec.getCatalog());
+            
+            File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/Usuarios.jasper"));
+             
+            JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
+            
+            HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
+            hsr.addHeader("Content-disposition", "attachment; filename=Lista De Usuarios.pdf");
+            OutputStream os = hsr.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jp, os);
+            os.flush();
+            os.close();
+            facesContext.responseComplete();
+           
+        } catch (JRException e) {
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + e.getMessage());
+        } catch(IOException i){
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + i.getMessage());
+        } catch (SQLException q){
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + q.getMessage());
+        }
+
         
     }
     

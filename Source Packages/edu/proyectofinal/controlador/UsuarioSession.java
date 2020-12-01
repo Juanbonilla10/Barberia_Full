@@ -21,42 +21,59 @@ import org.primefaces.PrimeFaces;
 @Named(value = "usuarioSession")
 @SessionScoped
 public class UsuarioSession implements Serializable {
-    
-    @EJB  
-    UsuariosFacadeLocal UsuariosFacadeLocal; 
+
+    @EJB
+    UsuariosFacadeLocal UsuariosFacadeLocal;
 
     private String correoIn = "";
-    private String contrasenaIn = "";  
-    private Usuarios usuLogin = new Usuarios ();
-    
+    private String contrasenaIn = "";
+    private Usuarios usuLogin = new Usuarios();
+
     /**
      * Creates a new instance of UsuarioSession
      */
     public UsuarioSession() {
     }
-    
-    public void inicioSesion(){
+
+    public void inicioSesion() {
         String mensajeSw = " ";
-        
+
         try {
-         usuLogin =  UsuariosFacadeLocal.loginUsuario(correoIn, contrasenaIn);
-         
-         if (usuLogin.getIdUsuarios() == null) {
+            usuLogin = UsuariosFacadeLocal.loginUsuario(correoIn, contrasenaIn);
+
+            switch (usuLogin.getRolidURol().getDescripcion()) {
+                case "Administrador":
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    break;
+                case "Cliente":
+                    FacesContext fc = FacesContext.getCurrentInstance();
+                    fc.getExternalContext().redirect("ClienteUsuario/index.xhtml");
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    break;
+                case "Empleado":
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    break;
+                case "Auxiliar":
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    break;
+                default:
+                    System.out.println("Error ninguno fue");
+            }
+
+           /*if (usuLogin.getIdUsuarios() == null) {
                 mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
-               
+
             } else {
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.getExternalContext().redirect("Inventario/index.xhtml");
 
-            }
-            
-       } catch (Exception e) {
+            }*/
+
+        } catch (Exception e) {
             mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
         }
         PrimeFaces.current().executeScript(mensajeSw);
     }
-    
-
 
     public String getCorreoIn() {
         return correoIn;
@@ -81,7 +98,5 @@ public class UsuarioSession implements Serializable {
     public void setUsuLogin(Usuarios usuLogin) {
         this.usuLogin = usuLogin;
     }
-    
-    
-    
+
 }
