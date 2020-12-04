@@ -27,6 +27,7 @@ public class UsuarioSession implements Serializable {
 
     private String correoIn = "";
     private String contrasenaIn = "";
+    private int cedula;
     private Usuarios usuLogin = new Usuarios();
 
     /**
@@ -40,18 +41,20 @@ public class UsuarioSession implements Serializable {
 
         try {
             usuLogin = UsuariosFacadeLocal.loginUsuario(correoIn, contrasenaIn);
-
+            FacesContext fc = FacesContext.getCurrentInstance();
             switch (usuLogin.getRolidURol().getDescripcion()) {
                 case "Administrador":
+                    fc.getExternalContext().redirect("Inventario/index.xhtml");
+                    cedula= usuLogin.getNumIdentificacion();
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
                     break;
                 case "Cliente":
-                    FacesContext fc = FacesContext.getCurrentInstance();
                     fc.getExternalContext().redirect("ClienteUsuario/index.xhtml");
-                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    cedula= usuLogin.getNumIdentificacion();
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion() + " y el numero de cedula es: " + this.cedula);
                     break;
                 case "Empleado":
-                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
+                    System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion() + " y el numero de cedula es: " + this.cedula);
                     break;
                 case "Auxiliar":
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
@@ -60,7 +63,7 @@ public class UsuarioSession implements Serializable {
                     System.out.println("Error ninguno fue");
             }
 
-           /*if (usuLogin.getIdUsuarios() == null) {
+            /*if (usuLogin.getIdUsuarios() == null) {
                 mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
 
             } else {
@@ -68,7 +71,6 @@ public class UsuarioSession implements Serializable {
                 fc.getExternalContext().redirect("Inventario/index.xhtml");
 
             }*/
-
         } catch (Exception e) {
             mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
         }
@@ -97,6 +99,14 @@ public class UsuarioSession implements Serializable {
 
     public void setUsuLogin(Usuarios usuLogin) {
         this.usuLogin = usuLogin;
+    }
+
+    public int getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
     }
 
 }

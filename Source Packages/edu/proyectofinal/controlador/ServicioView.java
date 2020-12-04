@@ -74,6 +74,8 @@ public class ServicioView implements Serializable {
         public void editarServicio() {
         String mensajeSw = "";
         try {
+            servicios.setCategoriaservicioidCategoriaServicio(categoriaServicioFacadeLocal.find(servicios.getCategoriaservicioidCategoriaServicio().getIdCategoriaServicio()));
+           
             serviciosFacadeLocal.edit(servicios);
             listaservicios.clear();
             listaservicios.addAll(serviciosFacadeLocal.findAll());

@@ -6,6 +6,8 @@
 package edu.proyectofinal.facade;
 
 import edu.proyectofinal.modelo.Citas;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,6 +44,18 @@ public class CitasFacade extends AbstractFacade<Citas> implements CitasFacadeLoc
             return new Citas();
         }
         
+    }
+    
+    @Override
+    public List<Citas> listaCitasPer(int usuariosidUsuarios){
+        try {
+            Query yt = em.createQuery("SELECT p FROM Citas p WHERE p.usuariosidUsuarios.numIdentificacion = :usuariosidUsuarios");
+            yt.setParameter("usuariosidUsuarios", usuariosidUsuarios);
+            return yt.getResultList();
+        } catch (Exception e) {
+            System.out.println("edu.webapp1966781a.facade.ProductoFacade.listaPorCategoria() " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
     
 }

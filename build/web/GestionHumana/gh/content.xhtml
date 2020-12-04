@@ -48,6 +48,7 @@
                                                             <th>Dirección</th>
                                                             <th>Genero</th>
                                                             <th>Correo</th>
+                                                            <th>Rol</th>
                                                             <th>Acciones</th>
                                                         </tr>
                                                     </thead>
@@ -61,12 +62,13 @@
                                                                 <td>#{usu.direccion}</td>
                                                                 <td>#{usu.genero}</td>
                                                                 <td>#{usu.email}</td>
+                                                                <td> #{usu.rolidURol.descripcion}</td>
                                                                 <td>
-                                                                    <c:if test="#{usu.numIdentificacion != inicioRequest.objusu.numIdentificacion}">
+                                                                    <c:if test="#{usu.numIdentificacion != usuarioSession.usuLogin.numIdentificacion}">
                                                                         <h:commandButton  action="#{listaUsuarioView.cargaUsuarioEditar(usu)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar">
                                                                             <f:ajax render=":formModal"></f:ajax>
                                                                         </h:commandButton>
-                                                                        <h:commandButton action="#{listaUsuarioView.removerUsuario(usu)}" class="btn btn-outline-danger" value="Remover"/>
+                                                                        <h:commandButton action="#{listaUsuarioView.removerUsuario(usu)}" class="btn btn-danger" value="Remover"/>
                                                                     </c:if>
                                                                 </td>
                                                             </tr>
@@ -163,6 +165,14 @@
                                             <h:inputSecret required="true" requiredMessage="Ingrese una clave" id="regClave"  value="#{listaUsuarioView.usReg.contrasena}" class="form-control" html5:placeholder="Clave"/>
                                             <h:message style="color: red" for="regClave"></h:message>
                                         </div>
+                                        
+                                        <div class="form-group">    
+                                            <label>Rol</label>
+                                            <h:selectOneMenu value="#{listaUsuarioView.usReg.rolidURol.idURol}" class="form-control">
+                                                <f:selectItems value="#{listaUsuarioView.listaRol}" var="objRol" itemValue="#{objRol.idURol}" itemLabel="#{objRol.descripcion}"/>
+                                            </h:selectOneMenu>                   
+                                        </div>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn-secundary btn-flat m-b-30 m-t-30" data-dismiss="modal">Cancel</button>
@@ -233,6 +243,14 @@
                                             <h:inputSecret required="true" requiredMessage="Ingrese una clave" id="regClave"  value="#{listaUsuarioView.usReg.contrasena}" class="form-control" html5:placeholder="Clave"/>
                                             <h:message style="color: red" for="regClave"></h:message>
                                         </div>
+                                        
+                                        <div class="form-group">    
+                                            <label>Rol</label>
+                                            <h:selectOneMenu value="#{listaUsuarioView.usReg.rolidURol.idURol}" class="form-control">
+                                                <f:selectItems value="#{listaUsuarioView.listaRol}" var="objRol" itemValue="#{objRol.idURol}" itemLabel="#{objRol.descripcion}"/>
+                                            </h:selectOneMenu>                   
+                                        </div>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>

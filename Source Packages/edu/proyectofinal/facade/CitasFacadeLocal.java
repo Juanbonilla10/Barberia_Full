@@ -31,5 +31,7 @@ public interface CitasFacadeLocal {
     int count();
 
     public Citas eliminarDatos(Integer citasid);
+
+    public List<Citas> listaCitasPer(int usuariosidUsuarios);
     
 }

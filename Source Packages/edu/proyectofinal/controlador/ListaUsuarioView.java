@@ -6,7 +6,9 @@
 package edu.proyectofinal.controlador;
 
 
+import edu.proyectofinal.facade.RolFacadeLocal;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
+import edu.proyectofinal.modelo.Rol;
 import edu.proyectofinal.modelo.Usuarios;
 import edu.proyectofinal.utilidades.Email;
 import java.io.File;
@@ -51,27 +53,31 @@ public class ListaUsuarioView implements Serializable {
     
     @EJB
     UsuariosFacadeLocal usuarioFacadeLocal;
-    
     private ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
-    
     private Usuarios usReg = new Usuarios();
     
+    @EJB
+    RolFacadeLocal rolFacadeLocal;
+    private Rol rol = new Rol();
+    private ArrayList<Rol> listaRol = new ArrayList<>();
     
     @Inject
     UsuarioSession usuarioSession;
+
 
     /**
      * Creates a new instance of AdministradorView
      */
     @PostConstruct
     public void leerListaUsuarios() {
-        try {
-            listaUsuarios.addAll(usuarioFacadeLocal.findAll());
-        } catch (Exception e) {
-            System.out.println("Error " + e);
-        }
+        
+       listaUsuarios.addAll(usuarioFacadeLocal.findAll());
+       listaRol.addAll(rolFacadeLocal.findAll());
+       
+       usReg.setRolidURol(new Rol());
         
     }
+    
     
     public void cargaUsuarioEditar(Usuarios usuEditar) {
         this.usReg = usuEditar;
@@ -82,32 +88,37 @@ public class ListaUsuarioView implements Serializable {
         try {
             usuarioFacadeLocal.remove(usuRem);
             listaUsuarios.remove(usuRem);
+            
             mensajeSw = "swal('Usuario removido' , ' con exito ', 'success')";
         } catch (Exception e) {
             mensajeSw = "swal('Problemas removiendo' , ' al usuario  ', 'error')";
         }
         PrimeFaces.current().executeScript(mensajeSw);
     }
-
+    
+    
     public void registrarUser() {
-        String mensajeSw = "";
         try {
             usReg.setFechaNacimiento("2020");
+            usReg.setRolidURol(rolFacadeLocal.find(usReg.getRolidURol().getIdURol()));
+            
             usuarioFacadeLocal.create(usReg);
             listaUsuarios.add(usReg);
-            mensajeSw = "swal('Usuario registrado' , ' con exito ', 'success')";
+
         } catch (Exception e) {
-            mensajeSw = "swal('El usuario' , ' Ya se encuentra registrado  ', 'error')";
+            //System.out.println("Error al regustrar" + getClientedocu() + e);
             System.out.println("Error" + e);
         }
         usReg = new Usuarios();
-        PrimeFaces.current().executeScript(mensajeSw);
+
     }
     
     
     public void editarUsuario() {
         String mensajeSw = "";
         try {
+            usReg.setRolidURol(rolFacadeLocal.find(usReg.getRolidURol().getIdURol()));
+            
             usuarioFacadeLocal.edit(usReg);
             listaUsuarios.clear();
             listaUsuarios.addAll(usuarioFacadeLocal.findAll());
@@ -141,16 +152,17 @@ public class ListaUsuarioView implements Serializable {
 
         try {
             Map parametro = new HashMap();
-            parametro.put("UsuariosReporte", usuarioSession.getUsuLogin().getNombres() + " " + usuarioSession.getUsuLogin().getApellidos());
+            parametro.put("Usuario", usuarioSession.getUsuLogin().getNombres() + " " + usuarioSession.getUsuLogin().getApellidos());
+            parametro.put("Img", context.getRealPath("/images/AYT.png"));
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
             
-            File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/Usuarios.jasper"));
+            File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/UsuarioR.jasper"));
              
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
             
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
-            hsr.addHeader("Content-disposition", "attachment; filename=Lista De Usuarios.pdf");
+            hsr.addHeader("Content-disposition", "attachment; filename=Lista de usuarios.pdf");
             OutputStream os = hsr.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jp, os);
             os.flush();
@@ -184,6 +196,24 @@ public class ListaUsuarioView implements Serializable {
     public void setUsReg(Usuarios usReg) {
         this.usReg = usReg;
     }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public ArrayList<Rol> getListaRol() {
+        return listaRol;
+    }
+
+    public void setListaRol(ArrayList<Rol> listaRol) {
+        this.listaRol = listaRol;
+    }
+    
+    
     
     
 }
