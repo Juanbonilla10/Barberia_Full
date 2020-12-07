@@ -14,31 +14,127 @@
                 <div class="container-fluid">
                     <div class="block-header">
                         <h2>
-                            COUNTER ANIMATION
+                            MIS CITAS
                         </h2>
                     </div>
                     <!-- Counter Examples -->
-                    <h:form>
-                        <div class="row clearfix">
-                            <c:forEach items="#{citaClienteView.listacitas}" var="objpl">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="info-box">
-                                        <div class="icon bg-red">
-                                            <i class="material-icons">shopping_cart</i>
-                                        </div>
-                                        <h:commandLink action="#{citaClienteView.selecionCategoria(objpl.idCitas)}">
-                                            <div class="content">
-                                                <div class="text">#{objpl.serviciosIdservicio.nombreServicio}</div>
-                                                <div class="number count-to" data-from="0" data-to="125" data-speed="1000" data-fresh-interval="20">125</div>
+
+
+                    <!-- Advanced Validation -->
+
+                    <div class="row col-md-5 clearfix" style="margin: 0 auto;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong>Crear Cita</strong></h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);">Action</a></li>
+                                                <li><a href="javascript:void(0);">Another action</a></li>
+                                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="body">
+                                    <h:form id="form_advanced_validation" >
+
+                                        <div class="form-group form-float">
+                                            <label class="form-label">Servicio</label>
+                                            <div class="form-line">
+                                                <h:selectOneMenu value="#{citaClienteView.citas.serviciosIdservicio.idservicio}" class="form-control" required="required">
+                                                    <f:selectItems value="#{citaClienteView.listaservices}" var="objlp" itemValue="#{objlp.idservicio}" itemLabel="#{objlp.nombreServicio}"  />
+                                                </h:selectOneMenu>
+
                                             </div>
-                                        </h:commandLink>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <label class="form-label">Numero de Telefono</label>
+                                            <div class="form-line">
+                                                <h:inputText html5:type="number" class="form-control"  required="required" value="#{citaClienteView.citas.telefono}" />
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <label class="form-label">Fecha</label>
+                                            <div class="form-line">                 
+                                                <h:inputText html5:type="date" class="form-control"  required="required" value="#{citaClienteView.citas.fecha}" />                                               
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <label class="form-label">Hora</label>
+                                            <div class="form-line">                 
+                                                <h:inputText html5:type="time" class="form-control"  required="required" value="#{citaClienteView.citas.hora}"/>                                               
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <label class="form-label">Forma de pago</label>
+                                            <div class="form-line">
+                                                <h:selectOneMenu value="#{citaClienteView.citas.tipopagoidTipoPago.idTipoPago}" class="form-control" required="required">
+                                                    <f:selectItems value="#{citaClienteView.listapago}" var="objlpgj" itemValue="#{objlpgj.idTipoPago}" itemLabel="#{objlpgj.descripcion}"  />
+                                                </h:selectOneMenu>
+
+                                            </div>
+                                        </div>
+                                        <h:commandButton class="btn btn-primary waves-effect" type="submit" value="Crear" action="#{citaClienteView.crearCitaCliente()}" />                                   
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row col-md-7 clearfix">
+                        <h:form>
+                            <c:forEach items="#{citaClienteView.listacitas}" var="objpl">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="header bg-red">
+                                            <h2>
+                                                <strong>#{objpl.serviciosIdservicio.nombreServicio}</strong>  <small>#{objpl.serviciosIdservicio.categoriaservicioidCategoriaServicio.descripcion}</small>
+                                            </h2>
+
+                                            <ul class="header-dropdown m-r--5">
+                                                <li class="dropdown">
+                                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="material-icons">more_vert</i>
+                                                    </a>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li><a href="javascript:void(0);">Action</a></li>
+                                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                        <div class="body">
+                                            <p>Servicio : #{objpl.serviciosIdservicio.nombreServicio}</p>
+                                            <p>Nombres : #{objpl.usuariosidUsuarios.nombres}</p>
+                                            <p>Tipo de pago: #{objpl.tipopagoidTipoPago.descripcion}</p>
+                                            <p>Fecha: #{objpl.fecha}</p>
+                                            <p>Hora: #{objpl.hora}</p>
+                                            <p>Valor: #{objpl.serviciosIdservicio.valorServicio}</p>
+                                            <h:commandButton value="Cancelar" class="btn btn-danger" style="margin-right: 15px;" action="#{citaClienteView.eliminarCitaCli(objpl)}"/>
+                                            <h:commandButton class="btn btn-success" action="#{citaClienteView.cargadatoscita(objpl)}"  value="Actualizar Cita"/>
+                                            
+                                        </div>
+
                                     </div>
                                 </div>
                             </c:forEach>
+                        </h:form>
 
-                        </div>
-                        
-                    </h:form>
+
+                    </div>
+
+
 
                     <!-- #END# Chart Samples -->
                 </div>
