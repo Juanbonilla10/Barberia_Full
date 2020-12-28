@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:body>
         <section class="content">
@@ -114,7 +115,7 @@
                                                             </h:commandButton>
 
                                                         </h:form>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,6 +155,16 @@
                                                         <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
                                                         <h:form>
                                                             <h:commandButton value="Citas Reservadas" class="btn btn-primary waves-effect" action="#{citaView.reporteCitas()}">
+                                                            </h:commandButton>
+                                                            <br></br>
+                                                            <br></br>
+                                                            <label>Fecha Desde </label>
+                                                            <h:inputText html5:type="date" value="#{citaView.fecha_primeprivate}"  />
+                                                            <br></br>
+                                                             <label>Fecha Hasta </label>
+                                                             <h:inputText html5:type="date" value="#{citaView.ultima_fecha}" />
+                                                            <br></br>
+                                                            <h:commandButton value="Productos mas vendidos" class="btn btn-primary waves-effect" action="#{citaView.reporteVentasPorMes()}">
                                                             </h:commandButton>
                                                             <br></br>
                                                             <br></br>

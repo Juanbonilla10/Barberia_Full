@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+
+                <div class="content-fluid">
+                    <div class="block-header">
+                        <h2>
+                            Inventarios
+                            <small>En esta parte del modulo podras ver todo lo relacionado con proveedores, productos e ingresos de estos</small>
+                        </h2>
+                    </div>
+                    <h:form>
+                        <div class="row">
+
+
+                            <c:forEach items="#{inventarioView.listaproveedor}" var="cate">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box-4 hover-zoom-effect">
+                                        <div class="icon">
+                                            <i class="material-icons col-indigo">face</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text"><p class="font-bold">#{cate.nombre}</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </h:form>
+
+                    <div class="block-header">
+                        <h2>
+                            Cantidad
+                            <small>Cantidad de productos en inventario</small>
+                        </h2>
+                    </div>
+                    <h:form>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box-4 hover-zoom-effect">
+                                    <div class="icon">
+                                        <i class="material-icons col-teal">equalizer</i>
+                                    </div>
+                                    <div class="content">
+
+                                        <div class="stat-digit"><p class="font-bold">TOTAL PRODUCTOS : #{inventarioView.catidadProductos()}</p> </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <div class="row">
+                        <h:form>
+                            <div class="block-header">
+                                <h2>
+                                    Productos
+                                    <small>Productos y su informacion</small>
+                                </h2>
+                            </div>
+
+                            <c:forEach items="#{inventarioView.listapro}" var="pt">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="header bg-blue-grey">
+                                            <h2>
+                                                #{pt.descripcion} <small>#{pt.proveedorIdProveedor.nombre}</small>
+                                            </h2>
+
+                                        </div>
+                                        <div class="body">
+                                            <div class="text"><p class="font-bold">Referencia: #{pt.referencia} </p></div>
+                                            <div class="text"><p class="font-bold">Codigo de barras: #{pt.codigoBarras}</p></div>
+                                            <div class="text"><p class="font-bold">Precio proveedor: #{pt.precioProveedor}</p></div>
+                                            <div class="text"><p class="font-bold">Precio venta: #{pt.precioPublico}</p></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                        </h:form>
+                    </div> 
+                </div>
+
+
+            </section>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>
+                          CITAS
+                        </h2>
+                    </div>
+
+                    <div class="row col-md-7 clearfix">
+                        <h:form>
+                            <c:forEach items="#{citaView.listacitas}" var="objpl">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="header bg-red">
+                                            <h2>
+                                                <strong>#{objpl.serviciosIdservicio.nombreServicio}</strong>  <small>#{objpl.serviciosIdservicio.categoriaservicioidCategoriaServicio.descripcion}</small>
+                                            </h2>
+
+                                            <ul class="header-dropdown m-r--5">
+                                                <li class="dropdown">
+                                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="material-icons">more_vert</i>
+                                                    </a>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li><a href="javascript:void(0);">Action</a></li>
+                                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                        <div class="body">
+                                            <p>Servicio : #{objpl.serviciosIdservicio.nombreServicio}</p>
+                                            <p>Nombres : #{objpl.usuariosidUsuarios.nombres}</p>
+                                            <p>Tipo de pago: #{objpl.tipopagoidTipoPago.descripcion}</p>
+                                            <p>Fecha: #{objpl.fecha}</p>
+                                            <p>Hora: #{objpl.hora}</p>
+                                            <p>Valor: #{objpl.serviciosIdservicio.valorServicio}</p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </h:form>
+                    </div>
+                </div>
+            </section>
+        </ui:composition>
+    </h:body>
+</html>
+

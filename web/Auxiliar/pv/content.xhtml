@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content" id="formModalis">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Lista de ventas</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        VENTAS
+                                        <small>En este modulo podras realizar el registro de ventas de la empresa </small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#mediumModaleli" style="width: 100px; float: right;
+                                                margin-right: 95px;">Eliminar</button>
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
+                                                margin-right: 95px;">Crear</button>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Id</th>
+                                                            <th scope="col">Cliente</th>
+                                                            <th scope="col">Producto</th>
+                                                            <th scope="col">Tipo de pago</th>
+                                                            <th scope="col">Fecha</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Total</th>
+                                                            <th scope="col">Iva</th>
+                                                            <th scope="col">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{ventaView.listaventa}" var="objvtn">
+                                                            <tr>
+                                                                <td>#{objvtn.idventaProducto}</td>
+                                                                <td>#{objvtn.idUsuarios.nombres}</td>
+                                                                <td>#{objvtn.crearproductoidCrearProducto.descripcion}</td>
+                                                                <td>#{objvtn.tipopagoidTipoPago.descripcion}</td>
+                                                                <td>#{objvtn.fechaVenta}</td>
+                                                                <td>#{objvtn.cantidad}</td>
+                                                                <td>#{objvtn.total}</td>
+                                                                <td>#{objvtn.iva}</td>
+                                                                <td><h:commandButton  action="#{ventaView.retornarDatos(objvtn)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                    <!--MODEL DE VENTAS-->
+                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Crear Venta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Clientes</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.idUsuarios.idUsuarios}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listausuario}" var="objkl" itemValue="#{objkl.idUsuarios}" itemLabel="#{objkl.numIdentificacion}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputProducto">Producto</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.crearproductoidCrearProducto.idCrearProducto}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listaprducts}" var="objtlo" itemValue="#{objtlo.idCrearProducto}" itemLabel="#{objtlo.descripcion}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputPago">Tipo de pago</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.tipopagoidTipoPago.idTipoPago}" class="form-control form-control-sm">
+                                                <f:selectItems  value="#{ventaView.listapagos}" var="objlp" itemValue="#{objlp.idTipoPago}" itemLabel="#{objlp.descripcion}"  />
+                                            </h:selectOneMenu>  
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Fecha</label>
+                                            <h:inputText value="#{ventaView.objproduct.fechaVenta}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCantidad">Cantidad</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.cantidad}" class="form-control"  html5:placeholder="Cantidad" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputTotal">Total</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.total}" class="form-control" id="spTotal" html5:placeholder="8"  />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputIva">Iva</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.iva}" class="form-control"  html5:placeholder="Iva" html5:disabled="disabled" onchange="sumar(this.value);"/>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{ventaView.crearVenta()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Guardar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--MODAL DE ACTUALIZAR-->
+                    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form id="formModal">
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Id de la venta</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.idventaProducto}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listaventa}" var="objvts" itemValue="#{objvts.idventaProducto}" itemLabel="#{objvts.idventaProducto}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputClientes">Clientes</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.idUsuarios.idUsuarios}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listausuario}" var="objkl" itemValue="#{objkl.idUsuarios}" itemLabel="#{objkl.numIdentificacion}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputProducto">Producto</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.crearproductoidCrearProducto.idCrearProducto}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listaprducts}" var="objtlo" itemValue="#{objtlo.idCrearProducto}" itemLabel="#{objtlo.descripcion}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputPago">Tipo de pago</label>
+                                            <h:selectOneMenu value="#{ventaView.objproduct.tipopagoidTipoPago.idTipoPago}" class="form-control form-control-sm">
+                                                <f:selectItems  value="#{ventaView.listapagos}" var="objlp" itemValue="#{objlp.idTipoPago}" itemLabel="#{objlp.descripcion}"  />
+                                            </h:selectOneMenu>  
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Fecha</label>
+                                            <h:inputText value="#{ventaView.objproduct.fechaVenta}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputCantidad">Cantidad</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.cantidad}" class="form-control" id="exampleInputCantidad" html5:placeholder="Cantidad"/>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputTotal">Total</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.total}" class="form-control" id="exampleInputTotal" html5:placeholder="Total"/>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputIva">Iva</label>
+                                            <h:inputText html5:type="number" value="#{ventaView.objproduct.iva}" class="form-control" id="exampleInputIva" html5:placeholder="Iva"/>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{ventaView.actualizarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30 " value="Actualizar" />
+                                            <h:commandButton action="#"  class="btn btn-link waves-effect ter"  value="Buscar" />
+                                        </div> 
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--TERMINA MODAL ACTUALIZAR-->
+                    <!--BOTON PARA ABRIR MODAL-->
+                    <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza Usuario
+                    </button>
+                    <!--MODAL DE ELIMINAR-->
+                    <div class="modal fade" id="mediumModaleli" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Venta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Clientes</label>
+                                            <h:selectOneMenu value="#{ventaView.idventa}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{ventaView.listaventa}" var="objkl" itemValue="#{objkl.idventaProducto}" itemLabel="#{objkl.idventaProducto}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="modal-foote" >
+                                            <h:commandButton  action="#{ventaView.eliminar()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Eliminar" >
+                                            </h:commandButton>
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </section>
+           
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

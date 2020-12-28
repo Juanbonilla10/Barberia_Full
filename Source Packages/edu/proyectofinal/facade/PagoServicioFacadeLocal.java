@@ -29,5 +29,7 @@ public interface PagoServicioFacadeLocal {
     List<PagoServicio> findRange(int[] range);
 
     int count();
+
+    public List<PagoServicio> listaPagoB(int usuariosidUsuarios);
     
 }

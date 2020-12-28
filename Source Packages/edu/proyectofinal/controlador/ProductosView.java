@@ -11,6 +11,7 @@ import edu.proyectofinal.modelo.CrearProducto;
 import edu.proyectofinal.modelo.Proveedor;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -18,6 +19,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,6 +35,14 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import javax.servlet.http.Part;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.primefaces.PrimeFaces;
+
 
 /**
  *
@@ -50,6 +61,11 @@ public class ProductosView implements Serializable {
     ProveedorFacadeLocal proveedorFacadeLocal;
     private ArrayList<Proveedor> listaproveedor = new ArrayList<>();
     private Proveedor objprov = new Proveedor();
+    
+    private CrearProducto objProductoNew = new CrearProducto();
+  
+    private Part archivoExcel;
+    private String nombreArchivo;
     
     @Inject
     UsuarioSession usuarioSession;
@@ -101,6 +117,93 @@ public class ProductosView implements Serializable {
             System.out.println("Error al actualizar:" + e);
         }
     }
+    
+     public void insertarXLS(List cellDataList) {
+        try {
+            int filasContador = 0;
+            for (int i = 0; i < cellDataList.size(); i++) {
+                List cellTemp = (List) cellDataList.get(i);
+                CrearProducto newP = new CrearProducto();
+                for (int j = 0; j < cellTemp.size(); j++) {
+                    XSSFCell hssfCell = (XSSFCell) cellTemp.get(j);
+                    switch (filasContador) {
+                        case 0:
+                            newP.setReferencia(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 1:
+                            newP.setCodigoBarras(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 2:
+                            newP.setDescripcion(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 3:
+                            newP.setPrecioProveedor(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 4:
+                            newP.setPrecioPublico(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 5:
+                            newP.setFechaRegistro(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 6:
+                            Proveedor nueva = proveedorFacadeLocal.find((int) Math.floor(hssfCell.getNumericCellValue()));
+                            newP.setProveedorIdProveedor(nueva);
+                            crearProductoFacadeLocal.create(newP);
+                            filasContador=0;
+                            break;
+                    }
+
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("edu.proyectofinal.controlador.ProductosView.insertarXLS()" + e.getMessage());
+        }
+    }
+
+    public void subeExcel() throws IOException {
+        String mensajeSw = "";
+        if (archivoExcel != null) {
+            if (archivoExcel.getSize() < 4000000) {
+                if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(archivoExcel.getContentType())) {
+                    InputStream input = archivoExcel.getInputStream();
+                    List cellData = new ArrayList();
+                    XSSFWorkbook workBook = new XSSFWorkbook(input);
+                    XSSFSheet hssfSheet = workBook.getSheetAt(0);
+                    Iterator rowIterator = hssfSheet.rowIterator();
+                    rowIterator.next();
+                    while (rowIterator.hasNext()) {
+                        XSSFRow hssfRow = (XSSFRow) rowIterator.next();
+                        Iterator iterator = hssfRow.cellIterator();
+                        List cellTemp = new ArrayList();
+                        while (iterator.hasNext()) {
+                            XSSFCell hssfCell = (XSSFCell) iterator.next();
+                            cellTemp.add(hssfCell);
+                        }
+                        cellData.add(cellTemp);
+                    }
+                    insertarXLS(cellData);
+                    ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                    context.redirect("index.xhtml");
+                } else {
+                    mensajeSw = "swal('El archivo' , ' no es una XLSX ', 'error')";
+                }
+            } else {
+                mensajeSw = "swal('El archivo' , ' es muy grande  ', 'error')";
+            }
+        } else {
+            mensajeSw = "swal('No puede cargar ' , ' EL  archivo  ', 'error')";
+        }
+
+        PrimeFaces.current().executeScript(mensajeSw);
+    }
+
     
     public void reporteProductos(){
         
@@ -173,6 +276,31 @@ public class ProductosView implements Serializable {
 
     public void setObjcrpro(CrearProducto objcrpro) {
         this.objcrpro = objcrpro;
+    }
+
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
+    }
+
+    public Part getArchivoExcel() {
+        return archivoExcel;
+    }
+
+    public void setArchivoExcel(Part archivoExcel) {
+        this.archivoExcel = archivoExcel;
+    }
+
+ 
+    public CrearProducto getObjProductoNew() {
+        return objProductoNew;
+    }
+
+    public void setObjProductoNew(CrearProducto objProductoNew) {
+        this.objProductoNew = objProductoNew;
     }
 
 }

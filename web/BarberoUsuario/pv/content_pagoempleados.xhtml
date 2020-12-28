@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>PAGOS</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        PAGOS EMPLEADOS
+                                        <small>En este modulo se puede visualizar los pagos de servicios a los empleados</small>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Fecha atención</th>
+                                                            <th scope="col">Valor final servicio</th>
+                                                            <th scope="col">Fecha Pago al barbero</th>
+                                                            <th scope="col">Abono</th>
+                                                            <th scope="col">Saldo pendiente</th>
+                                                            <th scope="col">Nombre servicio</th>
+                                                            <th scope="col">Nombre empleado</th>
+
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{barberoSession.listapagoservicios}" var="obpago">
+                                                            <tr>
+                                                                <td>#{obpago.fechaAtencion}</td>
+                                                                <td>#{obpago.valorServicio}</td>
+                                                                <td>#{obpago.fechaPagoBarbero}</td>
+                                                                <td>#{obpago.abono}</td>
+                                                                <td>#{obpago.saldoPendiente}</td>
+                                                                <td>#{obpago.serviciosIdservicio.nombreServicio}</td>
+                                                                <td>#{obpago.usuariosidUsuarios.nombres}</td>
+                                                            </tr>
+                                                        </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                </div>
+            </section>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

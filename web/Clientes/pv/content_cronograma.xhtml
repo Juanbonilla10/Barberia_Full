@@ -29,12 +29,24 @@
                                                 margin-right: 95px;">Eliminar</button>
                                         <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
                                                 margin-right: 95px;">Crear</button>
+                                        <h:form id="miformUno" enctype="multipart/form-data" style="margin-bottom: 10px"> 
+
+                                            <h:inputFile id="fileImgUno" onchange="$('#miformUno\\:myBoton').click();" style="display: none" value="#"></h:inputFile>
+
+                                            <h:commandButton id="myBoton" style="display: none" class="btn btn-outline-success" action="#" value="Cargar Imagen">
+                                                <f:ajax  execute="fileImgUno" ></f:ajax>
+                                            </h:commandButton>
+
+                                            <button type="button" onclick="$('#miformUno\\:fileImgUno').click();" class="btn btn-outline-success btn-sm __web-inspector-hide-shortcut__"><i class="fa fa-magic"></i>&nbsp; Cargar Productos Xlsx</button>
+
+                                        </h:form>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="content">
                         <div class="animated fadeIn">
@@ -81,7 +93,7 @@
                                 </div>
                             </div>
                         </div><!-- .animated -->
-                    </div><!-- .content -->
+                    </div><!-- .content -->                 
                     <!--MODEL DE VENTAS-->
                     <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -98,17 +110,17 @@
                                         <div class="col-md-4">
                                             <label for="exampleInputClientes">Fecha</label>
                                             <h:inputText value="#{cronogramaView.cronograma.fechaInicio}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
-                                       
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputProducto">Hora Inicio</label>
                                             <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
-                                       
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputPago">Hora fin</label>
                                             <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
-                                        
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputFecha">Estilista</label>
@@ -146,17 +158,17 @@
                                         <div class="col-md-4">
                                             <label for="exampleInputClientes">Fecha</label>
                                             <h:inputText value="#{cronogramaView.cronograma.fechaInicio}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
-                                       
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputProducto">Hora Inicio</label>
                                             <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
-                                       
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputPago">Hora fin</label>
                                             <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
-                                        
+
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputFecha">Estilista</label>
@@ -213,12 +225,8 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </div>
+
             </section>
 
         </ui:composition>

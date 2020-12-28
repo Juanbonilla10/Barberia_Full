@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content" id="formModalis">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Cronograma</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        CRONOGRAMA
+                                        <small>En este modulo podras crear el cronograma para el personal</small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#mediumModaleli" style="width: 100px; float: right;
+                                                margin-right: 95px;">Eliminar</button>
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#mediumModal" style="width: 100px; float: right;
+                                                margin-right: 95px;">Crear</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Id</th>
+                                                            <th scope="col">Fecha</th>
+                                                            <th scope="col">Hora Inicio</th>
+                                                            <th scope="col">Hora Fin</th>
+                                                            <th scope="col">Estilista</th>
+                                                            <th scope="col">Categoria</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="#{cronogramaView.listacronograma}" var="objcrono">
+                                                            <tr>
+                                                                <td>#{objcrono.idCronograma}</td>
+                                                                <td>#{objcrono.fechaInicio}</td>
+                                                                <td>#{objcrono.horaInicio}</td>
+                                                                <td>#{objcrono.horaFin}</td>
+                                                                <td>#{objcrono.usuariosidUsuarios.nombres}</td>
+                                                                <td>#{objcrono.categoriaservicioidCategoriaServicio.descripcion}</td>                                                              
+                                                                <td><h:commandButton  action="#{cronogramaView.retornarDatos(objcrono)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                    <!--MODEL DE VENTAS-->
+                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Crear Cronograma</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Fecha</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.fechaInicio}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                       
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputProducto">Hora Inicio</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
+                                       
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputPago">Hora fin</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
+                                        
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Estilista</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.usuariosidUsuarios.idUsuarios}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listausuarios}" var="objust" itemValue="#{objust.idUsuarios}" itemLabel="#{objust.nombres} #{objust.apellidos}" />
+                                            </h:selectOneMenu>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCantidad">Categoria</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.categoriaservicioidCategoriaServicio.idCategoriaServicio}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listacategoria}" var="objcate" itemValue="#{objcate.idCategoriaServicio}" itemLabel="#{objcate.tipoServicio}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{cronogramaView.registrarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Guardar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--MODAL DE ACTUALIZAR-->
+                    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form id="formModal">
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Fecha</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.fechaInicio}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                       
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputProducto">Hora Inicio</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
+                                       
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputPago">Hora fin</label>
+                                            <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
+                                        
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Estilista</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.usuariosidUsuarios.idUsuarios}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listausuarios}" var="objust" itemValue="#{objust.idUsuarios}" itemLabel="#{objust.nombres} #{objust.apellidos}" />
+                                            </h:selectOneMenu>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCantidad">Categoria</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.categoriaservicioidCategoriaServicio.idCategoriaServicio}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listacategoria}" var="objcate" itemValue="#{objcate.idCategoriaServicio}" itemLabel="#{objcate.tipoServicio}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{cronogramaView.actualizarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Actualizar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--TERMINA MODAL ACTUALIZAR-->
+                    <!--BOTON PARA ABRIR MODAL-->
+                    <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza Usuario
+                    </button>
+                    <!--MODAL DE ELIMINAR-->
+                    <div class="modal fade" id="mediumModaleli" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Venta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Clientes</label>
+                                            <h:selectOneMenu value="#{cronogramaView.idcronogram}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{cronogramaView.listacronograma}" var="objid" itemValue="#{objid.idCronograma}" itemLabel="#{objid.idCronograma}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="modal-foote" >
+                                            <h:commandButton  action="#{cronogramaView.eliminarCrono()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Eliminar" >
+                                            </h:commandButton>
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </section>
+
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

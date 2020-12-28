@@ -44,8 +44,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 @Named(value = "citaView")
 @ViewScoped
 public class CitaView implements Serializable {
-    
+
     private Integer idcita;
+    private String fecha_primeprivate ;
+    private String ultima_fecha;
 
     @EJB
     UsuariosFacadeLocal usuariosFacadeLocal;
@@ -69,6 +71,10 @@ public class CitaView implements Serializable {
 
     @Inject
     UsuarioSession usuarioSession;
+    
+    
+    
+
     /**
      * Creates a new instance of CitaView
      */
@@ -101,8 +107,6 @@ public class CitaView implements Serializable {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
-        citas = new Citas();
     }
 
     public void cargaDatos(Citas objcitasp) {
@@ -125,8 +129,8 @@ public class CitaView implements Serializable {
         }
 
     }
-    
-    public void eliminarDatos(){
+
+    public void eliminarDatos() {
         try {
             citasFacadeLocal.eliminarDatos(idcita);
             listacitas.clear();
@@ -135,10 +139,10 @@ public class CitaView implements Serializable {
             System.out.println("Error al eliminar desde el controlador: " + e.getMessage());
         }
     }
-    
-    public void reporteCitas(){
-        
-         FacesContext facesContext = FacesContext.getCurrentInstance();
+
+    public void reporteCitas() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
 
@@ -151,11 +155,11 @@ public class CitaView implements Serializable {
             parametro.put("Img", context.getRealPath("/images/AYT.png"));
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
-            
+
             File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/Citas.jasper"));
-             
+
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
-            
+
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
             hsr.addHeader("Content-disposition", "attachment; filename=Lista Citas.pdf");
             OutputStream os = hsr.getOutputStream();
@@ -163,16 +167,53 @@ public class CitaView implements Serializable {
             os.flush();
             os.close();
             facesContext.responseComplete();
-           
+
         } catch (JRException e) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + e.getMessage());
-        } catch(IOException i){
+        } catch (IOException i) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + i.getMessage());
-        } catch (SQLException q){
+        } catch (SQLException q) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + q.getMessage());
         }
 
-        
+    }
+
+    public void reporteVentasPorMes() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext context = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) context.getRequest();
+
+        HttpServletResponse response = (HttpServletResponse) context.getResponse();
+        response.setContentType("application/pdf");
+
+        try {
+            Map parametro = new HashMap();
+            parametro.put("fecha",getFecha_primeprivate());
+            parametro.put("fehca_ultima", getUltima_fecha());
+            Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
+            System.out.println("Catalogo : " + conec.getCatalog());
+
+            File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/productospormes.jasper"));
+
+            JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
+
+            HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
+            hsr.addHeader("Content-disposition", "attachment; filename=Lista Mas Vendidos.pdf");
+            OutputStream os = hsr.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jp, os);
+            os.flush();
+            os.close();
+            facesContext.responseComplete();
+
+        } catch (JRException e) {
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + e.getMessage());
+        } catch (IOException i) {
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + i.getMessage());
+        } catch (SQLException q) {
+            System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + q.getMessage());
+        }
+
     }
 
     public Usuarios getUsuarios() {
@@ -246,5 +287,24 @@ public class CitaView implements Serializable {
     public void setIdcita(Integer idcita) {
         this.idcita = idcita;
     }
+
+    public String getUltima_fecha() {
+        return ultima_fecha;
+    }
+
+    public void setUltima_fecha(String ultima_fecha) {
+        this.ultima_fecha = ultima_fecha;
+    }
+
+    public String getFecha_primeprivate() {
+        return fecha_primeprivate;
+    }
+
+    public void setFecha_primeprivate(String fecha_primeprivate) {
+        this.fecha_primeprivate = fecha_primeprivate;
+    }
+
+
+
 
 }

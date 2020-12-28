@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>CITAS</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        CITAS RESERVADAS 
+                                        <small>En este modulo se puede realizar gestión para las citas </small>
+                                    </h2>
+
+                                    <div class="row clearfix js-sweetalert">                                        
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#mediumModaleli" style="width: 100px; float: right;
+                                                margin-right: 95px;">Eliminar</button>
+                                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#defaultModalcrear" style="width: 100px; float: right;
+                                                margin-right: 95px;">Crear</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>                                              
+                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="basic-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Tipo de pago</th>
+                                                            <th>Servicio</th>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Telefono</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Name</th>
+                                                            <th>Tipo de pago</th>
+                                                            <th>Servicio</th>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Telefono</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <c:forEach items="#{citaView.listacitas}" var="objcitasp">
+                                                            <tr>
+                                                                <td>#{objcitasp.idCitas}</td>
+                                                                <td>#{objcitasp.usuariosidUsuarios.nombres}</td>
+                                                                <td>#{objcitasp.tipopagoidTipoPago.descripcion}</td>
+                                                                <td>#{objcitasp.serviciosIdservicio.nombreServicio}</td>
+                                                                <td>#{objcitasp.fecha}</td>
+                                                                <td>#{objcitasp.hora}</td>
+                                                                <td>#{objcitasp.telefono}</td>
+                                                                <td>
+                                                                    <h:commandButton type="button" class="btn btn-warning" action="#{citaView.cargaDatos(objcitasp)}" onclick="$('#btnModal').click();" value="Editar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                    <!--MODEL DE VENTAS-->
+                    <!--CREAR CITA-->
+                    <h:form>
+                        <div class="modal fade" id="defaultModalcrear" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="defaultModalLabel">Crear Cita</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="demo-masked-input">
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <b>Servicio</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">library_books</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:selectOneMenu value="#{citaView.citas.serviciosIdservicio.idservicio}" class="form-control">
+                                                                <f:selectItems value="#{citaView.listaservicios}" var="objcitas" itemValue="#{objcitas.idservicio}" itemLabel="#{objcitas.nombreServicio}"/>
+                                                            </h:selectOneMenu>                       
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b>Cliente</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">person</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:selectOneMenu  class="form-control">
+                                                                <f:selectItems value="#{citaView.listauser}" var="objcitas" itemValue="#{objcitas.idUsuarios}" itemLabel="#{objcitas.nombres} #{objcitas.apellidos}" />
+                                                            </h:selectOneMenu>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b>Documento</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">edit</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:selectOneMenu value="#{citaView.citas.usuariosidUsuarios.idUsuarios}" class="form-control">
+                                                                <f:selectItems value="#{citaView.listauser}" var="objcitas" itemValue="#{objcitas.idUsuarios}" itemLabel="#{objcitas.numIdentificacion}" />
+                                                            </h:selectOneMenu> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b>Numero de telefono</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">phone</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:inputText value="#{citaView.citas.telefono}" html5:type="number" class="form-control mobile-phone-number" html5:placeholder="Ex: +57 (317) 289-07-63"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <b>Date</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">date_range</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:inputText value="#{citaView.citas.fecha}" html5:type="date" class="form-control date" html5:placeholder="Ex: 30/07/2016"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <b>Time (12 hour)</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">access_time</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:inputText value="#{citaView.citas.hora}" html5:type="time" class="form-control time12" html5:placeholder="Ex: 11:59 pm"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b>Credit Card</b>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">credit_card</i>
+                                                        </span>
+                                                        <div class="form-line">
+                                                            <h:selectOneMenu value="#{citaView.citas.tipopagoidTipoPago.idTipoPago}" class="form-control">
+                                                                <f:selectItems value="#{citaView.listapagos}" var="objpagos" itemValue="#{objpagos.idTipoPago}" itemLabel="#{objpagos.descripcion}"/>
+                                                            </h:selectOneMenu>                       
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <h:commandButton action="#{citaView.crearCita()}" class="btn btn-link waves-effect" value="Guardar" />
+                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <!--MODAL DE ACTUALIZAR-->
+                    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form id="formModal">
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Nombre</label>
+                                            <h:selectOneMenu value="#{citaView.citas.usuariosidUsuarios.idUsuarios}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{citaView.listauser}" var="objetouser" itemValue="#{objetouser.idUsuarios}" itemLabel="#{objetouser.nombres} #{objetouser.apellidos}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputClientes">Tipo de pago</label>
+                                            <h:selectOneMenu value="#{citaView.citas.tipopagoidTipoPago.idTipoPago}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{citaView.listapagos}" var="objetopago" itemValue="#{objetopago.idTipoPago}" itemLabel="#{objetopago.descripcion}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputProducto">Servicio</label>
+                                            <h:selectOneMenu value="#{citaView.citas.serviciosIdservicio.idservicio}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{citaView.listaservicios}" var="objetoservicio" itemValue="#{objetoservicio.idservicio}" itemLabel="#{objetoservicio.nombreServicio}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputPago">Fecha</label>
+                                            <h:inputText value="#{citaView.citas.fecha}" html5:type="date" class="form-control"  html5:placeholder="10/10/2020"/>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputFecha">Hora</label>
+                                            <h:inputText value="#{citaView.citas.hora}" html5:type="time" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <label for="exampleInputCantidad">Telefono</label>
+                                            <h:inputText html5:type="number" value="#{citaView.citas.telefono}" class="form-control" id="exampleInputCantidad" html5:placeholder="Cantidad"/>
+                                        </div>
+
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{citaView.actualizarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30 " value="Actualizar" />
+                                        </div> 
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--TERMINA MODAL ACTUALIZAR-->
+                    <!--BOTON PARA ABRIR MODAL-->
+                    <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza Usuario
+                    </button>
+                    <!--MODAL DE ELIMINAR-->
+                    <div class="modal fade" id="mediumModaleli" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Venta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputClientes">Clientes</label>
+                                            <h:selectOneMenu value="#{citaView.idcita}" class="form-control form-control-sm" >
+                                                <f:selectItems  value="#{citaView.listacitas}" var="objkll" itemValue="#{objkll.idCitas}" itemLabel="#{objkll.idCitas}"  />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <h:commandButton  action="#{citaView.eliminarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Eliminar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </section>
+
+        </ui:composition>
+    </h:body>
+
+
+
+</html>

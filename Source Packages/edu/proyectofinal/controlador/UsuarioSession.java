@@ -45,18 +45,22 @@ public class UsuarioSession implements Serializable {
             switch (usuLogin.getRolidURol().getDescripcion()) {
                 case "Administrador":
                     fc.getExternalContext().redirect("Inventario/index.xhtml");
-                    cedula= usuLogin.getNumIdentificacion();
+                    cedula = usuLogin.getNumIdentificacion();
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
                     break;
                 case "Cliente":
                     fc.getExternalContext().redirect("ClienteUsuario/index.xhtml");
-                    cedula= usuLogin.getNumIdentificacion();
+                    cedula = usuLogin.getNumIdentificacion();
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion() + " y el numero de cedula es: " + this.cedula);
                     break;
-                case "Empleado":
+                case "Barbero":
+                    fc.getExternalContext().redirect("BarberoUsuario/index.xhtml");
+                    cedula = usuLogin.getNumIdentificacion();
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion() + " y el numero de cedula es: " + this.cedula);
                     break;
                 case "Auxiliar":
+                    fc.getExternalContext().redirect("Auxiliar/index.xhtml");
+                    cedula = usuLogin.getNumIdentificacion();
                     System.out.println("El id seleccionado es:" + usuLogin.getRolidURol().getDescripcion());
                     break;
                 default:
