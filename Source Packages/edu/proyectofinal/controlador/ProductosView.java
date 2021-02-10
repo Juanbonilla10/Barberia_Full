@@ -91,8 +91,6 @@ public class ProductosView implements Serializable {
         } catch (Exception e) {
             System.out.println("No registrado busque mas opciones" + e);
         }
-
-        objcrpro = new CrearProducto();
     }
 
     public void retornaProducto(CrearProducto objpros) {

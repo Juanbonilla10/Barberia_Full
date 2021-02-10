@@ -33,5 +33,12 @@ public interface UsuariosFacadeLocal {
     public Usuarios loginUsuario(String email, String contrasena);
 
     public Usuarios restauPass(String correo);
+
+    public List<Usuarios> barberos();
+
+ 
+
+    
+
     
 }

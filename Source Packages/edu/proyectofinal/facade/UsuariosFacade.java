@@ -6,6 +6,8 @@
 package edu.proyectofinal.facade;
 
 import edu.proyectofinal.modelo.Usuarios;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,6 +53,18 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
                
         } catch (Exception e) {
             return new Usuarios();
+        }
+    }
+    
+    @Override
+    public List<Usuarios> barberos(){
+        try {
+            String sql = "SELECT Nombres,Apellidos FROM Usuarios WHERE rol_idURol='3'";
+            Query p = em.createNativeQuery(sql);
+            return p.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error al consultar Usuario Barberos" + e.getMessage());
+             return new ArrayList<>();
         }
     }
     

@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,10 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -49,6 +54,7 @@ import org.primefaces.PrimeFaces;
 public class CronogramaView implements Serializable {
 
     private Integer idcronogram;
+    private int idrol = 3;
 
     @EJB
     CronogramaFacadeLocal cronogramaFacadeLocal;
@@ -79,12 +85,16 @@ public class CronogramaView implements Serializable {
     @PostConstruct
     public void cargarDatos() {
 
-        listacronograma.addAll(cronogramaFacadeLocal.findAll());
-        listausuarios.addAll(usuariosFacadeLocal.findAll());
-        listacategoria.addAll(categoriaServicioFacadeLocal.findAll());
+        try {
+            listacronograma.addAll(cronogramaFacadeLocal.findAll());
+            listacategoria.addAll(categoriaServicioFacadeLocal.findAll());
+            listausuarios.addAll(usuariosFacadeLocal.barberos());
+            cronograma.setUsuariosidUsuarios(new Usuarios());
+            cronograma.setCategoriaservicioidCategoriaServicio(new CategoriaServicio());
+        } catch (Exception e) {
+            System.out.println("Error al cargar PostConstruct" + e.getMessage());
+        }
 
-        cronograma.setUsuariosidUsuarios(new Usuarios());
-        cronograma.setCategoriaservicioidCategoriaServicio(new CategoriaServicio());
     }
 
     public void registrarDatos() {
@@ -131,6 +141,7 @@ public class CronogramaView implements Serializable {
         }
     }
 
+    //INSERTAR ARCHIVO EXCEL//
 //    public void insertarXLS(List cellDataList) {
 //        try {
 //            int filasContador = 0;
@@ -178,7 +189,7 @@ public class CronogramaView implements Serializable {
 //        } catch (Exception e) {
 //        }
 //    }
-//
+//    //CREAR EXCEL//  
 //    public void subeExcel() throws IOException {
 //        String mensajeSw = "";
 //        if (archivoExcel != null) {
@@ -220,7 +231,6 @@ public class CronogramaView implements Serializable {
 //
 //        PrimeFaces.current().executeScript(mensajeSw);
 //    }
-
     public void reporteCronograma() {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -321,6 +331,14 @@ public class CronogramaView implements Serializable {
 
     public void setArchivoExcel(Part archivoExcel) {
         this.archivoExcel = archivoExcel;
+    }
+
+    public int getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(int idrol) {
+        this.idrol = idrol;
     }
 
 }
