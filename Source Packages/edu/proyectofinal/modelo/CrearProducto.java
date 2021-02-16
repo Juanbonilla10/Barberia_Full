@@ -6,7 +6,9 @@
 package edu.proyectofinal.modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "crear_producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CrearProducto.findAll", query = "SELECT c FROM CrearProducto c")})
+    @NamedQuery(name = "CrearProducto.findAll", query = "SELECT c FROM CrearProducto c")
+    , @NamedQuery(name = "CrearProducto.findByIdCrearProducto", query = "SELECT c FROM CrearProducto c WHERE c.idCrearProducto = :idCrearProducto")
+    , @NamedQuery(name = "CrearProducto.findByDescripcion", query = "SELECT c FROM CrearProducto c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "CrearProducto.findByReferencia", query = "SELECT c FROM CrearProducto c WHERE c.referencia = :referencia")
+    , @NamedQuery(name = "CrearProducto.findByCodigoBarras", query = "SELECT c FROM CrearProducto c WHERE c.codigoBarras = :codigoBarras")
+    , @NamedQuery(name = "CrearProducto.findByPrecioProveedor", query = "SELECT c FROM CrearProducto c WHERE c.precioProveedor = :precioProveedor")
+    , @NamedQuery(name = "CrearProducto.findByPrecioPublico", query = "SELECT c FROM CrearProducto c WHERE c.precioPublico = :precioPublico")
+    , @NamedQuery(name = "CrearProducto.findByFechaRegistro", query = "SELECT c FROM CrearProducto c WHERE c.fechaRegistro = :fechaRegistro")})
 public class CrearProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,9 +80,15 @@ public class CrearProducto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Fecha_Registro")
     private String fechaRegistro;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
+    private Collection<IngresoProducto> ingresoProductoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
+    private Collection<VentaProducto> ventaProductoCollection;
     @JoinColumn(name = "proveedor_id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Proveedor proveedorIdProveedor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crearproductoidCrearProducto", fetch = FetchType.LAZY)
+    private Collection<Inventario> inventarioCollection;
 
     public CrearProducto() {
     }
@@ -146,12 +163,39 @@ public class CrearProducto implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
+    @XmlTransient
+    public Collection<IngresoProducto> getIngresoProductoCollection() {
+        return ingresoProductoCollection;
+    }
+
+    public void setIngresoProductoCollection(Collection<IngresoProducto> ingresoProductoCollection) {
+        this.ingresoProductoCollection = ingresoProductoCollection;
+    }
+
+    @XmlTransient
+    public Collection<VentaProducto> getVentaProductoCollection() {
+        return ventaProductoCollection;
+    }
+
+    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
+        this.ventaProductoCollection = ventaProductoCollection;
+    }
+
     public Proveedor getProveedorIdProveedor() {
         return proveedorIdProveedor;
     }
 
     public void setProveedorIdProveedor(Proveedor proveedorIdProveedor) {
         this.proveedorIdProveedor = proveedorIdProveedor;
+    }
+
+    @XmlTransient
+    public Collection<Inventario> getInventarioCollection() {
+        return inventarioCollection;
+    }
+
+    public void setInventarioCollection(Collection<Inventario> inventarioCollection) {
+        this.inventarioCollection = inventarioCollection;
     }
 
     @Override

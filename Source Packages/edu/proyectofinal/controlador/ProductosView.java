@@ -91,8 +91,6 @@ public class ProductosView implements Serializable {
         } catch (Exception e) {
             System.out.println("No registrado busque mas opciones" + e);
         }
-
-        objcrpro = new CrearProducto();
     }
 
     public void retornaProducto(CrearProducto objpros) {
@@ -111,8 +109,9 @@ public class ProductosView implements Serializable {
 
     public void eliminarprod(CrearProducto prorem) {
         try {
-            crearProductoFacadeLocal.remove(objcrpro);
-            listaCrearProducto.remove(objcrpro);
+            crearProductoFacadeLocal.remove(prorem);
+            listaCrearProducto.remove(prorem);
+            listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
         } catch (Exception e) {
             System.out.println("Error al actualizar:" + e);
         }

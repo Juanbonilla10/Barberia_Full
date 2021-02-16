@@ -49,7 +49,7 @@ public class PagoempleadosView implements Serializable {
     @PostConstruct
     public void cargadatos() {
 
-        listausuario.addAll(usuariosFacadeLocal.findAll());
+        listausuario.addAll(usuariosFacadeLocal.lista(3));
         listaservicios.addAll(serviciosFacadeLocal.findAll());
         listapagoservicios.addAll(pagoServicioFacadeLocal.findAll());
 

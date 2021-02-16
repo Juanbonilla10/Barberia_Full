@@ -30,7 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "pago_servicio")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PagoServicio.findAll", query = "SELECT p FROM PagoServicio p")})
+    @NamedQuery(name = "PagoServicio.findAll", query = "SELECT p FROM PagoServicio p")
+    , @NamedQuery(name = "PagoServicio.findByIdPagoServicio", query = "SELECT p FROM PagoServicio p WHERE p.idPagoServicio = :idPagoServicio")
+    , @NamedQuery(name = "PagoServicio.findByFechaAtencion", query = "SELECT p FROM PagoServicio p WHERE p.fechaAtencion = :fechaAtencion")
+    , @NamedQuery(name = "PagoServicio.findByValorServicio", query = "SELECT p FROM PagoServicio p WHERE p.valorServicio = :valorServicio")
+    , @NamedQuery(name = "PagoServicio.findByFechaPagoBarbero", query = "SELECT p FROM PagoServicio p WHERE p.fechaPagoBarbero = :fechaPagoBarbero")
+    , @NamedQuery(name = "PagoServicio.findByAbono", query = "SELECT p FROM PagoServicio p WHERE p.abono = :abono")
+    , @NamedQuery(name = "PagoServicio.findBySaldoPendiente", query = "SELECT p FROM PagoServicio p WHERE p.saldoPendiente = :saldoPendiente")})
 public class PagoServicio implements Serializable {
 
     private static final long serialVersionUID = 1L;

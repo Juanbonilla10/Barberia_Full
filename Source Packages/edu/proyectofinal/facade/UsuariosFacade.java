@@ -6,6 +6,8 @@
 package edu.proyectofinal.facade;
 
 import edu.proyectofinal.modelo.Usuarios;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,7 +31,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-      @Override
+    @Override
     public Usuarios restauPass(String correo) {
         try {
             Query qm = em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :correo");
@@ -51,6 +53,17 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
                
         } catch (Exception e) {
             return new Usuarios();
+        }
+    }
+    
+    @Override
+    public List<Usuarios> lista(int idrol){
+        try{
+            Query r = em.createQuery("SELECT u FROM Usuarios u WHERE u.rolidURol.idURol=:idrol");
+            r.setParameter("idrol", idrol);
+            return r.getResultList();
+        }catch(Exception e){
+            return new ArrayList<>();
         }
     }
     

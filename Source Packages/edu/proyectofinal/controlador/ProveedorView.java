@@ -39,55 +39,50 @@ import net.sf.jasperreports.engine.JasperPrint;
  */
 @Named(value = "proveedorView")
 @ViewScoped
-public class ProveedorView implements Serializable{
-     
-     @EJB
-     ProveedorFacadeLocal proveedorFacadeLocal;
-     private ArrayList<Proveedor> listaproveedor = new ArrayList<>();
-     private Proveedor objprov = new Proveedor(); 
-     
-      @EJB
+public class ProveedorView implements Serializable {
+
+    @EJB
+    ProveedorFacadeLocal proveedorFacadeLocal;
+    private ArrayList<Proveedor> listaproveedor = new ArrayList<>();
+    private Proveedor objprov = new Proveedor();
+
+    @EJB
     UsuariosFacadeLocal usuariosFacadeLocal;
     private ArrayList<Usuarios> listausuario = new ArrayList<>();
     private Usuarios objusru = new Usuarios();
-    
-   @Inject
+
+    @Inject
     UsuarioSession usuarioSession;
-     
-     public ProveedorView()  {
+
+    public ProveedorView() {
     }
-  
-   
-   
-    
-     @PostConstruct
-     public void listaProv(){
-     listaproveedor.addAll(proveedorFacadeLocal.findAll());
-     listausuario.addAll (usuariosFacadeLocal.findAll());
-     
-     objprov.setUsuariosidUsuarios1(new Usuarios());  
-     
-     }
-     
-    
-    
-    public void registrarProv(){
+
+    @PostConstruct
+    public void listaProv() {
+        listaproveedor.addAll(proveedorFacadeLocal.findAll());
+        listausuario.addAll(usuariosFacadeLocal.findAll());
+
+        objprov.setUsuariosidUsuarios1(new Usuarios());
+
+    }
+
+    public void registrarProv() {
         try {
-            
+
             proveedorFacadeLocal.create(objprov);
             listaproveedor.clear();
             listaproveedor.addAll(proveedorFacadeLocal.findAll());
         } catch (Exception e) {
             System.out.println("No registrado busque mas opciones" + e);
         }
-        
-        objprov = new Proveedor();
+
     }
-    public void retornaDatos(Proveedor objpr){
-        this.objprov = objpr;       
+
+    public void retornaDatos(Proveedor objpr) {
+        this.objprov = objpr;
     }
-     
-       public void actualizarProv(){
+
+    public void actualizarProv() {
         try {
             proveedorFacadeLocal.edit(objprov);
             listaproveedor.clear();
@@ -96,20 +91,20 @@ public class ProveedorView implements Serializable{
             System.out.println("Error al actualizar:" + e);
         }
     }
-       
-       
-     public void eliminarProv(Proveedor prorem){
-          try {
-     proveedorFacadeLocal.remove(objprov);
-     listaproveedor.remove(objprov);
-     } catch (Exception e) {
+
+    public void eliminarProv(Proveedor prorem) {
+        try {
+            proveedorFacadeLocal.remove(prorem);
+            listaproveedor.remove(prorem);
+            listaproveedor.addAll(proveedorFacadeLocal.findAll());
+        } catch (Exception e) {
             System.out.println("Error al actualizar:" + e);
         }
-     }
-     
-     public void reporteProveedor(){
-        
-         FacesContext facesContext = FacesContext.getCurrentInstance();
+    }
+
+    public void reporteProveedor() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
 
@@ -122,11 +117,11 @@ public class ProveedorView implements Serializable{
             parametro.put("img", context.getRealPath("/images/AYT.png"));
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
-            
+
             File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/listaproveedor.jasper"));
-             
+
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
-            
+
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
             hsr.addHeader("Content-disposition", "attachment; filename=Lista De Proveedores.pdf");
             OutputStream os = hsr.getOutputStream();
@@ -134,16 +129,15 @@ public class ProveedorView implements Serializable{
             os.flush();
             os.close();
             facesContext.responseComplete();
-           
+
         } catch (JRException e) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + e.getMessage());
-        } catch(IOException i){
+        } catch (IOException i) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + i.getMessage());
-        } catch (SQLException q){
+        } catch (SQLException q) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + q.getMessage());
         }
 
-        
     }
 
     public ArrayList<Proveedor> getListaproveedor() {
@@ -178,6 +172,4 @@ public class ProveedorView implements Serializable{
         this.objusru = objusru;
     }
 
-
-    
 }

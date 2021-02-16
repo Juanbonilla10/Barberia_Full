@@ -30,7 +30,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "citas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c")})
+    @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c")
+    , @NamedQuery(name = "Citas.findByIdCitas", query = "SELECT c FROM Citas c WHERE c.idCitas = :idCitas")
+    , @NamedQuery(name = "Citas.findByTelefono", query = "SELECT c FROM Citas c WHERE c.telefono = :telefono")
+    , @NamedQuery(name = "Citas.findByFecha", query = "SELECT c FROM Citas c WHERE c.fecha = :fecha")
+    , @NamedQuery(name = "Citas.findByHora", query = "SELECT c FROM Citas c WHERE c.hora = :hora")})
 public class Citas implements Serializable {
 
     private static final long serialVersionUID = 1L;

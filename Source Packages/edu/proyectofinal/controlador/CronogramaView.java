@@ -7,9 +7,12 @@ package edu.proyectofinal.controlador;
 
 import edu.proyectofinal.facade.CategoriaServicioFacadeLocal;
 import edu.proyectofinal.facade.CronogramaFacadeLocal;
+import edu.proyectofinal.facade.HorariosCronogramaFacade;
+import edu.proyectofinal.facade.HorariosCronogramaFacadeLocal;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
 import edu.proyectofinal.modelo.CategoriaServicio;
 import edu.proyectofinal.modelo.Cronograma;
+import edu.proyectofinal.modelo.HorariosCronograma;
 import edu.proyectofinal.modelo.Usuarios;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +23,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +42,10 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -49,6 +57,8 @@ import org.primefaces.PrimeFaces;
 public class CronogramaView implements Serializable {
 
     private Integer idcronogram;
+    private int idrol = 3;
+    private String disponibles="2";
 
     @EJB
     CronogramaFacadeLocal cronogramaFacadeLocal;
@@ -64,6 +74,11 @@ public class CronogramaView implements Serializable {
     CategoriaServicioFacadeLocal categoriaServicioFacadeLocal;
     private CategoriaServicio categoriaServicio = new CategoriaServicio();
     private ArrayList<CategoriaServicio> listacategoria = new ArrayList<>();
+    
+    @EJB
+    HorariosCronogramaFacadeLocal horariosCronogramaFacadeLocal;
+    private HorariosCronograma horariosCronograma = new HorariosCronograma();
+    private ArrayList<HorariosCronograma> listahoras = new ArrayList<>();
 
     @Inject
     UsuarioSession usuarioSession;
@@ -79,25 +94,39 @@ public class CronogramaView implements Serializable {
     @PostConstruct
     public void cargarDatos() {
 
-        listacronograma.addAll(cronogramaFacadeLocal.findAll());
-        listausuarios.addAll(usuariosFacadeLocal.findAll());
-        listacategoria.addAll(categoriaServicioFacadeLocal.findAll());
+        try {
+            listahoras.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
+            //listahoras.addAll(horariosCronogramaFacadeLocal.findAll());
+            listacronograma.addAll(cronogramaFacadeLocal.findAll());
+            listacategoria.addAll(categoriaServicioFacadeLocal.findAll());
+            listausuarios.addAll(usuariosFacadeLocal.lista(3)); //FUNCION RETORNA UNA LISTA DE SOLO PERSONAS DE UN ROL//
+            cronograma.setUsuariosidUsuarios(new Usuarios());
+            cronograma.setCategoriaservicioidCategoriaServicio(new CategoriaServicio());
+        } catch (Exception e) {
+            System.out.println("Error al cargar PostConstruct" + e.getMessage());
+        }
 
-        cronograma.setUsuariosidUsuarios(new Usuarios());
-        cronograma.setCategoriaservicioidCategoriaServicio(new CategoriaServicio());
     }
 
     public void registrarDatos() {
 
         try {
-
+                                 //ACTUALIZA ESTADO DE LA CITA CUANDO SE CREA//
+            horariosCronogramaFacadeLocal.actualizaEstadoCita(cronograma.getTurno());
             cronograma.setUsuariosidUsuarios(usuariosFacadeLocal.find(cronograma.getUsuariosidUsuarios().getIdUsuarios()));
             cronograma.setCategoriaservicioidCategoriaServicio(categoriaServicioFacadeLocal.find(cronograma.getCategoriaservicioidCategoriaServicio().getIdCategoriaServicio()));
             cronogramaFacadeLocal.create(cronograma);
             listacronograma.clear();
             listacronograma.addAll(cronogramaFacadeLocal.findAll());
+            listahoras.clear();
+            listahoras.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
+                              
+            
+            System.out.println("variable hora:" + horariosCronograma.getHora());
+            
 
-        } catch (Exception e) {
+
+        }catch (Exception e) {
             System.out.println("Error al registrar" + e.getMessage());
         }
 
@@ -119,18 +148,19 @@ public class CronogramaView implements Serializable {
 
     public void actualizarDatos() {
         try {
+            //ACTUALIZA DATSO DE LAS CITAS
             cronograma.setUsuariosidUsuarios(usuariosFacadeLocal.find(cronograma.getUsuariosidUsuarios().getIdUsuarios()));
             cronograma.setCategoriaservicioidCategoriaServicio(categoriaServicioFacadeLocal.find(cronograma.getCategoriaservicioidCategoriaServicio().getIdCategoriaServicio()));
             cronogramaFacadeLocal.edit(cronograma);
             listacronograma.clear();
             listacronograma.addAll(cronogramaFacadeLocal.findAll());
-
         } catch (Exception e) {
 
             System.out.println("Error al actulizar los datos" + e.getMessage());
         }
     }
 
+    //INSERTAR ARCHIVO EXCEL//
 //    public void insertarXLS(List cellDataList) {
 //        try {
 //            int filasContador = 0;
@@ -178,7 +208,7 @@ public class CronogramaView implements Serializable {
 //        } catch (Exception e) {
 //        }
 //    }
-//
+//    //CREAR EXCEL//  
 //    public void subeExcel() throws IOException {
 //        String mensajeSw = "";
 //        if (archivoExcel != null) {
@@ -220,7 +250,6 @@ public class CronogramaView implements Serializable {
 //
 //        PrimeFaces.current().executeScript(mensajeSw);
 //    }
-
     public void reporteCronograma() {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -321,6 +350,38 @@ public class CronogramaView implements Serializable {
 
     public void setArchivoExcel(Part archivoExcel) {
         this.archivoExcel = archivoExcel;
+    }
+
+    public int getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(int idrol) {
+        this.idrol = idrol;
+    }
+
+    public HorariosCronograma getHorariosCronograma() {
+        return horariosCronograma;
+    }
+
+    public void setHorariosCronograma(HorariosCronograma horariosCronograma) {
+        this.horariosCronograma = horariosCronograma;
+    }
+
+    public ArrayList<HorariosCronograma> getListahoras() {
+        return listahoras;
+    }
+
+    public void setListahoras(ArrayList<HorariosCronograma> listahoras) {
+        this.listahoras = listahoras;
+    }
+
+    public String getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(String disponibles) {
+        this.disponibles = disponibles;
     }
 
 }

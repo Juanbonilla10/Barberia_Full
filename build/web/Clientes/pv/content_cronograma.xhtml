@@ -37,7 +37,7 @@
                                                 <f:ajax  execute="fileImgUno" ></f:ajax>
                                             </h:commandButton>
 
-                                            <button type="button" onclick="$('#miformUno\\:fileImgUno').click();" class="btn btn-outline-success btn-sm __web-inspector-hide-shortcut__"><i class="fa fa-magic"></i>&nbsp; Cargar Productos Xlsx</button>
+                                            <button type="button" onclick="$('#miformUno\\:fileImgUno').click();" class="btn btn-warning btn-sm __web-inspector-hide-shortcut__" style="margin-top: 17px;margin-left: 17px;"><i class="fa fa-magic"></i>&nbsp; Cargar Cronograma</button>
 
                                         </h:form>
 
@@ -63,8 +63,7 @@
                                                         <tr>
                                                             <th scope="col">Id</th>
                                                             <th scope="col">Fecha</th>
-                                                            <th scope="col">Hora Inicio</th>
-                                                            <th scope="col">Hora Fin</th>
+                                                            <th scope="col">Turno</th>
                                                             <th scope="col">Estilista</th>
                                                             <th scope="col">Categoria</th>
                                                         </tr>
@@ -74,8 +73,7 @@
                                                             <tr>
                                                                 <td>#{objcrono.idCronograma}</td>
                                                                 <td>#{objcrono.fechaInicio}</td>
-                                                                <td>#{objcrono.horaInicio}</td>
-                                                                <td>#{objcrono.horaFin}</td>
+                                                                <td>#{objcrono.turno}</td>
                                                                 <td>#{objcrono.usuariosidUsuarios.nombres}</td>
                                                                 <td>#{objcrono.categoriaservicioidCategoriaServicio.descripcion}</td>                                                              
                                                                 <td><h:commandButton  action="#{cronogramaView.retornarDatos(objcrono)}" style="margin-right: 10px" class="btn btn-outline-primary" onclick="$('#btnModal').click();" value="Editar" >
@@ -107,34 +105,30 @@
                                 </div>
                                 <h:form>
                                     <div class="modal-body">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
+                                            <label for="exampleInputTurno">Turno</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.turno}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listahoras}" var="objhro" itemValue="#{objhro.hora}" itemLabel="#{objhro.hora}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="exampleInputClientes">Fecha</label>
                                             <h:inputText value="#{cronogramaView.cronograma.fechaInicio}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
 
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputProducto">Hora Inicio</label>
-                                            <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
-
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputPago">Hora fin</label>
-                                            <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
-
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputFecha">Estilista</label>
-                                            <h:selectOneMenu value="#{cronogramaView.cronograma.usuariosidUsuarios.idUsuarios}" class="form-control form-control-sm">
-                                                <f:selectItems value="#{cronogramaView.listausuarios}" var="objust" itemValue="#{objust.idUsuarios}" itemLabel="#{objust.nombres} #{objust.apellidos}" />
-                                            </h:selectOneMenu>
-
-                                        </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="exampleInputCantidad">Categoria</label>
                                             <h:selectOneMenu value="#{cronogramaView.cronograma.categoriaservicioidCategoriaServicio.idCategoriaServicio}" class="form-control form-control-sm">
                                                 <f:selectItems value="#{cronogramaView.listacategoria}" var="objcate" itemValue="#{objcate.idCategoriaServicio}" itemLabel="#{objcate.tipoServicio}" />
                                             </h:selectOneMenu>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="exampleInputFecha">Estilista</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.usuariosidUsuarios.idUsuarios}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listausuarios}" var="objust" itemValue="#{objust.idUsuarios}" itemLabel="#{objust.nombres} #{objust.apellidos}" />
+                                            </h:selectOneMenu>
+                                        </div>
+
                                         <div class="modal-footer" >
                                             <h:commandButton  action="#{cronogramaView.registrarDatos()}" class="btn btn-primary btn-flat m-b-30 m-t-30"  value="Guardar" />
                                         </div>             
@@ -161,14 +155,10 @@
 
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="exampleInputProducto">Hora Inicio</label>
-                                            <h:inputText value="#{cronogramaView.cronograma.horaInicio}" html5:type="time" class="form-control"/>
-
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputPago">Hora fin</label>
-                                            <h:inputText value="#{cronogramaView.cronograma.horaFin}" html5:type="time" class="form-control"  />
-
+                                            <label for="exampleInputTurno">Turno</label>
+                                            <h:selectOneMenu value="#{cronogramaView.cronograma.turno}" class="form-control form-control-sm">
+                                                <f:selectItems value="#{cronogramaView.listahoras}" var="objhro" itemValue="#{objhro.hora}" itemLabel="#{objhro.hora}" />
+                                            </h:selectOneMenu>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputFecha">Estilista</label>

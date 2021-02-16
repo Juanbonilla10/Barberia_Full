@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cronograma")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cronograma.findAll", query = "SELECT c FROM Cronograma c")})
+    @NamedQuery(name = "Cronograma.findAll", query = "SELECT c FROM Cronograma c")
+    , @NamedQuery(name = "Cronograma.findByIdCronograma", query = "SELECT c FROM Cronograma c WHERE c.idCronograma = :idCronograma")
+    , @NamedQuery(name = "Cronograma.findByFechaInicio", query = "SELECT c FROM Cronograma c WHERE c.fechaInicio = :fechaInicio")
+    , @NamedQuery(name = "Cronograma.findByTurno", query = "SELECT c FROM Cronograma c WHERE c.turno = :turno")})
 public class Cronograma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,13 +50,8 @@ public class Cronograma implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "Hora_Inicio")
-    private String horaInicio;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "Hora_Fin")
-    private String horaFin;
+    @Column(name = "Turno")
+    private String turno;
     @JoinColumn(name = "categoria_servicio_idCategoria_Servicio", referencedColumnName = "idCategoria_Servicio")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoriaServicio categoriaservicioidCategoriaServicio;
@@ -68,11 +66,10 @@ public class Cronograma implements Serializable {
         this.idCronograma = idCronograma;
     }
 
-    public Cronograma(Integer idCronograma, String fechaInicio, String horaInicio, String horaFin) {
+    public Cronograma(Integer idCronograma, String fechaInicio, String turno) {
         this.idCronograma = idCronograma;
         this.fechaInicio = fechaInicio;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+        this.turno = turno;
     }
 
     public Integer getIdCronograma() {
@@ -91,20 +88,12 @@ public class Cronograma implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getHoraInicio() {
-        return horaInicio;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setHoraInicio(String horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public String getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(String horaFin) {
-        this.horaFin = horaFin;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
     public CategoriaServicio getCategoriaservicioidCategoriaServicio() {

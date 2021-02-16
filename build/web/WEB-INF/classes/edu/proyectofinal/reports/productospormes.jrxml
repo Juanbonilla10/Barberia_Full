@@ -13,47 +13,47 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="fecha" class="java.lang.String"/>
-	<parameter name="fehca_ultima" class="java.lang.String"/>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fehca_ultima" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     SUM(Cantidad),
-     crear_producto.`Descripcion`
+     crear_producto.`Descripcion` AS crear_producto_Descripcion,
+     venta_producto.`Fecha_Venta` AS venta_producto_Fecha_Venta,
+     venta_producto.`Cantidad` AS venta_producto_Cantidad,
+     venta_producto.`Total` AS venta_producto_Total,
+     venta_producto.`crear_producto_idCrear_Producto` AS venta_producto_crear_producto_idCrear_Producto
 FROM
-     `crear_producto` crear_producto INNER JOIN `venta_producto` venta_producto ON crear_producto.`idCrear_Producto` = venta_producto.`crear_producto_idCrear_Producto`
-WHERE
-     venta_producto.Fecha_Venta BETWEEN  $P{fecha} and $P{fehca_ultima}
-GROUP BY
-     venta_producto.crear_producto_idCrear_Producto]]>
+     `crear_producto` crear_producto INNER JOIN `venta_producto` venta_producto ON crear_producto.`idCrear_Producto` = venta_producto.`crear_producto_idCrear_Producto`]]>
 	</queryString>
-	<field name="SUM(Cantidad)" class="java.math.BigDecimal"/>
-	<field name="Descripcion" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="crear_producto_Descripcion" class="java.lang.String"/>
+	<field name="venta_producto_Fecha_Venta" class="java.lang.String"/>
+	<field name="venta_producto_Cantidad" class="java.lang.Integer"/>
+	<field name="venta_producto_Total" class="java.lang.Double"/>
+	<field name="venta_producto_crear_producto_idCrear_Producto" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="132" splitType="Stretch">
-			<image>
-				<reportElement x="456" y="0" width="99" height="132" uuid="cb8f0567-24a1-4fd4-ba38-03b512ae3079"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
-			</image>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="d62f0c82-a63c-44e2-bc6b-be2aa067c68f"/>
+				<reportElement mode="Opaque" x="2" y="0" width="451" height="95" backcolor="#000000" uuid="d62f0c82-a63c-44e2-bc6b-be2aa067c68f"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="6c85a531-6d46-4557-98a7-64bdbd8f063d"/>
+					<reportElement style="Title" x="0" y="0" width="449" height="66" uuid="6c85a531-6d46-4557-98a7-64bdbd8f063d"/>
 					<textElement>
-						<font isBold="false"/>
+						<font size="46" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry Title]]></text>
+					<text><![CDATA[Productos más vendidos]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="3f4ba56c-0cd7-4b07-8a7d-3be1bbfb3859"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry SubTitle]]></text>
+					<text><![CDATA[BARBERIA AYT ]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -74,54 +74,122 @@ GROUP BY
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="7" width="277" height="18" forecolor="#000000" uuid="e4d42a7d-dff4-4782-8e16-23738f85298e"/>
+				<reportElement style="Column header" x="0" y="8" width="133" height="18" forecolor="#000000" uuid="c5c01c9d-61bb-439e-a7a5-f10a1a3e41aa"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[Cantidad Por Producto]]></text>
+				<text><![CDATA[Nombre Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="277" y="7" width="277" height="18" forecolor="#000000" uuid="2998d242-f3b0-4110-9e71-dea29983f975"/>
+				<reportElement style="Column header" x="133" y="8" width="94" height="18" forecolor="#000000" uuid="2dbb26e8-32a5-4c82-b690-9fd935848042"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[Descripcion]]></text>
+				<text><![CDATA[Fecha_Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="227" y="8" width="57" height="18" forecolor="#000000" uuid="dd2d992b-4f98-4e80-a24b-49cd09b5ead0"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="284" y="8" width="122" height="18" forecolor="#000000" uuid="b3c545ab-d3bf-4310-a897-04b726a9fd98"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="406" y="8" width="124" height="18" forecolor="#000000" uuid="c1db1150-fe2b-4118-9004-e97547415bea"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Id producto]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="f4abf33d-e933-487f-9ed1-7504d708c4e8"/>
+				<box rightPadding="11"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="277" height="18" uuid="f24c8531-df84-47f3-9ecc-3d41858d62d0"/>
+					<reportElement style="Detail" positionType="Float" x="2" y="0" width="131" height="18" uuid="4c67a4b1-0ef0-4950-aee8-1594002266e8"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{SUM(Cantidad)}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{crear_producto_Descripcion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="277" y="0" width="277" height="18" uuid="22e764a0-a38e-49ab-af00-a800b5dc7f24"/>
+					<reportElement style="Detail" positionType="Float" x="133" y="0" width="94" height="18" uuid="361c2ae7-f615-411c-9d10-aa369720f6c6"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{venta_producto_Fecha_Venta}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="227" y="0" width="57" height="18" uuid="8fa4e7d4-a583-4304-b4de-703fbe38d433"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{venta_producto_Cantidad}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="284" y="0" width="122" height="18" uuid="f976752a-2541-4638-88c9-fc92f624a8e0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{venta_producto_Total}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="406" y="0" width="124" height="18" uuid="452fa2ed-c6d4-4f1e-b725-f980ef3097ce"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{venta_producto_crear_producto_idCrear_Producto}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch">
+		<band height="252" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="76f973c9-7009-4370-b5f8-24b98d9d5cef"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<bar3DChart>
+				<chart>
+					<reportElement x="50" y="15" width="446" height="217" uuid="8d8c1b69-b033-420a-a57c-229f5c70c93c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{crear_producto_Descripcion}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{venta_producto_Fecha_Venta}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{venta_producto_Total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="25" splitType="Stretch">
+		<band height="62" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="66d1543e-6d02-4587-b25f-6b1617c4343f"/>
 				<textField evaluationTime="Report">

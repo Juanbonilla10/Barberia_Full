@@ -110,7 +110,7 @@ public class VentaView implements Serializable {
             
         }
         PrimeFaces.current().executeScript(mensaje);
-        objproduct = new VentaProducto();
+ 
         
     }
     

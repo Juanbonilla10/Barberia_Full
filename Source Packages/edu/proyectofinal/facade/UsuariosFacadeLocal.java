@@ -6,6 +6,7 @@
 package edu.proyectofinal.facade;
 
 import edu.proyectofinal.modelo.Usuarios;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -33,5 +34,22 @@ public interface UsuariosFacadeLocal {
     public Usuarios loginUsuario(String email, String contrasena);
 
     public Usuarios restauPass(String correo);
+
+    public List<Usuarios> lista(int idrol);
+
+
+
+  
+
+  
+
+  
+
+    
+
+ 
+
+    
+
     
 }

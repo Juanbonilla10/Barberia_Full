@@ -34,11 +34,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "proveedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")})
+    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")
+    , @NamedQuery(name = "Proveedor.findByIdProveedor", query = "SELECT p FROM Proveedor p WHERE p.idProveedor = :idProveedor")
+    , @NamedQuery(name = "Proveedor.findByNombre", query = "SELECT p FROM Proveedor p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Proveedor.findByRazon", query = "SELECT p FROM Proveedor p WHERE p.razon = :razon")
+    , @NamedQuery(name = "Proveedor.findByFechar", query = "SELECT p FROM Proveedor p WHERE p.fechar = :fechar")
+    , @NamedQuery(name = "Proveedor.findByNumCel", query = "SELECT p FROM Proveedor p WHERE p.numCel = :numCel")
+    , @NamedQuery(name = "Proveedor.findByNumTel", query = "SELECT p FROM Proveedor p WHERE p.numTel = :numTel")
+    , @NamedQuery(name = "Proveedor.findByDiaPago", query = "SELECT p FROM Proveedor p WHERE p.diaPago = :diaPago")
+    , @NamedQuery(name = "Proveedor.findByCiudad", query = "SELECT p FROM Proveedor p WHERE p.ciudad = :ciudad")
+    , @NamedQuery(name = "Proveedor.findByDirecccion", query = "SELECT p FROM Proveedor p WHERE p.direcccion = :direcccion")
+    , @NamedQuery(name = "Proveedor.findByEmail", query = "SELECT p FROM Proveedor p WHERE p.email = :email")
+    , @NamedQuery(name = "Proveedor.findByUsuariosidUsuarios", query = "SELECT p FROM Proveedor p WHERE p.usuariosidUsuarios = :usuariosidUsuarios")
+    , @NamedQuery(name = "Proveedor.findByCrearproductoidCrearProducto", query = "SELECT p FROM Proveedor p WHERE p.crearproductoidCrearProducto = :crearproductoidCrearProducto")
+    , @NamedQuery(name = "Proveedor.findByNit", query = "SELECT p FROM Proveedor p WHERE p.nit = :nit")})
 public class Proveedor implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedorIdProveedor", fetch = FetchType.LAZY)
-    private Collection<CrearProducto> crearProductoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,6 +95,8 @@ public class Proveedor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nit")
     private String nit;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedorIdProveedor", fetch = FetchType.LAZY)
+    private Collection<CrearProducto> crearProductoCollection;
     @JoinColumn(name = "usuarios_idUsuarios1", referencedColumnName = "idUsuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios usuariosidUsuarios1;
@@ -207,6 +219,15 @@ public class Proveedor implements Serializable {
         this.nit = nit;
     }
 
+    @XmlTransient
+    public Collection<CrearProducto> getCrearProductoCollection() {
+        return crearProductoCollection;
+    }
+
+    public void setCrearProductoCollection(Collection<CrearProducto> crearProductoCollection) {
+        this.crearProductoCollection = crearProductoCollection;
+    }
+
     public Usuarios getUsuariosidUsuarios1() {
         return usuariosidUsuarios1;
     }
@@ -238,15 +259,6 @@ public class Proveedor implements Serializable {
     @Override
     public String toString() {
         return "edu.proyectofinal.modelo.Proveedor[ idProveedor=" + idProveedor + " ]";
-    }
-
-    @XmlTransient
-    public Collection<CrearProducto> getCrearProductoCollection() {
-        return crearProductoCollection;
-    }
-
-    public void setCrearProductoCollection(Collection<CrearProducto> crearProductoCollection) {
-        this.crearProductoCollection = crearProductoCollection;
     }
     
 }
