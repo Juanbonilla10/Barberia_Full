@@ -132,6 +132,18 @@
                                                     <div class="panel-body">
                                                         <p>Reportes generales de pagos,registro nuevos y mas pordras verlo aquí </p>
                                                         <h:form>
+                                                            <br></br>
+                                                            <label>Fecha Inicial </label>
+                                                            <h:inputText html5:type="date" value="#{pagoempleadosView.fechaIn}" style="margin-left: 15px;" />
+                                                            <br></br>
+                                                            <br></br>
+                                                            <label>Fecha Final </label>
+                                                            <h:inputText html5:type="date" value="#{pagoempleadosView.fechaFn}" style="margin-left: 22px;" />
+                                                            <br></br>
+                                                            <h:commandButton value="Ventas por Empleado" class="btn btn-primary waves-effect" action="#{pagoempleadosView.reporteVentasPorEmpleado()}">
+                                                            </h:commandButton>
+                                                            <br></br>
+                                                            <br></br>
                                                             <h:commandButton value="Listado de Usuarios" class="btn btn-primary waves-effect" action="#{listaUsuarioView.reporteUsuarios()}">
                                                             </h:commandButton>
 
@@ -161,8 +173,8 @@
                                                             <label>Fecha Desde </label>
                                                             <h:inputText html5:type="date" value="#{citaView.fecha_primeprivate}"  />
                                                             <br></br>
-                                                             <label>Fecha Hasta </label>
-                                                             <h:inputText html5:type="date" value="#{citaView.ultima_fecha}" />
+                                                            <label>Fecha Hasta </label>
+                                                            <h:inputText html5:type="date" value="#{citaView.ultima_fecha}" />
                                                             <br></br>
                                                             <h:commandButton value="Productos mas vendidos" class="btn btn-primary waves-effect" action="#{citaView.reporteVentasPorMes()}">
                                                             </h:commandButton>

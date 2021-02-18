@@ -33,9 +33,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  *
@@ -193,9 +195,9 @@ public class CitaView implements Serializable {
             parametro.put("fehca_ultima", getUltima_fecha());
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
-
+              
             File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/productospormes.jasper"));
-
+            
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
 
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();

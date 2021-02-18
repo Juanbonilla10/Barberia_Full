@@ -27,7 +27,8 @@
      venta_producto.`Total` AS venta_producto_Total,
      venta_producto.`crear_producto_idCrear_Producto` AS venta_producto_crear_producto_idCrear_Producto
 FROM
-     `crear_producto` crear_producto INNER JOIN `venta_producto` venta_producto ON crear_producto.`idCrear_Producto` = venta_producto.`crear_producto_idCrear_Producto`]]>
+     `crear_producto` crear_producto INNER JOIN `venta_producto` venta_producto ON crear_producto.`idCrear_Producto` = venta_producto.`crear_producto_idCrear_Producto`
+WHERE venta_producto.`Fecha_Venta` between $P{fecha} and $P{fehca_ultima}]]>
 	</queryString>
 	<field name="crear_producto_Descripcion" class="java.lang.String"/>
 	<field name="venta_producto_Fecha_Venta" class="java.lang.String"/>
