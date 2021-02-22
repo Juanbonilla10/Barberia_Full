@@ -75,6 +75,8 @@ public class ProductosView implements Serializable {
 
     @PostConstruct
     public void listprod() {
+        
+        crearProductoFacadeLocal.ingreso(67,11);
         listaproveedor.addAll(proveedorFacadeLocal.findAll());
         listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
 

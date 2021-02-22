@@ -29,5 +29,9 @@ public interface CrearProductoFacadeLocal {
     List<CrearProducto> findRange(int[] range);
 
     int count();
+
+    public CrearProducto ingreso(int idingresi, int ingreso);
+
+
     
 }

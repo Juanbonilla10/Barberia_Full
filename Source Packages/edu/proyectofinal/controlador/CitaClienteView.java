@@ -6,10 +6,13 @@
 package edu.proyectofinal.controlador;
 
 import edu.proyectofinal.facade.CitasFacadeLocal;
+import edu.proyectofinal.facade.HorariosCronogramaFacade;
+import edu.proyectofinal.facade.HorariosCronogramaFacadeLocal;
 import edu.proyectofinal.facade.ServiciosFacadeLocal;
 import edu.proyectofinal.facade.TipoPagoFacadeLocal;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
 import edu.proyectofinal.modelo.Citas;
+import edu.proyectofinal.modelo.HorariosCronograma;
 import edu.proyectofinal.modelo.Servicios;
 import edu.proyectofinal.modelo.TipoPago;
 import edu.proyectofinal.modelo.Usuarios;
@@ -29,6 +32,8 @@ import javax.inject.Inject;
 @Named(value = "citaClienteView")
 @SessionScoped
 public class CitaClienteView implements Serializable {
+
+    private String disponibles = "2";
 
     @EJB
     CitasFacadeLocal citasFacadeLocal;
@@ -50,12 +55,18 @@ public class CitaClienteView implements Serializable {
     private Servicios servicios = new Servicios();
     private ArrayList<Servicios> listaservices = new ArrayList<>();
 
+    @EJB
+    HorariosCronogramaFacadeLocal horariosCronogramaFacadeLocal;
+    private HorariosCronograma horariosCronograma = new HorariosCronograma();
+    private ArrayList<HorariosCronograma> listaHorariosCronogramas = new ArrayList<>();
+
     @Inject
     UsuarioSession usuarioSession;
 
     @PostConstruct
     public void cargaCategorias() {
         try {
+            listaHorariosCronogramas.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
             listausu.addAll(usuariosFacadeLocal.findAll());
             listapago.addAll(tipoPagoFacadeLocal.findAll());
             listaservices.addAll(serviciosFacadeLocal.findAll());
@@ -80,13 +91,13 @@ public class CitaClienteView implements Serializable {
     public void crearCitaCliente() {
 
         try {
-
+            horariosCronogramaFacadeLocal.actualizaEstadoCita(citas.getHora());
             citas.setUsuariosidUsuarios(usuariosFacadeLocal.find(usuarioSession.getUsuLogin().getIdUsuarios()));
             citas.setServiciosIdservicio(serviciosFacadeLocal.find(citas.getServiciosIdservicio().getIdservicio()));
             citas.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(citas.getTipopagoidTipoPago().getIdTipoPago()));
-
             citasFacadeLocal.create(citas);
-
+            listaHorariosCronogramas.clear();
+            listaHorariosCronogramas.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
             listacitas.clear();
             listacitas.addAll(citasFacadeLocal.listaCitasPer(usuarioSession.getCedula()));
 
@@ -96,6 +107,15 @@ public class CitaClienteView implements Serializable {
             System.out.println("Error al crear: " + e.getMessage());
         }
 
+    }
+
+    public void actualizarEstados() {
+        try {
+            listaHorariosCronogramas.clear();
+            listaHorariosCronogramas.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
+        } catch (Exception e) {
+            System.out.println("Error al crear: " + e.getMessage());
+        }
     }
 
     public void eliminarCitaCli(Citas uscita) {
@@ -200,6 +220,30 @@ public class CitaClienteView implements Serializable {
 
     public void setListaservices(ArrayList<Servicios> listaservices) {
         this.listaservices = listaservices;
+    }
+
+    public HorariosCronograma getHorariosCronograma() {
+        return horariosCronograma;
+    }
+
+    public void setHorariosCronograma(HorariosCronograma horariosCronograma) {
+        this.horariosCronograma = horariosCronograma;
+    }
+
+    public ArrayList<HorariosCronograma> getListaHorariosCronogramas() {
+        return listaHorariosCronogramas;
+    }
+
+    public void setListaHorariosCronogramas(ArrayList<HorariosCronograma> listaHorariosCronogramas) {
+        this.listaHorariosCronogramas = listaHorariosCronogramas;
+    }
+
+    public String getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(String disponibles) {
+        this.disponibles = disponibles;
     }
 
 }
