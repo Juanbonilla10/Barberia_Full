@@ -75,6 +75,7 @@ public class CitaClienteView implements Serializable {
             citas.setUsuariosidUsuarios(new Usuarios());
             citas.setTipopagoidTipoPago(new TipoPago());
             System.out.println("CEDULA : " + usuarioSession.getCedula());
+           
         } catch (Exception e) {
             System.out.println("edu.webapp1966781a.controlador.ProductosView.cargaCategorias() " + e.getMessage());
         }
@@ -91,7 +92,7 @@ public class CitaClienteView implements Serializable {
     public void crearCitaCliente() {
 
         try {
-            horariosCronogramaFacadeLocal.actualizaEstadoCita(citas.getHora());
+            horariosCronogramaFacadeLocal.actualizaEstadoCita(citas.getFecha());
             citas.setUsuariosidUsuarios(usuariosFacadeLocal.find(usuarioSession.getUsuLogin().getIdUsuarios()));
             citas.setServiciosIdservicio(serviciosFacadeLocal.find(citas.getServiciosIdservicio().getIdservicio()));
             citas.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(citas.getTipopagoidTipoPago().getIdTipoPago()));
@@ -100,7 +101,7 @@ public class CitaClienteView implements Serializable {
             listaHorariosCronogramas.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
             listacitas.clear();
             listacitas.addAll(citasFacadeLocal.listaCitasPer(usuarioSession.getCedula()));
-
+            System.out.println("El valor que se ingreso en la cita es: " + citas.getHora());
             System.out.println("Se insertaron los datos correspondientes");
 
         } catch (Exception e) {

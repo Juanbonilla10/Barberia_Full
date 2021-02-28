@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+	<meta name="viewport" content="width-divice-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/contactenos.css"/>
+		<style>
+		.body {
+			background: url(http://labarberia.com/wp-content/uploads/2019/12/bg_barberia.jpg);
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+		body{
+			background: url(http://labarberia.com/wp-content/uploads/2019/12/bg_barberia.jpg);
+			background-repeat: round;
+		}
+
+		.row {
+			margin-bottom: 5px;
+		}
+
+		.my-menu div .hamb {
+			width: 500px;
+		}
+
+		.nav-bar {
+			text-align: right;
+			font-size: 25px;
+			padding: 10px;
+			background-color: #e64a19;
+		}
+
+		.nav-bar a {
+			color: white !important;
+			text-decoration: none !important;
+		}
+
+		.principales {
+			padding: 20px 10px;
+			text-align: center;
+			margin: 0 auto;
+			color: white;
+		}
+
+		.menu a{
+			color: #ffff;
+			padding: 15px;
+
+		}
+			
+	</style>
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="index.xhtml">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="Servicios.xhtml">Servicios</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="nuestro_equi.xhtml">Nuestro equipo</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="proyeccion.xhtml">Proyección</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="comunicate.xhtml">Comunícate</a>
+			</li>
+                        <li class="nav-item">
+                            
+                            <select onchange="location = this.value;" style="width:120px;  margin-top: 10px; margin-left: 700px" class="nav-link navbar-expand-lg navbar-dark bg-dark fixed-top form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                             <option selected=""><img scr="img/idi.png" width="30px" height="30px"/>Traducir</option>
+                             <option value="homeTra.xhtml"><a class="nav-link" >Ingles<img src="img/66.png" width="30px" height="15px"/></a></option>
+                             <option value="index.xhtml"><a class="nav-link">Español</a></option>
+                            
+                            </select>
+			</li>    
+		</ul>
+		</div>
+	</nav>
+		<div class="container">
+			<div class="row">
+				<div class="principales">
+					<br/>
+					<h3>NOSOTROS</h3>
+					<br/>
+					<img width="400px" src="img/Barberia.jpg" alt=""/>
+					<br/>
+					<br/>
+					<div class="row my-menu justify-content-center">
+						<div class="justify-content-center col-md-6 col-sm-6 col-xs-12">
+							<p>A Y T es un club de caballeros con barbería clásica o tradicional que se encarga prestar
+								soluciones para el cuidado personal masculino, brindando la mejor asesoría y
+								experiencia, gracias al mejoramiento continuo y personalización de sus servicios.</p>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p> Contamos con una amplia línea de productos y servicios que buscan siempre el bienestar
+								de sus clientes. Siempre nos han atendido, es hora de que nosotros los atendamos a ellos
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="principales">
+				<br/>
+				<h3>NUESTRO EQUIPO</h3>
+				<br/>
+
+				<div class="row my-menu justify-content-flex-start">
+					<div class="justify-content-flex-start col-md-4 col-sm-6 col-xs-12">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" src="img/trabajador1.jpg" alt="Card image cap"/>
+							<div class="card-body">
+								<h5 style="color:black" class="card-title">Cristian Ortiz</h5>
+								<p style="color:black" class="card-text">Se adapta perfectamente al estilo de tu
+									preferencia, con un estilo innovador y delineados impecables te hará lucir el look
+									que decidas con clase y estilo. Un ser carismatico.</p>
+								<img width="1"
+									src="https://lh3.googleusercontent.com/proxy/cYYGMIJE4YSLoWD7XC_ic0WqeEUWbtnmhoDISlkIIBpEsxkraLaasFRUwGZVWrak10jKeC4pYIHAzh2x9qeh2TBZOBxmQ_RMrpMIOnQ7pOTfyenlLUf0dAIKlw"
+									alt=""/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" src="img/Trabajador4.jpg" alt="Card image cap"/>
+							<div class="card-body">
+								<h5 style="color:black" class="card-title">Felipe Ordoñez</h5>
+								<p style="color:black" class="card-text">Su especialidad es la barbería clásica, su
+									pasión es lograr que cada corte y arreglo de barba trascienda a lograr el mejor
+									resultado dando más de lo que el cliente espera.</p>
+								<img width="150px"
+									src="https://lh3.googleusercontent.com/proxy/cYYGMIJE4YSLoWD7XC_ic0WqeEUWbtnmhoDISlkIIBpEsxkraLaasFRUwGZVWrak10jKeC4pYIHAzh2x9qeh2TBZOBxmQ_RMrpMIOnQ7pOTfyenlLUf0dAIKlw"
+									alt=""/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" src="img/trabajador3.jpg" alt="Card image cap"/>
+							<div class="card-body">
+								<h5 style="color:black" class="card-title">Jonathan Pineda</h5>
+								<p style="color:black" class="card-text">La versatilidad en su técnica le permite
+									manejar estilos clásicos y modernos. Un apasionado por definir y pulir con tijera la
+									barba y el cabello de cada cliente de forma excepcional.</p>
+								<img width="150px"
+									src="https://lh3.googleusercontent.com/proxy/cYYGMIJE4YSLoWD7XC_ic0WqeEUWbtnmhoDISlkIIBpEsxkraLaasFRUwGZVWrak10jKeC4pYIHAzh2x9qeh2TBZOBxmQ_RMrpMIOnQ7pOTfyenlLUf0dAIKlw"
+									alt=""/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="principales">
+					<br/>
+					<h3>TESTIMONIO</h3>
+					<br/>
+					<img width="500px" src="img/Testimonio.jpg" alt=""/>
+					<br/>
+					<br/>
+					<div class="row my-menu justify-content-center">
+						<div class="justify-content-center col-md-6 col-sm-6 col-xs-12">
+							<p> Calidad humana impresionante, calidad profesional excelente, desde que abrió sus puertas
+								trabajan con los mejores productos del mercado y la barberia hace un trabajo perfecto,
+								el salón es muy elegante y acogedor, Calidad-precio inmejorable. </p>
+					    </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.minjs"></script> 
+    </body>
+</html>

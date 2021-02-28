@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <title>Home</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css"/>
+	<meta name="viewport" content="width-divice-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+	<link rel="stylesheet" type="text/css" href="Inicio.css"/>
+	<script src="mision.js" ></script>
+    </head>
+    <style>
+	.body {
+		background: url(http://labarberia.com/wp-content/uploads/2019/12/bg_barberia.jpg);
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+	body{
+		background: url(http://labarberia.com/wp-content/uploads/2019/12/bg_barberia.jpg);
+		background-repeat: round;
+	}
+
+</style>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="homeTra.xhtml">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="Servicios_1.xhtml">Services</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="nuestr_tr.xhtml">Our team</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="mision.xhtml">Projection</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="comunicate_tr.xhtml">Communicate</a>
+			</li>
+			<li class="nav-item">
+                            
+                            <select onchange="location = this.value;" style="width:90px; margin-top: 10px; margin-left: 700px" class="nav-link navbar-expand-lg navbar-dark bg-dark fixed-top form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                             <option selected=""><img scr="img/idi.png" width="30px" height="30px"/>Translator</option>
+                             <option value="homeTra.xhtml"><a class="nav-link" >English <img src="img/66.png" width="30px" height="15px"/></a></option>
+                             <option value="index.xhtml"><a class="nav-link">Spanish</a></option>
+                            
+                            </select>
+			</li>
+		</ul>
+		<div>
+			<img src="img/usuario.png" style="width: 30px;"/>
+		</div>
+		<div>
+			<a class="nav-link" style="color: white;" href="index.html">Log in</a>		 
+		</div>
+	</div>
+
+</nav>
+
+
+
+<div class="row ti">
+	<div class="col-md-5 col-sm-5 col-xs-5 ancho"  style="margin: auto;">
+		<div class="carousel slide" id="principial-carousel" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#principial-carousel" data-slide-to="0" class="active"></li>
+				<li data-target="#principial-carousel" data-slide-to="1" class="active"></li>
+				<li data-target="#principial-carousel" data-slide-to="2" class="active"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="img/bars.jpg" height="400px" width="1100px"/>
+				</div>
+				<div class="carousel-item " >
+					<img src="img/barber.jpg" height="400px" width="1100px"/>
+				</div>
+				<div class="carousel-item "  >
+					<img src="img/elegante.jpg" height="400px" width="1100px"/>
+				</div>
+			</div>
+			<a href="#principial-carousel" class="carousel-control-prev" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+			<a href="#principial-carousel" class="carousel-control-next" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	<div  class=" col-md-1 col-sm-3 col-xs-3" style="margin-right: auto;">
+		<div class="redes_uno">
+			<a href="index.html"><img src="img/entrar.png" width="100" alt="la imagen no carga" title="Login"/></a>
+		</div>
+		<div class="redes_uno">
+			<a href="https://www.facebook.com/"><img src="img/twuit.png"  alt="la imagen no carga" title="Ir a facebook"/></a>
+		</div>
+		<br/>
+		<div class="redes_uno">
+			<a href="https://www.instagram.com/"><img src="img/instagram.png" width="80" alt="la imagen no carga" title="Ir a instagram"/></a>
+		</div>
+		<br/>
+		<div class="redes_uno">
+			<a href="https://web.whatsapp.com/"><img src="img/whatsapp.png" width="100" alt="la imagen no carga" title="Ir a whatsapp"/></a>
+		</div>	
+	</div>
+</div>
+
+
+<!--PARALLAX-->
+
+
+<div class="col-md-10 parallax">
+	<p style="background: #481412;color: white; ">The future has many names. For the weak is the unreachable. For the fearful, the unknown. For the brave it is the opportunity.</p>
+</div>
+
+
+
+<br/>
+<div class="col-md-12">
+	<h2 style="text-align: center; " class="tituloser">Service</h2>
+</div>
+
+<br/>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div  class="card one" style="width: 15rem;">
+				<div class="card-body">
+					<h5 style="color: #EECE8A" class="card-title">¿Something to drink?</h5>
+					<p  class="card-text">We have a wide variety of drinks for you to taste your palate while you are receiving your service with us</p>
+					<a href="#" class="btn btn-warning align-items-end">Visitanos</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card dos" style="width: 15rem;">
+				<div class="card-body">
+					<h5 style="color: #EECE8A" class="card-title">Haircut</h5>
+					<p  class="card-text">We have a very extensive catalog of styles so that you can choose the one you like the most in addition to our stylists who can advise you</p>
+					<a href="#" class="btn btn-warning align-items-end">Book Appointment</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card tres" style="width: 15rem;">
+				<div class="card-body">
+					<h5 style="color: #EECE8A" class="card-title">Beard and grooming</h5>
+					<p  class="card-text">Here we fix your beard and perform treatment and processes for the care of your beard is the priority as a service.</p>
+					<a href="#" class="btn btn-warning align-items-end">Book Appointment</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card cuatro" style="width: 15rem;">
+				<div class="card-body">
+					<h5 style="color: #EECE8A" class="card-title">Entertainment</h5>
+					<p  class="card-text">While you wait for your turn you can play classic games on our consoles or browse our 4G network</p>
+					<a href="#" class="btn btn-warning align-items-end">Visit us</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+<br/>
+<br/>
+<div class="container">
+	<div class=" row">
+		<div class="col">
+			<div class="vamos">
+				<center>
+				<div class="">
+					<h2 class="ordenar">We are the best</h2>
+				</div>
+				<br/>
+				<br/>
+				<div class="col-md-12" id="indi">
+					<div class="solo" id="ese">
+						<p>We are what we do repeatedly. Therefore, excellence is not an act, but a habit.</p>
+					</div>
+				</div>
+				</center>
+
+			</div>
+
+		</div>
+
+	</div>
+	<br/>
+	<br/>
+	<h2 style="color:#EECE8A; text-align: center;">News</h2>
+	<br/>
+		<div class="row ">
+			<div class="col-md-4 ">
+				<center>
+				<div class="card var1" style="width: 18rem;">
+					<div class="card-body">
+						<h5 style="color:#EECE8A;" class="card-title">Sale</h5>
+						<p class="card-text"  style="color: white;">Take advantage and come we have discounts from 25% off on products ...</p>
+						<a href="#" class="btn btn-warning">Leer más</a>
+					</div>
+				</div>
+				</center>
+			</div>
+
+			<div class="col-md-4">
+				<center>
+				<div class="card var2" style="width: 18rem;">
+					<div class="card-body">
+						<h5 style="color:#EECE8A;" class="card-title">Friends friday</h5>
+						<p class="card-text"  style="color: white;">Bring your friends and they can enjoy a beer for each one..</p>
+						<a href="#" class="btn btn-warning">Read more</a>
+					</div>
+				</div>
+				</center>
+			</div>
+			<div class="col-md-4">
+				<center>
+				<div class="card var3" style="width: 18rem;">
+					<div class="card-body">
+						<h5 style="color:#EECE8A;" class="card-title">The best</h5>
+						<p class="card-text" style="color: white;">In the last competition "The best barbershop" we were among the top five ..</p>
+						<a href="#" class="btn btn-warning">Read more</a>
+					</div>
+				</div>
+				</center>
+			</div>  	
+		</div>
+
+            </div>
+
+	<br/>
+	<br/>
+	<br/>
+	<div class="container pum">
+		<div class="row">
+			<div class="col-3">
+				<img  src="img/AYT.png" width="150" />
+			</div>
+			<div class="col-3 per">
+				<br/>
+				<br/>
+				<p style="color:#EECE8A;">Contact</p>
+
+				<p style="color:#EECE8A;">Privacy Policy</p>
+
+				<p style="color:#EECE8A;">Terms and Conditions</p>
+
+			</div>
+			<div class="col-3 per">
+				<br/>
+				<br/>
+				<p style="color:#EECE8A;">Street 8 south #38-70</p>
+				<p style="color:#EECE8A;">Bogotá, Colombia</p>
+				<p style="color:#EECE8A;">Phone:3176594473</p>
+			</div>
+
+
+			<div style="padding-top: 35px" class="col-3">
+				<div class="pa">
+					<a href="https://www.facebook.com/"><img src="img/twuit.png"  alt="la imagen no carga" title="Ir a facebook"/></a>
+				</div>
+				<br/>
+				<div class="pa">
+					<a href="https://www.instagram.com/"><img src="img/instagram.png"  alt="la imagen no carga" title="Ir a instagram"/></a>
+				</div>
+				<br/>
+				<div class="pa">
+					<a href="https://web.whatsapp.com/"><img src="img/whatsapp.png"  alt="la imagen no carga" title="Ir a whatsapp"/></a>
+				</div>	
+
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+
+</body>
+    
+</html>
+
