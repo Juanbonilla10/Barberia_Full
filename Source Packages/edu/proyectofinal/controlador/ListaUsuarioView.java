@@ -98,18 +98,21 @@ public class ListaUsuarioView implements Serializable {
     
     
     public void registrarUser() {
+        String mensajeSw = "";
         try {
             usReg.setFechaNacimiento("2020");
-            usReg.setRolidURol(rolFacadeLocal.find(usReg.getRolidURol().getIdURol()));
-            
+            usReg.setRolidURol(rolFacadeLocal.find(usReg.getRolidURol().getIdURol()));           
             usuarioFacadeLocal.create(usReg);
             listaUsuarios.add(usReg);
+            
+            mensajeSw = "swal('Usuario creado' , ' con exito ', 'success')";
 
         } catch (Exception e) {
             //System.out.println("Error al regustrar" + getClientedocu() + e);
             System.out.println("Error" + e);
         }
         usReg = new Usuarios();
+        PrimeFaces.current().executeScript(mensajeSw);
 
     }
     

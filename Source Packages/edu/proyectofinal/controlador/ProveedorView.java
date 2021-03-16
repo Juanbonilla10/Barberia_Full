@@ -96,6 +96,7 @@ public class ProveedorView implements Serializable {
         try {
             proveedorFacadeLocal.remove(prorem);
             listaproveedor.remove(prorem);
+            listaproveedor.clear();
             listaproveedor.addAll(proveedorFacadeLocal.findAll());
         } catch (Exception e) {
             System.out.println("Error al actualizar:" + e);

@@ -99,7 +99,7 @@ public class ProductosView implements Serializable {
         this.objcrpro = objpros;
     }
 
-    public void actualizarProv() {
+    public void actualizarProd() {
         try {
             crearProductoFacadeLocal.edit(objcrpro);
             listaCrearProducto.clear();
@@ -109,13 +109,14 @@ public class ProductosView implements Serializable {
         }
     }
 
-    public void eliminarprod(CrearProducto prorem) {
+    public void eliminarprod(CrearProducto prorem){
         try {
             crearProductoFacadeLocal.remove(prorem);
             listaCrearProducto.remove(prorem);
+            listaCrearProducto.clear();
             listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
         } catch (Exception e) {
-            System.out.println("Error al actualizar:" + e);
+            System.out.println("Error el aliminar por llave forane con ventas:" + e);
         }
     }
     

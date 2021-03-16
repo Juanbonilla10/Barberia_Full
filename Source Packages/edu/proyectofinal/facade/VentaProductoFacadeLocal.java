@@ -5,6 +5,7 @@
  */
 package edu.proyectofinal.facade;
 
+import edu.proyectofinal.modelo.CrearProducto;
 import edu.proyectofinal.modelo.VentaProducto;
 import java.util.List;
 import javax.ejb.Local;
@@ -31,5 +32,13 @@ public interface VentaProductoFacadeLocal {
     int count();
 
     public VentaProducto eliminarPorId(Integer numeroid);
+
+    public int validaStock(int descripcionProducto);
+
+    
+
+    
+
+   
     
 }

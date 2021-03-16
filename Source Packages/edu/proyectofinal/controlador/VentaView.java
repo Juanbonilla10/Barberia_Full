@@ -5,7 +5,6 @@
  */
 package edu.proyectofinal.controlador;
 
-
 import edu.proyectofinal.facade.CrearProductoFacadeLocal;
 import edu.proyectofinal.facade.TipoPagoFacadeLocal;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
@@ -18,9 +17,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.PrimeFaces;
+
 
 /**
  *
@@ -29,10 +30,15 @@ import org.primefaces.PrimeFaces;
 @Named(value = "ventaView")
 @ViewScoped
 public class VentaView implements Serializable {
-    
+
     private Integer idventa;
-    private String mensaje=""; 
+    private String mensaje = "";
     private boolean verdad;
+    private int consultaStock = 0;
+    private int validacion = 0;
+    private int insertarProducto = 0;
+    private String valorS = "";
+    private int CantidadInterface = 0;
 
     public VentaView() {
 
@@ -57,102 +63,129 @@ public class VentaView implements Serializable {
     CrearProductoFacadeLocal cpf;
     private ArrayList<CrearProducto> listaprducts = new ArrayList<>();
     private CrearProducto objprtc = new CrearProducto();
-    
-  
+
+    private ArrayList<CrearProducto> listaStockDisponible = new ArrayList<>();
+
     /**
      * Creates a new instance of VentaView
      */
     @PostConstruct
     public void listaproductos() {
-        
-        
-        
+
         listapagos.addAll(tipoPagoFacadeLocal.findAll());
 
         listaventa.addAll(ventaProductoFacadeLocal.findAll());
-        
+
         listausuario.addAll(usuariosFacadeLocal.findAll());
 
         listaprducts.addAll(cpf.findAll());
-        
+
         objproduct.setCrearproductoidCrearProducto(new CrearProducto());
-        
+
         objproduct.setTipopagoidTipoPago(new TipoPago());
-        
+
         objproduct.setIdUsuarios(new Usuarios());
 
-        
     }
 
-    public void crearVenta() {  
-        
-        String mensaje="";
-        
-        try {
-            
-            objproduct.setCrearproductoidCrearProducto(cpf.find(objproduct.getCrearproductoidCrearProducto().getIdCrearProducto()));
-            
-            objproduct.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(objproduct.getTipopagoidTipoPago().getIdTipoPago()));
-            
-            objproduct.setIdUsuarios(usuariosFacadeLocal.find(objproduct.getIdUsuarios().getIdUsuarios()));
-            
-            ventaProductoFacadeLocal.create(objproduct);
-            
-            listaventa.add(objproduct);
-            
-            mensaje="Swal.fire('¡Venta creada con exito!','','success')";
-            
-        } catch (Exception e) {
-            //System.out.println("Error al regustrar" + getClientedocu() + e);
-            System.out.println("Erro"+ e );
-            
-             mensaje="Swal.fire('¡No se pudo crear la venta!','','error')";
-            
+    public void crearVenta() {
+
+        String mensajeSw = "";
+
+
+        consultaStock = ventaProductoFacadeLocal.validaStock(getInsertarProducto());
+        //System.out.println("Listado es : " + listaStockDisponible.get(listaStockDisponible.size() -1));
+
+        //System.out.println("Numero es 1 :" + listaStockDisponible.get(0));        
+        //System.out.println("Numero es 2 :" +  objprtc.getCantidad());
+        //for(int x = 0; x < listaStockDisponible.size();x++){
+        //  System.out.println("Imprmiendo valor:" + listaStockDisponible.get(x));
+        // }
+        System.out.println("erda mi pana" + consultaStock);
+
+        if (getCantidadInterface() > getConsultaStock()) {
+
+            mensajeSw = "swal('¡Error al crear venta!','','error')";
+        } else {
+
+            try {
+
+                objproduct.setCrearproductoidCrearProducto(cpf.find(getInsertarProducto()));
+
+                objproduct.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(objproduct.getTipopagoidTipoPago().getIdTipoPago()));
+
+                objproduct.setIdUsuarios(usuariosFacadeLocal.find(objproduct.getIdUsuarios().getIdUsuarios()));
+
+                objproduct.setCantidad(getCantidadInterface());
+
+                ventaProductoFacadeLocal.create(objproduct);
+
+                listaventa.add(objproduct);
+
+                mensajeSw = "swal('¡Venta creada con exito!','','success')";
+
+                System.out.println("Variable valor: " + validacion);
+
+            } catch (Exception e) {
+                //System.out.println("Error al regustrar" + getClientedocu() + e);
+                System.out.println("Erro" + e.getMessage());
+
+                mensajeSw = "swal(¡Error al crear venta!','','warning')";
+            }
         }
-        PrimeFaces.current().executeScript(mensaje);
- 
+        PrimeFaces.current().executeScript(mensajeSw);
+    }
+
+    public void retornarDatos(VentaProducto objkl) {
+        this.objproduct = objkl;
+    }
+
+    public void actualizarDatos() {
         
-    }
-    
-    public void retornarDatos(VentaProducto objkl){
-        this.objproduct = objkl;       
-    }
-     
-    public void actualizarDatos(){
+        String mensajeSW= "";
+        
         try {
             objproduct.setCrearproductoidCrearProducto(cpf.find(objproduct.getCrearproductoidCrearProducto().getIdCrearProducto()));
-            
+
             objproduct.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(objproduct.getTipopagoidTipoPago().getIdTipoPago()));
-            
+
             objproduct.setIdUsuarios(usuariosFacadeLocal.find(objproduct.getIdUsuarios().getIdUsuarios()));
-            
+
             ventaProductoFacadeLocal.edit(objproduct);
             listaventa.clear();
             listaventa.addAll(ventaProductoFacadeLocal.findAll());
+            
+            mensajeSW= "swal('Venta actualizada','con exito','success')";
+            
         } catch (Exception e) {
             System.out.println("Error al actualizar:" + e);
+            mensajeSW= "swal('Error al actualizar registro',' ','warning')";
         }
-    }
-    
-    public void eliminar (){
-              
-        try {         
-           ventaProductoFacadeLocal.eliminarPorId(idventa);
-           listaventa.clear();
-           listaventa.addAll(ventaProductoFacadeLocal.findAll()); 
-           this.verdad=true;
-           this.mensaje="swal('Usuario modificado' , ' con exito ', 'success')";
-           System.out.println(this.mensaje + this.verdad);
-           
-                  
-        } catch (Exception e) {
-            System.out.println("Error al eliminar la venta: " + e.getMessage());
-            mensaje="Swal.fire('¡No se pudo eliminar!','','error')";
-        }
-         
-        PrimeFaces.current().executeScript(this.mensaje);
+        
+        PrimeFaces.current().executeScript(mensajeSW);
         
     }
+
+    public void eliminar() {
+
+        try {
+            ventaProductoFacadeLocal.eliminarPorId(idventa);
+            listaventa.clear();
+            listaventa.addAll(ventaProductoFacadeLocal.findAll());
+            this.verdad = true;
+            this.mensaje = "swal('Venta eliminada' , ' con exito ', 'success')";
+            System.out.println(this.mensaje + this.verdad);
+
+        } catch (Exception e) {
+            System.out.println("Error al eliminar la venta: " + e.getMessage());
+            mensaje = "Swal.fire('¡No se pudo eliminar!','','error')";
+        }
+
+        PrimeFaces.current().executeScript(this.mensaje);
+
+    }
+    
+  
 
     public TipoPago getObjtpg() {
         return objtpg;
@@ -242,5 +275,52 @@ public class VentaView implements Serializable {
         this.verdad = verdad;
     }
 
+    public int getConsultaStock() {
+        return consultaStock;
+    }
+
+    public void setConsultaStock(int consultaStock) {
+        this.consultaStock = consultaStock;
+    }
+
+    public int getInsertarProducto() {
+        return insertarProducto;
+    }
+
+    public void setInsertarProducto(int insertarProducto) {
+        this.insertarProducto = insertarProducto;
+    }
+
+    public ArrayList<CrearProducto> getListaStockDisponible() {
+        return listaStockDisponible;
+    }
+
+    public void setListaStockDisponible(ArrayList<CrearProducto> listaStockDisponible) {
+        this.listaStockDisponible = listaStockDisponible;
+    }
+
+    public int getValidacion() {
+        return validacion;
+    }
+
+    public void setValidacion(int validacion) {
+        this.validacion = validacion;
+    }
+
+    public String getValorS() {
+        return valorS;
+    }
+
+    public void setValorS(String valorS) {
+        this.valorS = valorS;
+    }
+
+    public int getCantidadInterface() {
+        return CantidadInterface;
+    }
+
+    public void setCantidadInterface(int CantidadInterface) {
+        this.CantidadInterface = CantidadInterface;
+    }
 
 }

@@ -5,7 +5,9 @@
  */
 package edu.proyectofinal.controlador;
 
+import edu.proyectofinal.facade.RolFacadeLocal;
 import edu.proyectofinal.facade.UsuariosFacadeLocal;
+import edu.proyectofinal.modelo.Rol;
 import edu.proyectofinal.modelo.Usuarios;
 import edu.proyectofinal.utilidades.Email;
 import java.io.Serializable;
@@ -26,18 +28,33 @@ public class InicioRequest implements Serializable {
     
     @EJB
     UsuariosFacadeLocal usuariosFacadeLocal;
+    
+    @EJB
+    RolFacadeLocal rolFacadeLocal;
+    private Rol rol = new Rol();
      
     private Usuarios objusu = new Usuarios();
     private String correoing = "";
     private String correoIn = "";
     private String contrasenaIn = ""; 
-    /**
+    private Integer idRol=2;
+            /**
      * Creates a new instance of InicioRequest
      */
     
     public void registrarUser(){
         try {
             objusu.setFechaNacimiento("2020");
+            usuariosFacadeLocal.create(objusu);
+        } catch (Exception e) {
+            System.out.println("No registrado" + e);
+        }
+    }
+    
+    public void registrarUserFuera(){
+        try {
+            objusu.setFechaNacimiento("2020");
+            objusu.setRolidURol(rolFacadeLocal.find(idRol));
             usuariosFacadeLocal.create(objusu);
         } catch (Exception e) {
             System.out.println("No registrado" + e);
@@ -102,6 +119,22 @@ public class InicioRequest implements Serializable {
 
     public void setContrasenaIn(String contrasenaIn) {
         this.contrasenaIn = contrasenaIn;
+    }
+
+    public Integer getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Integer idRol) {
+        this.idRol = idRol;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     

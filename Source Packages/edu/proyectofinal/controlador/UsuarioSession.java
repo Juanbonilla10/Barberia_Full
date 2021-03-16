@@ -37,11 +37,13 @@ public class UsuarioSession implements Serializable {
     }
 
     public void inicioSesion() {
-        String mensajeSw = " ";
+        String mensajeSw = "";
+        String errorIngresar = "";
 
         try {
             usuLogin = UsuariosFacadeLocal.loginUsuario(correoIn, contrasenaIn);
             FacesContext fc = FacesContext.getCurrentInstance();
+            errorIngresar = usuLogin.getRolidURol().getDescripcion();
             switch (usuLogin.getRolidURol().getDescripcion()) {
                 case "Administrador":
                     fc.getExternalContext().redirect("Inventario/index.xhtml");
@@ -76,6 +78,7 @@ public class UsuarioSession implements Serializable {
 
             }*/
         } catch (Exception e) {
+            System.out.println("Datos ingresados" + errorIngresar + e.getCause());
             mensajeSw = "swal('El usuario' , ' No se encuentra registrado  ', 'error')";
         }
         PrimeFaces.current().executeScript(mensajeSw);

@@ -31,6 +31,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public UsuariosFacade() {
         super(Usuarios.class);
     }
+
     @Override
     public Usuarios restauPass(String correo) {
         try {
@@ -41,30 +42,30 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return new Usuarios();
         }
     }
-    
- 
+
     @Override
-    public Usuarios loginUsuario(String email, String contrasena){
-           try {
-               Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :email AND u.contrasena =:contrasena ");
-               q.setParameter("email", email);
-               q.setParameter("contrasena", contrasena);
-               return (Usuarios) q.getSingleResult();
-               
+    public Usuarios loginUsuario(String email, String contrasena) {
+        try {
+            Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :email AND u.contrasena =:contrasena ");
+            q.setParameter("email", email);
+            q.setParameter("contrasena", contrasena);
+            return (Usuarios) q.getSingleResult();
+
         } catch (Exception e) {
+            System.out.println("Error al logearse" + e.getMessage());
             return new Usuarios();
         }
     }
-    
+
     @Override
-    public List<Usuarios> lista(int idrol){
-        try{
+    public List<Usuarios> lista(int idrol) {
+        try {
             Query r = em.createQuery("SELECT u FROM Usuarios u WHERE u.rolidURol.idURol=:idrol");
             r.setParameter("idrol", idrol);
             return r.getResultList();
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ArrayList<>();
         }
     }
-    
+
 }

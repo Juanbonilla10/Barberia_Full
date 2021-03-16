@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:body>
+
+        <ui:composition>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Ingreso de producto</h2>
+                    </div>
+                    <!-- Bootstrap Default Buttons -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        <small>En este modulo podras generar el ingreso de productos </small>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="animated fadeIn">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        </div>
+                                        <div class="card-body">
+                                            <h:form>
+                                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Referencia</th>
+                                                            <th>Codigo Barras</th>
+                                                            <th>Descripcion</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Precio publico</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <c:forEach items="#{productosView.listaCrearProducto}" var="objpro">
+                                                            <tr>
+                                                                <td>#{objpro.idCrearProducto}</td>
+                                                                <td>#{objpro.referencia}</td>
+                                                                <td>#{objpro.codigoBarras}</td>
+                                                                <td>#{objpro.descripcion}</td>
+                                                                <td>#{objpro.cantidad}</td>
+                                                                <td>#{objpro.precioProveedor}</td>
+                                                                <td>
+                                                                     <h:commandButton action="#{productosView.retornaProducto(objpro)}" style="margin-right: 10px" class="btn btn-primary" onclick="$('#btnModal').click();" value="Ingresar" >
+                                                                        <f:ajax render=":formModal"></f:ajax>
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+
+                                                        </c:forEach>    
+                                                    </tbody>
+                                                </table>
+                                            </h:form>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .animated -->
+                    </div><!-- .content -->
+                     <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar Proveedor</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    
+                                    <h:form id="formModal">
+                                      <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputRef">Referencia</label>
+                                            <h:inputText style="opacity: 0.5;"  value="#{productosView.objcrpro.referencia}" html5:type="text" class="form-control" id="exampleInputRef"  html5:placeholder="000 Prove" html5:disabled="disabled" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputCod">Codigo de barras</label>
+                                            <h:inputText  style="opacity: 0.5;" value="#{productosView.objcrpro.codigoBarras}" html5:type="text" class="form-control" id="exampleInputCod"  html5:placeholder="770000000" html5:disabled="disabled"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="exampleInputDescripcio">Descripcion</label>
+                                            <h:inputText  style="opacity: 0.5;" value="#{productosView.objcrpro.descripcion}" html5:type="text" class="form-control" id="exampleInputDescripcio"  html5:placeholder="Descripcion" html5:disabled="disabled"/>
+                                        </div>
+                                          <div class="col-md-4">
+                                          <label for="exampleInputCant">Cantidad</label>
+                                            <h:inputText value="#{productosView.objcrpro.cantidad}" requiredMessage="Ingrese una cantidad valida " required="true" html5:type="number" class="form-control" id="exampleInputDescripci"  html5:placeholder="Cantidad"/>
+                                          <h:message style="color: red" for="exampleInputCant"></h:message>
+                                        </div>
+                                          
+                                        <div class="col-md-4">
+                                            <label for="examplePubli">Precio publico</label>
+                                            <h:inputText  style="opacity: 0.5;" html5:type="text" value="#{productosView.objcrpro.precioPublico}" class="form-control" id="exampleInputPubli" html5:placeholder="$ 00000" html5:disabled="disabled"/>
+                                        </div>
+                                              
+
+                                        
+                                        
+                                        <div class="modal-footer" >
+                                            <h:commandButton action="#{productosView.actualizarProd()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                        </div>             
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                        actualiza proveedor
+                    </button>
+
+                  
+                </div>
+            </section>
+
+        </ui:composition>    
+
+
+    </h:body>
+</html>

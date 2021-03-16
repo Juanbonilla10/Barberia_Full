@@ -5,6 +5,7 @@
  */
 package edu.proyectofinal.facade;
 
+import edu.proyectofinal.modelo.CrearProducto;
 import edu.proyectofinal.modelo.VentaProducto;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,6 +41,24 @@ public class VentaProductoFacade extends AbstractFacade<VentaProducto> implement
         } catch (Exception e) {
             System.out.println("Error al realizar sentencia" + e);
             return new VentaProducto();
+        }
+    }
+    
+    /**
+     *
+     * @param descripcionProducto
+     * @return
+     */
+   
+    @Override
+    public int validaStock(int descripcionProducto){
+        try {
+            Query ex = em.createQuery("select u.cantidad from CrearProducto u where u.idCrearProducto = :descripcionProducto");
+            ex.setParameter("descripcionProducto", descripcionProducto);
+            return   (int) ex.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+            return 7;
         }
     }
     

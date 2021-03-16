@@ -68,7 +68,10 @@
                                 <label for="rememberme">Recordar contraseña</label>
                             </div>
                             <div class="col-xs-4">
-                                <h:commandButton action="#{usuarioSession.inicioSesion()}" value="Iniciar" class="btn btn-block bg-pink waves-effect" type="submit"/>
+                                <h:commandButton action="#{usuarioSession.inicioSesion()}" value="Iniciar" class="btn btn-block bg-pink waves-effect" type="submit" html5:target="request"/>
+                            </div>
+                            <div style="display: none">
+                                <h:commandButton action="#{usuarioSession.inicioSesion()}" value="Iniciar" class="btn btn-block bg-pink waves-effect" type="submit" html5:target="request"/>
                             </div>
                         </div>
                         <div class="row m-t-15 m-b--20">
