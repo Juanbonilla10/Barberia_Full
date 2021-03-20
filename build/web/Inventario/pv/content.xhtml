@@ -7,9 +7,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
-        <ui:composition>
+       
 
-           <section class="content">
+            <section class="content">
                 <div class="container-fluid">
                     <div class="block-header">
                         <h2>Proveedores</h2>
@@ -46,7 +46,7 @@
                                                 <table class="table table-hover">
                                                     <thead>
                                                         <tr>
-                                                            
+
                                                             <th scope="col">Item</th>
                                                             <th scope="col">NIT</th>
                                                             <th scope="col">Nombre</th>
@@ -81,13 +81,13 @@
                                                                         <f:ajax render=":formModal"></f:ajax>
                                                                     </h:commandButton>
                                                                     <h:commandButton action="#{proveedorView.eliminarProv(objrs)}" type="submit" style="margin-right: 10px" class="btn btn-danger" value="Eliminar" >
-                                                                        
+
                                                                     </h:commandButton>
-                                                                
-                                                                 </td>
-                                                                
+
+                                                                </td>
+
                                                             </tr>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </h:form>
@@ -99,7 +99,7 @@
                         </div><!-- .animated -->
                     </div><!-- .content -->
                     <!--MODEL DE PROVEEDOR-->
-                   <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
 
                             <div class="modal-content">
@@ -113,66 +113,66 @@
                                     <div class="modal-body">
                                         <div class="col-md-4">
                                             <label for="exampleInputNIT">NIT</label>
-                                           
+
                                             <h:inputText value="#{proveedorView.objprov.nit}" requiredMessage="Ingrese un valido NIT " required="true" html5:type="number" class="form-control" id="exampleInputNIT"  html5:placeholder="00000000-0"/>
-                                           <h:message style="color: red" for="exampleInputNIT"></h:message>
+                                            <h:message style="color: red" for="exampleInputNIT"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputNombre">Nombre</label>
                                             <h:inputText value="#{proveedorView.objprov.nombre}" html5:type="text" requiredMessage="Ingrese un Nombre valido" required="true" class="form-control" id="exampleInputNombre"  html5:placeholder="Nombre"/>
-                                       <h:message style="color: red" for="exampleInputNombre"></h:message>
+                                            <h:message style="color: red" for="exampleInputNombre"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputRazon">Razon Social</label>
                                             <h:inputText value="#{proveedorView.objprov.razon}" html5:type="text" requiredMessage="Ingrese una Razon social valida" required="true" class="form-control" id="exampleInputRazon"  html5:placeholder="Razon Social"/>
-                                        <h:message style="color: red" for="exampleInputRazon"></h:message>
+                                            <h:message style="color: red" for="exampleInputRazon"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputFecha">Fecha</label>
                                             <h:inputText value="#{proveedorView.objprov.fechar}" html5:type="date" requiredMessage="Ingrese una fecha valida" required="true" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
-                                        <h:message style="color: red" for="exampleInput Fecha"></h:message>
+                                            <h:message style="color: red" for="exampleInput Fecha"></h:message>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="exampleInputCel">Num Celular</label>
                                             <h:inputText html5:type="number" value="#{proveedorView.objprov.numCel}" requiredMessage="Ingrese un num celular valido" required="true" class="form-control" id="exampleInputCel" html5:placeholder="300-000-00-00"/>
-                                       <h:message style="color: red" for="exampleInputCel"></h:message>
+                                            <h:message style="color: red" for="exampleInputCel"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputTel">Num telefono</label>
                                             <h:inputText html5:type="number" value="#{proveedorView.objprov.numTel}" requiredMessage="Ingrese un telefono valido" required="true" class="form-control" id="exampleInputTel" html5:placeholder="700-00-00"/>
-                                        <h:message style="color: red" for="exampleInputTel"></h:message>
+                                            <h:message style="color: red" for="exampleInputTel"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="examplePago">Dias pago</label>
                                             <h:inputText html5:type="number" value="#{proveedorView.objprov.diaPago}" requiredMessage="Ingrese un dia de pago valido" required="true" class="form-control" id="examplePago" html5:placeholder="Dias para pago"/>
-                                        <h:message style="color: red" for="examplePago"></h:message>
+                                            <h:message style="color: red" for="examplePago"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputCiudad">Ciudad</label>
                                             <h:inputText html5:type="text" value="#{proveedorView.objprov.ciudad}" requiredMessage="Ingrese una ciudad valida" required="true" class="form-control" id="exampleInputCiudad" html5:placeholder="Ciudad"/>
-                                        <h:message style="color: red" for="exampleInputCiudad"></h:message>
+                                            <h:message style="color: red" for="exampleInputCiudad"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputDireccion">Direccion</label>
                                             <h:inputText html5:type="text" value="#{proveedorView.objprov.direcccion}" requiredMessage="Ingrese una direccion valida" required="true"  class="form-control" id="exampleInputDireccion" html5:placeholder="CLL 00 # 00 - 00"/>
-                                        <h:message style="color: red" for="exampleInputDireccion"></h:message>
+                                            <h:message style="color: red" for="exampleInputDireccion"></h:message>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleInputEmail">Email</label>
                                             <h:inputText html5:type="Email" value="#{proveedorView.objprov.email}" requiredMessage="Ingrese un Email valido" required="true" class="form-control" id="exampleInputEmail" html5:placeholder="*******@gmail.com"/>
-                                        <h:message style="color: red" for="exampleInputEmail"></h:message>
+                                            <h:message style="color: red" for="exampleInputEmail"></h:message>
                                         </div>
                                         <div class="col-md-4">
-                                                    <b>Usuario</b>
-                                                   
-                                                        <div class="form-line">
-                                                            <h:selectOneMenu value="#{proveedorView.objprov.usuariosidUsuarios1.idUsuarios}" class="form-control">
-                                                                <f:selectItems value="#{proveedorView.listausuario}" var="objci" itemValue="#{objci.idUsuarios}" itemLabel="#{objci.nombres} #{objci.apellidos}" />
-                                                            </h:selectOneMenu>  
-                                                        </div>
-                                                    </div>
-                                                
+                                            <b>Usuario</b>
+
+                                            <div class="form-line">
+                                                <h:selectOneMenu value="#{proveedorView.objprov.usuariosidUsuarios1.idUsuarios}" class="form-control">
+                                                    <f:selectItems value="#{proveedorView.listausuario}" var="objci" itemValue="#{objci.idUsuarios}" itemLabel="#{objci.nombres} #{objci.apellidos}" />
+                                                </h:selectOneMenu>  
+                                            </div>
+                                        </div>
+
                                         <div class="modal-footer" >
                                             <h:commandButton action="#{proveedorView.registrarProv()}" type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
                                         </div>             
@@ -182,74 +182,93 @@
                         </div>
                     </div>
                 </div>
-      <!--ACTUALIZAR-->
-      <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Actualizar Proveedor</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                    
-                                    <h:form id="formModal">
-                                    <div class="modal-body">
-                                        <div class="col-md-4">
-                                            <label for="exampleInputNIT">NIT</label>
-                                            <h:inputText value="#{proveedorView.objprov.nit}" html5:type="number" class="form-control" id="exampleInputNIT"  html5:placeholder="00000000-0"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputNombre">Nombre</label>
-                                            <h:inputText value="#{proveedorView.objprov.nombre}" html5:type="text" class="form-control" id="exampleInputNombre"  html5:placeholder="Nombre"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputRazon">Razon Social</label>
-                                            <h:inputText value="#{proveedorView.objprov.razon}" html5:type="text" class="form-control" id="exampleInputRazon"  html5:placeholder="Razon Social"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputFecha">Fecha</label>
-                                            <h:inputText value="#{proveedorView.objprov.fechar}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
-                                        </div>
-                                        
-                                        <div class="col-md-4">
-                                            <label for="exampleInputCel">Num Celular</label>
-                                            <h:inputText html5:type="number" value="#{proveedorView.objprov.numCel}" class="form-control" id="exampleInputCel" html5:placeholder="300-000-00-00"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputTel">Num telefono</label>
-                                            <h:inputText html5:type="number" value="#{proveedorView.objprov.numTel}" class="form-control" id="exampleInputTel" html5:placeholder="700-00-00"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="examplePago">Dias pago</label>
-                                            <h:inputText html5:type="number" value="#{proveedorView.objprov.diaPago}" class="form-control" id="exampleInputPago" html5:placeholder="Dias para pago"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputCiudad">Ciudad</label>
-                                            <h:inputText html5:type="text" value="#{proveedorView.objprov.ciudad}" class="form-control" id="exampleInputCiudad" html5:placeholder="Ciudad"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputDireccion">Direccion</label>
-                                            <h:inputText html5:type="text" value="#{proveedorView.objprov.direcccion}"  class="form-control" id="exampleInputDireccion" html5:placeholder="CLL 00 # 00 - 00"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputEmail">Email</label>
-                                            <h:inputText html5:type="Email" value="#{proveedorView.objprov.email}" class="form-control" id="exampleInputEmail" html5:placeholder="*******@gmail.com"/>
-                                        </div>
-                                        <div class="modal-footer" >
-                                            <h:commandButton action="#{proveedorView.actualizarProv()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
-                                        </div>             
-                                    </div>
-                                </h:form>
+                <!--ACTUALIZAR-->
+                <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mediumModalLabel">Actualizar Proveedor</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+
+                            <h:form id="formModal">
+                                <div class="modal-body">
+                                    <div class="col-md-4">
+                                        <label for="exampleInputNIT">NIT</label>
+                                        <h:inputText value="#{proveedorView.objprov.nit}" html5:type="number" class="form-control" id="exampleInputNIT"  html5:placeholder="00000000-0"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputNombre">Nombre</label>
+                                        <h:inputText value="#{proveedorView.objprov.nombre}" html5:type="text" class="form-control" id="exampleInputNombre"  html5:placeholder="Nombre"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputRazon">Razon Social</label>
+                                        <h:inputText value="#{proveedorView.objprov.razon}" html5:type="text" class="form-control" id="exampleInputRazon"  html5:placeholder="Razon Social"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputFecha">Fecha</label>
+                                        <h:inputText value="#{proveedorView.objprov.fechar}" html5:type="date" class="form-control" id="exampleInputFecha"  html5:placeholder="10/10/2020"/>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="exampleInputCel">Num Celular</label>
+                                        <h:inputText html5:type="number" value="#{proveedorView.objprov.numCel}" class="form-control" id="exampleInputCel" html5:placeholder="300-000-00-00"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputTel">Num telefono</label>
+                                        <h:inputText html5:type="number" value="#{proveedorView.objprov.numTel}" class="form-control" id="exampleInputTel" html5:placeholder="700-00-00"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="examplePago">Dias pago</label>
+                                        <h:inputText html5:type="number" value="#{proveedorView.objprov.diaPago}" class="form-control" id="exampleInputPago" html5:placeholder="Dias para pago"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputCiudad">Ciudad</label>
+                                        <h:inputText html5:type="text" value="#{proveedorView.objprov.ciudad}" class="form-control" id="exampleInputCiudad" html5:placeholder="Ciudad"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputDireccion">Direccion</label>
+                                        <h:inputText html5:type="text" value="#{proveedorView.objprov.direcccion}"  class="form-control" id="exampleInputDireccion" html5:placeholder="CLL 00 # 00 - 00"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleInputEmail">Email</label>
+                                        <h:inputText html5:type="Email" value="#{proveedorView.objprov.email}" class="form-control" id="exampleInputEmail" html5:placeholder="*******@gmail.com"/>
+                                    </div>
+                                    <div class="modal-footer" >
+                                        <h:commandButton action="#{proveedorView.actualizarProv()}" class="btn btn-primary btn-flat m-b-30 m-t-30" value="Guardar" />
+                                    </div>             
+                                </div>
+                            </h:form>
                         </div>
                     </div>
-                     <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
-                        actualiza proveedor
-                    </button>
-                
-           </section>
-        </ui:composition>
+                </div>
+                <button type="button" style="display: none" id="btnModal" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#actualizarModal">
+                    actualiza proveedor
+                </button>
+
+            </section>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+            <!-- Jquery Core Js -->
+            <script src="plugins/jquery/jquery.min.js"></script>
+
+            <!-- Bootstrap Core Js -->
+            <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+            <!-- Waves Effect Plugin Js -->
+            <script src="plugins/node-waves/waves.js"></script>
+
+            <!-- Validation Plugin Js -->
+            <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+            <!-- Custom Js -->
+            <script src="js/admin.js"></script>
+            <script src="js/pages/examples/sign-in.js"></script>
+
     </h:body>
 
 
