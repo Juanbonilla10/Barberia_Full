@@ -30,15 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "crear_producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CrearProducto.findAll", query = "SELECT c FROM CrearProducto c")
-    , @NamedQuery(name = "CrearProducto.findByIdCrearProducto", query = "SELECT c FROM CrearProducto c WHERE c.idCrearProducto = :idCrearProducto")
-    , @NamedQuery(name = "CrearProducto.findByDescripcion", query = "SELECT c FROM CrearProducto c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CrearProducto.findByReferencia", query = "SELECT c FROM CrearProducto c WHERE c.referencia = :referencia")
-    , @NamedQuery(name = "CrearProducto.findByCodigoBarras", query = "SELECT c FROM CrearProducto c WHERE c.codigoBarras = :codigoBarras")
-    , @NamedQuery(name = "CrearProducto.findByCantidad", query = "SELECT c FROM CrearProducto c WHERE c.cantidad = :cantidad")
-    , @NamedQuery(name = "CrearProducto.findByPrecioProveedor", query = "SELECT c FROM CrearProducto c WHERE c.precioProveedor = :precioProveedor")
-    , @NamedQuery(name = "CrearProducto.findByPrecioPublico", query = "SELECT c FROM CrearProducto c WHERE c.precioPublico = :precioPublico")
-    , @NamedQuery(name = "CrearProducto.findByFechaRegistro", query = "SELECT c FROM CrearProducto c WHERE c.fechaRegistro = :fechaRegistro")})
+    @NamedQuery(name = "CrearProducto.findAll", query = "SELECT c FROM CrearProducto c")})
 public class CrearProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,8 +54,11 @@ public class CrearProducto implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "Codigo_Barras")
     private String codigoBarras;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "cantidad")
-    private Integer cantidad;
+    private String cantidad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -90,11 +85,12 @@ public class CrearProducto implements Serializable {
         this.idCrearProducto = idCrearProducto;
     }
 
-    public CrearProducto(Integer idCrearProducto, String descripcion, String referencia, String codigoBarras, String precioProveedor, String precioPublico, String fechaRegistro) {
+    public CrearProducto(Integer idCrearProducto, String descripcion, String referencia, String codigoBarras, String cantidad, String precioProveedor, String precioPublico, String fechaRegistro) {
         this.idCrearProducto = idCrearProducto;
         this.descripcion = descripcion;
         this.referencia = referencia;
         this.codigoBarras = codigoBarras;
+        this.cantidad = cantidad;
         this.precioProveedor = precioProveedor;
         this.precioPublico = precioPublico;
         this.fechaRegistro = fechaRegistro;
@@ -132,11 +128,11 @@ public class CrearProducto implements Serializable {
         this.codigoBarras = codigoBarras;
     }
 
-    public Integer getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 

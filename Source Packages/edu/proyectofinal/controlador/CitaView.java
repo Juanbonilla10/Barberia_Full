@@ -38,6 +38,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -98,6 +99,7 @@ public class CitaView implements Serializable {
     }
 
     public void crearCita() {
+        String mensajeSw = "";
         try {
 
             citas.setServiciosIdservicio(serviciosFacadeLocal.find(citas.getServiciosIdservicio().getIdservicio()));
@@ -106,9 +108,12 @@ public class CitaView implements Serializable {
             citasFacadeLocal.create(citas);
             listacitas.clear();
             listacitas.addAll(citasFacadeLocal.findAll());
+            mensajeSw = "swal('Cita creada' , ' con exito ', 'success')";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            mensajeSw = "swal('Problema al crear la cita' , ' al usuario  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void cargaDatos(Citas objcitasp) {
@@ -116,6 +121,7 @@ public class CitaView implements Serializable {
     }
 
     public void actualizarDatos() {
+        String mensajeSw = "";
 
         try {
 
@@ -126,20 +132,30 @@ public class CitaView implements Serializable {
             citasFacadeLocal.edit(citas);
             listacitas.clear();
             listacitas.addAll(citasFacadeLocal.findAll());
+            mensajeSw = "swal('Cita actualizada' , ' con exito ', 'success')";
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
+            mensajeSw = "swal('Problema al actualizar la cita' , '', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
 
     }
 
     public void eliminarDatos() {
+        
+        String mensajeSw = "";
+        
         try {
             citasFacadeLocal.eliminarDatos(idcita);
             listacitas.clear();
             listacitas.addAll(citasFacadeLocal.findAll());
+            mensajeSw = "swal('Cita eliminada' , ' con exito ', 'success')";
         } catch (Exception e) {
             System.out.println("Error al eliminar desde el controlador: " + e.getMessage());
+            mensajeSw = "swal('Problema al eliminar la cita' , '', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
+        
     }
 
     public void reporteCitas() {

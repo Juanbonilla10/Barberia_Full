@@ -9,8 +9,6 @@
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
 
     <h:body>
-
-        <ui:composition>
             <section class="content">
                 <div class="container-fluid">
                     <div class="block-header">
@@ -143,7 +141,7 @@
 
                                         <div class="form-group">
                                             <label>Genero</label>
-                                            <h:inputText required="true"  requiredMessage="Ingrese el genero" id="regGenero" value="#{listaUsuarioView.usReg.genero}" class="form-control" html5:placeholder="Telefono"/>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el genero" id="regGenero" value="#{listaUsuarioView.usReg.genero}" class="form-control" html5:placeholder="Genero"/>
                                             <h:message style="color: red" for="regGenero"></h:message>
                                         </div>
 
@@ -175,9 +173,10 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn-secundary btn-flat m-b-30 m-t-30" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
                                         <h:commandButton action="#{listaUsuarioView.editarUsuario()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Actualizar"/>
                                     </div>
+                                    
                                 </h:form>
                             </div>
                         </div>
@@ -221,7 +220,7 @@
 
                                         <div class="form-group">
                                             <label>Genero</label>
-                                            <h:inputText required="true"  requiredMessage="Ingrese el genero" id="regGenero" value="#{listaUsuarioView.usReg.genero}" class="form-control" html5:placeholder="Telefono"/>
+                                            <h:inputText required="true"  requiredMessage="Ingrese el genero" id="regGenero" value="#{listaUsuarioView.usReg.genero}" class="form-control" html5:placeholder="Genero"/>
                                             <h:message style="color: red" for="regGenero"></h:message>
                                         </div>
 
@@ -253,17 +252,37 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <h:commandButton action="#{listaUsuarioView.registrarUser()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Registrarse"/>
+                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+                                        <h:commandButton action="#{listaUsuarioView.registrarUser()}"  class="btn btn-primary waves-effect" value="Registrarse"/>
                                     </div>
+                                    
                                 </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            
+            <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
 
-        </ui:composition>    
+
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Validation Plugin Js -->
+        <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+        <!-- Custom Js -->
+        <script src="js/admin.js"></script>
+        <script src="js/pages/examples/sign-in.js"></script>
 
 
     </h:body>

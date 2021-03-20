@@ -34,11 +34,13 @@ public class VentaView implements Serializable {
     private Integer idventa;
     private String mensaje = "";
     private boolean verdad;
-    private int consultaStock = 0;
+    private String consultaStock = "0";
+    private int convertidor = 0;
     private int validacion = 0;
     private int insertarProducto = 0;
     private String valorS = "";
     private int CantidadInterface = 0;
+    private int cantidadInterfaceActualizar = 0;
 
     public VentaView() {
 
@@ -91,9 +93,14 @@ public class VentaView implements Serializable {
     public void crearVenta() {
 
         String mensajeSw = "";
-
+        
+        int RestaTotal = 0;
+        
 
         consultaStock = ventaProductoFacadeLocal.validaStock(getInsertarProducto());
+        
+        
+        convertidor = Integer.parseInt(consultaStock);
         //System.out.println("Listado es : " + listaStockDisponible.get(listaStockDisponible.size() -1));
 
         //System.out.println("Numero es 1 :" + listaStockDisponible.get(0));        
@@ -101,11 +108,11 @@ public class VentaView implements Serializable {
         //for(int x = 0; x < listaStockDisponible.size();x++){
         //  System.out.println("Imprmiendo valor:" + listaStockDisponible.get(x));
         // }
-        System.out.println("erda mi pana" + consultaStock);
 
-        if (getCantidadInterface() > getConsultaStock()) {
+        if (getCantidadInterface() >= getConvertidor()){
 
             mensajeSw = "swal('¡Error al crear venta!','','error')";
+            
         } else {
 
             try {
@@ -119,12 +126,19 @@ public class VentaView implements Serializable {
                 objproduct.setCantidad(getCantidadInterface());
 
                 ventaProductoFacadeLocal.create(objproduct);
+                
+                RestaTotal = getConvertidor() - getCantidadInterface();
+                
+                cpf.ingreso(getInsertarProducto(),getCantidadInterface());
 
                 listaventa.add(objproduct);
 
                 mensajeSw = "swal('¡Venta creada con exito!','','success')";
 
-                System.out.println("Variable valor: " + validacion);
+                //System.out.println("Variable valor: " + validacion);
+                       
+                
+                //ventaProductoFacadeLocal.actualizaInvenatrio(RestaTotal, getInsertarProducto());
 
             } catch (Exception e) {
                 //System.out.println("Error al regustrar" + getClientedocu() + e);
@@ -144,7 +158,18 @@ public class VentaView implements Serializable {
         
         String mensajeSW= "";
         
-        try {
+        convertidor = Integer.parseInt(consultaStock);
+        
+        if (cantidadInterfaceActualizar >= getConvertidor() ) {
+            
+            mensajeSW = "swal('¡Error al actualizar venta!','','error')";
+            
+        }else{
+            
+             try {
+                 
+            objproduct.setCantidad(getCantidadInterfaceActualizar());
+                 
             objproduct.setCrearproductoidCrearProducto(cpf.find(objproduct.getCrearproductoidCrearProducto().getIdCrearProducto()));
 
             objproduct.setTipopagoidTipoPago(tipoPagoFacadeLocal.find(objproduct.getTipopagoidTipoPago().getIdTipoPago()));
@@ -157,10 +182,14 @@ public class VentaView implements Serializable {
             
             mensajeSW= "swal('Venta actualizada','con exito','success')";
             
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Error al actualizar:" + e);
             mensajeSW= "swal('Error al actualizar registro',' ','warning')";
         }
+            
+        }
+        
+       
         
         PrimeFaces.current().executeScript(mensajeSW);
         
@@ -275,13 +304,6 @@ public class VentaView implements Serializable {
         this.verdad = verdad;
     }
 
-    public int getConsultaStock() {
-        return consultaStock;
-    }
-
-    public void setConsultaStock(int consultaStock) {
-        this.consultaStock = consultaStock;
-    }
 
     public int getInsertarProducto() {
         return insertarProducto;
@@ -321,6 +343,30 @@ public class VentaView implements Serializable {
 
     public void setCantidadInterface(int CantidadInterface) {
         this.CantidadInterface = CantidadInterface;
+    }
+
+    public int getCantidadInterfaceActualizar() {
+        return cantidadInterfaceActualizar;
+    }
+
+    public void setCantidadInterfaceActualizar(int cantidadInterfaceActualizar) {
+        this.cantidadInterfaceActualizar = cantidadInterfaceActualizar;
+    }
+
+    public String getConsultaStock() {
+        return consultaStock;
+    }
+
+    public void setConsultaStock(String consultaStock) {
+        this.consultaStock = consultaStock;
+    }
+
+    public int getConvertidor() {
+        return convertidor;
+    }
+
+    public void setConvertidor(int convertidor) {
+        this.convertidor = convertidor;
     }
 
 }

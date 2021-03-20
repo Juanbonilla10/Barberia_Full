@@ -52,6 +52,7 @@ public class ServicioView implements Serializable {
     }
     
         public void crearServicio() {         
+            String mensajeSw = "";
         try {
             
             servicios.setCategoriaservicioidCategoriaServicio(categoriaServicioFacadeLocal.find(servicios.getCategoriaservicioidCategoriaServicio().getIdCategoriaServicio()));
@@ -59,12 +60,17 @@ public class ServicioView implements Serializable {
             serviciosFacadeLocal.create(servicios);
             listaservicios.add(servicios);
             
+         mensajeSw = "swal('Servicio creado' , ' con exito ', 'success')";
+
         } catch (Exception e) {
             //System.out.println("Error al regustrar" + getClientedocu() + e);
-            System.out.println("Erro"+ e );
+            System.out.println("Error" + e);
         }
+        
         servicios= new Servicios();   
+        PrimeFaces.current().executeScript(mensajeSw);
     }   
+        
         
         public void cargaDatos(Servicios objser){
         this.servicios=objser;
@@ -80,9 +86,9 @@ public class ServicioView implements Serializable {
             listaservicios.clear();
             listaservicios.addAll(serviciosFacadeLocal.findAll());
 
-            mensajeSw = "swal('Usuario modificado' , ' con exito ', 'success')";
+            mensajeSw = "swal('Servicio modificado' , ' con exito ', 'success')";
         } catch (Exception e) {
-            mensajeSw = "swal('Problemas modificando' , ' al usuario  ', 'error')";
+            mensajeSw = "swal('Problemas modificando' , ' el servicio  ', 'error')";
         }
         PrimeFaces.current().executeScript(mensajeSw);
     }
@@ -98,7 +104,7 @@ public class ServicioView implements Serializable {
             
             mensajeSw = "swal('Servicio removido' , ' con exito ', 'success')";
         } catch (Exception e) {
-            mensajeSw = "swal('Problemas removiendo' , ' al servicio  ', 'error')";
+            mensajeSw = "swal('Problemas removiendo' , ' el servicio ', 'error')";
         }
         PrimeFaces.current().executeScript(mensajeSw);
     }
@@ -137,8 +143,5 @@ public class ServicioView implements Serializable {
     public void setServicios(Servicios servicios) {
         this.servicios = servicios;
     }
-        
-
-
     
 }

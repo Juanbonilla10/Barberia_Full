@@ -32,6 +32,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -67,15 +68,33 @@ public class ProveedorView implements Serializable {
     }
 
     public void registrarProv() {
+        String mensajeSw = " ";
         try {
 
             proveedorFacadeLocal.create(objprov);
             listaproveedor.clear();
             listaproveedor.addAll(proveedorFacadeLocal.findAll());
+            mensajeSw = "Swal.fire({\n"
+                    + "  title: 'Quiere registrar el proveedor?',\n"
+                    + "  icon: 'warning',\n"
+                    + "  showCancelButton: true,\n"
+                    + "  confirmButtonColor: '#3085d6',\n"
+                    + "  cancelButtonColor: '#d33',\n"
+                    + "  confirmButtonText: 'Si, Registrar!'\n"
+                    + "}).then((result) => {\n"
+                    + "  if (result.isConfirmed) {\n"
+                    + "    Swal.fire(\n"
+                    + "      'Registrado!',\n"
+                    + "      'Proveedor registrado con exito.',\n"
+                    + "      'success'\n"
+                    + "    )\n"
+                    + "  }\n"
+                    + "})";
         } catch (Exception e) {
-            System.out.println("No registrado busque mas opciones" + e);
+            System.out.println("Erro" + e.getMessage());
+            mensajeSw = "swal('Problemas al registrar el proveedor' , ' Verifique los campos  ', 'error')";
         }
-
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void retornaDatos(Proveedor objpr) {
@@ -83,24 +102,30 @@ public class ProveedorView implements Serializable {
     }
 
     public void actualizarProv() {
+        String mensajeSw = " ";
         try {
             proveedorFacadeLocal.edit(objprov);
             listaproveedor.clear();
             listaproveedor.addAll(proveedorFacadeLocal.findAll());
+            mensajeSw = "swal('Proveedor actualizado' , ' con exito ', 'success')";
         } catch (Exception e) {
-            System.out.println("Error al actualizar:" + e);
+            mensajeSw = "swal('Problemas al actualizar el proveedor' , ' Verifique los campos  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void eliminarProv(Proveedor prorem) {
+        String mensajeSw = " ";
         try {
             proveedorFacadeLocal.remove(prorem);
             listaproveedor.remove(prorem);
             listaproveedor.clear();
             listaproveedor.addAll(proveedorFacadeLocal.findAll());
+            mensajeSw = "swal('Proveedor removido' , ' con exito ', 'success')";
         } catch (Exception e) {
-            System.out.println("Error al actualizar:" + e);
+            mensajeSw = "swal('Problemas al remover el proveedor' , ' El proveedor tiene productos registrados  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void reporteProveedor() {

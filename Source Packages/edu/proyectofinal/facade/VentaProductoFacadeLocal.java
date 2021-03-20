@@ -33,7 +33,13 @@ public interface VentaProductoFacadeLocal {
 
     public VentaProducto eliminarPorId(Integer numeroid);
 
-    public int validaStock(int descripcionProducto);
+    public String validaStock(int descripcionProducto);
+
+    public VentaProducto actualizaInvenatrio(int cantidadActulizada, int idProducto);
+
+    
+
+
 
     
 

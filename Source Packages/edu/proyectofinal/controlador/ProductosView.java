@@ -43,7 +43,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.primefaces.PrimeFaces;
 
-
 /**
  *
  * @author Brayan Algecira
@@ -61,12 +60,12 @@ public class ProductosView implements Serializable {
     ProveedorFacadeLocal proveedorFacadeLocal;
     private ArrayList<Proveedor> listaproveedor = new ArrayList<>();
     private Proveedor objprov = new Proveedor();
-    
+
     private CrearProducto objProductoNew = new CrearProducto();
-  
+
     private Part archivoExcel;
     private String nombreArchivo;
-    
+
     @Inject
     UsuarioSession usuarioSession;
 
@@ -75,24 +74,54 @@ public class ProductosView implements Serializable {
 
     @PostConstruct
     public void listprod() {
-        
-        crearProductoFacadeLocal.ingreso(67,11);
+        listaCrearProducto.clear();
+        listaproveedor.clear();
         listaproveedor.addAll(proveedorFacadeLocal.findAll());
         listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
-
+        
         objcrpro.setProveedorIdProveedor(new Proveedor());
 
     }
+    
+    public void actuapag(){
+        
+        listaCrearProducto.clear();
+        listaproveedor.clear();
+        //listaproveedor.addAll(proveedorFacadeLocal.findAll());
+        //listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
+        
+        
+    }
+    
 
     public void registraProd() {
+        String mensajeSw = " ";
         try {
 
             crearProductoFacadeLocal.create(objcrpro);
             listaCrearProducto.clear();
             listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
+            mensajeSw = "Swal.fire({\n"
+                    + "  title: 'Quiere registrar el producto?',\n"
+                    + "  icon: 'warning',\n"
+                    + "  showCancelButton: true,\n"
+                    + "  confirmButtonColor: '#3085d6',\n"
+                    + "  cancelButtonColor: '#d33',\n"
+                    + "  confirmButtonText: 'Si, Registrar!'\n"
+                    + "}).then((result) => {\n"
+                    + "  if (result.isConfirmed) {\n"
+                    + "    Swal.fire(\n"
+                    + "      'Registrado!',\n"
+                    + "      'Producto registrado con exito.',\n"
+                    + "      'success'\n"
+                    + "    )\n"
+                    + "  }\n"
+                    + "})";
         } catch (Exception e) {
-            System.out.println("No registrado busque mas opciones" + e);
+            System.out.println("Erro" + e.getMessage());
+            mensajeSw = "swal('Problemas al registrar el producto' , ' Verifique los campos  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void retornaProducto(CrearProducto objpros) {
@@ -100,27 +129,33 @@ public class ProductosView implements Serializable {
     }
 
     public void actualizarProd() {
+        String mensajeSw = " ";
         try {
             crearProductoFacadeLocal.edit(objcrpro);
             listaCrearProducto.clear();
             listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
+            mensajeSw = "swal('producto actualizado' , ' con exito ', 'success')";
         } catch (Exception e) {
-            System.out.println("Error al actualizar:" + e);
+            mensajeSw = "swal('Problemas al actualizar el producto' , ' Verifique los campos  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
-    public void eliminarprod(CrearProducto prorem){
+    public void eliminarprod(CrearProducto prorem) {
+        String mensajeSw = " ";
         try {
             crearProductoFacadeLocal.remove(prorem);
             listaCrearProducto.remove(prorem);
             listaCrearProducto.clear();
             listaCrearProducto.addAll(crearProductoFacadeLocal.findAll());
+            mensajeSw = "swal('Producto removido' , ' con exito ', 'success')";
         } catch (Exception e) {
-            System.out.println("Error el aliminar por llave forane con ventas:" + e);
+            mensajeSw = "swal('Problemas al eliminar el producto' , ' El producto tiene ventas registradas  ', 'error')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
-    
-     public void insertarXLS(List cellDataList) {
+
+    public void insertarXLS(List cellDataList) {
         try {
             int filasContador = 0;
             for (int i = 0; i < cellDataList.size(); i++) {
@@ -142,23 +177,28 @@ public class ProductosView implements Serializable {
                             filasContador++;
                             break;
                         case 3:
-                            newP.setPrecioProveedor(hssfCell.toString());
+                            newP.setCantidad(hssfCell.toString());
                             filasContador++;
                             break;
                         case 4:
-                            newP.setPrecioPublico(hssfCell.toString());
+                            newP.setPrecioProveedor(hssfCell.toString());
                             filasContador++;
                             break;
                         case 5:
-                            newP.setFechaRegistro(hssfCell.toString());
+                            newP.setPrecioPublico(hssfCell.toString());
                             filasContador++;
                             break;
                         case 6:
+                            newP.setFechaRegistro(hssfCell.toString());
+                            filasContador++;
+                            break;
+                        case 7:
                             Proveedor nueva = proveedorFacadeLocal.find((int) Math.floor(hssfCell.getNumericCellValue()));
                             newP.setProveedorIdProveedor(nueva);
                             crearProductoFacadeLocal.create(newP);
-                            filasContador=0;
+                            filasContador = 0;
                             break;
+
                     }
 
                 }
@@ -206,10 +246,9 @@ public class ProductosView implements Serializable {
         PrimeFaces.current().executeScript(mensajeSw);
     }
 
-    
-    public void reporteProductos(){
-        
-         FacesContext facesContext = FacesContext.getCurrentInstance();
+    public void reporteProductos() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
 
@@ -222,11 +261,11 @@ public class ProductosView implements Serializable {
             parametro.put("imgUsuario", context.getRealPath("/images/AYT.png"));
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/versionbarber", "root", "");
             System.out.println("Catalogo : " + conec.getCatalog());
-            
+
             File jasper = new File(context.getRealPath("/WEB-INF/classes/edu/proyectofinal/reports/listaproductos.jasper"));
-             
+
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
-            
+
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
             hsr.addHeader("Content-disposition", "attachment; filename=Lista De Productos.pdf");
             OutputStream os = hsr.getOutputStream();
@@ -234,20 +273,17 @@ public class ProductosView implements Serializable {
             os.flush();
             os.close();
             facesContext.responseComplete();
-           
+
         } catch (JRException e) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + e.getMessage());
-        } catch(IOException i){
+        } catch (IOException i) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + i.getMessage());
-        } catch (SQLException q){
+        } catch (SQLException q) {
             System.out.println("edu.webapp1966781a.controlador.AdministradorView.descargaReporte() " + q.getMessage());
         }
 
-        
     }
-    
-     
-     
+
     public ArrayList<Proveedor> getListaproveedor() {
         return listaproveedor;
     }
@@ -296,7 +332,6 @@ public class ProductosView implements Serializable {
         this.archivoExcel = archivoExcel;
     }
 
- 
     public CrearProducto getObjProductoNew() {
         return objProductoNew;
     }

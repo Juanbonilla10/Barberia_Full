@@ -10,7 +10,7 @@
 
     <h:body>
 
-        <ui:composition>
+        
             <section class="content">
                 <div class="container-fluid">
                     <div class="block-header">
@@ -24,6 +24,9 @@
                                     <h2>
                                         <small>En este modulo podras generar el ingreso de productos </small>
                                     </h2>
+                                    <h:form>
+                                        <h:commandButton class="btn btn-primary" value="actualizar" action="#{productosView.actuapag()}"></h:commandButton>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +136,25 @@
                 </div>
             </section>
 
-        </ui:composition>    
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+            <!-- Jquery Core Js -->
+            <script src="plugins/jquery/jquery.min.js"></script>
+
+            <!-- Bootstrap Core Js -->
+            <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+            <!-- Waves Effect Plugin Js -->
+            <script src="plugins/node-waves/waves.js"></script>
+
+            <!-- Validation Plugin Js -->
+            <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+            <!-- Custom Js -->
+            <script src="js/admin.js"></script>
+            <script src="js/pages/examples/sign-in.js"></script>
 
 
     </h:body>

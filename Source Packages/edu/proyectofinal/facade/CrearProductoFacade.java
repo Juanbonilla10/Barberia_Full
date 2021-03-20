@@ -36,13 +36,12 @@ public class CrearProductoFacade extends AbstractFacade<CrearProducto> implement
     public CrearProducto ingreso(int idingresi,int ingreso){
         try {
            StoredProcedureQuery qm = em.createStoredProcedureQuery("sp_consultaCantdad");
-           qm.registerStoredProcedureParameter("idingresi", String.class , ParameterMode.IN);
-           qm.registerStoredProcedureParameter("ingreso", String.class , ParameterMode.IN);
-           qm.registerStoredProcedureParameter("salida", Long.class, ParameterMode.OUT);
+           qm.registerStoredProcedureParameter("idingresi", int.class , ParameterMode.IN);
+           qm.registerStoredProcedureParameter("ingreso", int.class , ParameterMode.IN);
            qm.setParameter("idingresi", idingresi);
            qm.setParameter("ingreso", ingreso);
            qm.execute();
-           return (CrearProducto) qm.getOutputParameterValue("salida");      
+           return new CrearProducto();
         } catch (Exception e) {
             System.out.println("Error al ingresar mas productos" + e.getMessage());
             return new CrearProducto();

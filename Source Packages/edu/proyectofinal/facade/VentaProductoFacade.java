@@ -51,14 +51,35 @@ public class VentaProductoFacade extends AbstractFacade<VentaProducto> implement
      */
    
     @Override
-    public int validaStock(int descripcionProducto){
+    public String validaStock(int descripcionProducto){
         try {
             Query ex = em.createQuery("select u.cantidad from CrearProducto u where u.idCrearProducto = :descripcionProducto");
             ex.setParameter("descripcionProducto", descripcionProducto);
-            return   (int) ex.getSingleResult();
+            return   (String) ex.getSingleResult();
         } catch (Exception e) {
-            System.out.println("Error" + e.getMessage());
-            return 7;
+            System.out.println("Error no sale x" + e.getMessage());
+            return "0";
+        }
+    }
+    
+
+
+    @Override
+    public VentaProducto actualizaInvenatrio(int cantidadActulizada,int idProducto){
+        try {  
+            
+            Query ul = em.createNativeQuery("UPDATE CrearProducto SET Cantidad = ?1 WHERE idCrearProducto = ?2");
+            ul.setParameter(1, "cantidadActulizada");
+            ul.setParameter(2, "idProducto");
+            ul.executeUpdate();
+            return new VentaProducto();
+//            Query el = em.createQuery("update CrearProducto l set l.cantidad =:cantidadActulizada where l.idCrearProducto =:idProducto ");
+//            el.setParameter("idProducto", idProducto).executeUpdate();
+//            el.setParameter("cantidadActulizada",cantidadActulizada).executeUpdate();           
+            
+        } catch (Exception e){           
+            System.out.println("Error al actualizar tabla de productos" + e.getMessage() );            
+            return new VentaProducto();
         }
     }
     

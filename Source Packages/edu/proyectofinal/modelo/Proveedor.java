@@ -34,20 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "proveedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")
-    , @NamedQuery(name = "Proveedor.findByIdProveedor", query = "SELECT p FROM Proveedor p WHERE p.idProveedor = :idProveedor")
-    , @NamedQuery(name = "Proveedor.findByNombre", query = "SELECT p FROM Proveedor p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Proveedor.findByRazon", query = "SELECT p FROM Proveedor p WHERE p.razon = :razon")
-    , @NamedQuery(name = "Proveedor.findByFechar", query = "SELECT p FROM Proveedor p WHERE p.fechar = :fechar")
-    , @NamedQuery(name = "Proveedor.findByNumCel", query = "SELECT p FROM Proveedor p WHERE p.numCel = :numCel")
-    , @NamedQuery(name = "Proveedor.findByNumTel", query = "SELECT p FROM Proveedor p WHERE p.numTel = :numTel")
-    , @NamedQuery(name = "Proveedor.findByDiaPago", query = "SELECT p FROM Proveedor p WHERE p.diaPago = :diaPago")
-    , @NamedQuery(name = "Proveedor.findByCiudad", query = "SELECT p FROM Proveedor p WHERE p.ciudad = :ciudad")
-    , @NamedQuery(name = "Proveedor.findByDirecccion", query = "SELECT p FROM Proveedor p WHERE p.direcccion = :direcccion")
-    , @NamedQuery(name = "Proveedor.findByEmail", query = "SELECT p FROM Proveedor p WHERE p.email = :email")
-    , @NamedQuery(name = "Proveedor.findByUsuariosidUsuarios", query = "SELECT p FROM Proveedor p WHERE p.usuariosidUsuarios = :usuariosidUsuarios")
-    , @NamedQuery(name = "Proveedor.findByCrearproductoidCrearProducto", query = "SELECT p FROM Proveedor p WHERE p.crearproductoidCrearProducto = :crearproductoidCrearProducto")
-    , @NamedQuery(name = "Proveedor.findByNit", query = "SELECT p FROM Proveedor p WHERE p.nit = :nit")})
+    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")})
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,10 +52,12 @@ public class Proveedor implements Serializable {
     @Size(max = 45)
     @Column(name = "fechar")
     private String fechar;
+    @Size(max = 20)
     @Column(name = "num_cel")
-    private Integer numCel;
+    private String numCel;
+    @Size(max = 20)
     @Column(name = "num_tel")
-    private Integer numTel;
+    private String numTel;
     @Size(max = 45)
     @Column(name = "dia_pago")
     private String diaPago;
@@ -147,19 +136,19 @@ public class Proveedor implements Serializable {
         this.fechar = fechar;
     }
 
-    public Integer getNumCel() {
+    public String getNumCel() {
         return numCel;
     }
 
-    public void setNumCel(Integer numCel) {
+    public void setNumCel(String numCel) {
         this.numCel = numCel;
     }
 
-    public Integer getNumTel() {
+    public String getNumTel() {
         return numTel;
     }
 
-    public void setNumTel(Integer numTel) {
+    public void setNumTel(String numTel) {
         this.numTel = numTel;
     }
 

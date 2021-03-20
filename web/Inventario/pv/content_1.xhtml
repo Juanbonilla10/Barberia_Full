@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
-        <ui:composition>
+
 
             <section class="content">
                 <div class="container-fluid">
@@ -62,7 +62,6 @@
                                                             <th scope="col">Referencia</th>
                                                             <th scope="col">Codigo Barras</th>
                                                             <th scope="col">Descripcion</th>
-                                                            <th scope="col">Cantidad</th>
                                                             <th scope="col">Proveedor</th>
                                                             <th scope="col">Precio proveedor</th>
                                                             <th scope="col">Precio publico</th>
@@ -77,7 +76,6 @@
                                                                 <td>#{objpro.referencia}</td>
                                                                 <td>#{objpro.codigoBarras}</td>
                                                                 <td>#{objpro.descripcion}</td>
-                                                                <td>#{objpro.cantidad}</td>
                                                                 <td>#{objpro.proveedorIdProveedor.nombre}</td>
                                                                 <td>#{objpro.precioProveedor}</td>
                                                                 <td>#{objpro.precioPublico}</td>
@@ -128,7 +126,8 @@
                                             <label for="exampleInputDescrip">Descripcion</label>
                                             <h:inputText value="#{productosView.objcrpro.descripcion}" requiredMessage="Ingrese una descripcion valida  " required="true" html5:type="text" class="form-control" id="exampleInputDescrip"  html5:placeholder="Descripcion"/>
                                             <h:message style="color: red" for="exampleInputDescrip"></h:message>
-                                        </div>                                        <div class="col-md-4">
+                                        </div>                                       
+                                        <div class="col-md-4">
                                             <label for="exampleInputCant">Cantidad</label>
                                             <h:inputText value="#{productosView.objcrpro.cantidad}" requiredMessage="Ingrese una cantidad valida " required="true" html5:type="number" class="form-control" id="exampleInputCant"  html5:placeholder="Cantidad"/>
                                             <h:message style="color: red" for="exampleInputCant"></h:message>
@@ -237,7 +236,25 @@
                 </button>
 
             </section>
-        </ui:composition>
+         <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+            <!-- Jquery Core Js -->
+            <script src="plugins/jquery/jquery.min.js"></script>
+
+            <!-- Bootstrap Core Js -->
+            <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+            <!-- Waves Effect Plugin Js -->
+            <script src="plugins/node-waves/waves.js"></script>
+
+            <!-- Validation Plugin Js -->
+            <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+            <!-- Custom Js -->
+            <script src="js/admin.js"></script>
+            <script src="js/pages/examples/sign-in.js"></script>
     </h:body>
 
 

@@ -78,6 +78,7 @@ public class PagoempleadosView implements Serializable {
     }
 
     public void crearPago() {
+        String mensajeSw = "";
         try {
 
             objpago.setServiciosIdservicio(serviciosFacadeLocal.find(objpago.getServiciosIdservicio().getIdservicio()));
@@ -87,10 +88,13 @@ public class PagoempleadosView implements Serializable {
             listapagoservicios.add(objpago);
             
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        mensajeSw = "swal('Pago creado' , ' con exito ', 'success')";
 
+        } catch (Exception e) {
+            //System.out.println("Error al regustrar" + getClientedocu() + e);
+            System.out.println("Error" + e);
+        } 
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void cargaDatos(PagoServicio pagoS) {

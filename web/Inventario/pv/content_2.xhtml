@@ -7,64 +7,91 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
-        <ui:composition>
+        <script >
+            function desarrollo() {
+                Swal.fire(
+                        '=D',
+                        'Orden de compra enviada!',
+                        'success'
+                        )
+            }
 
-           <section class="content">
-                <div class="container-fluid">
-                    <div class="block-header">
-                        <h2>Orden de compra</h2>
-                    </div>
-                    <!-- Bootstrap Default Buttons -->
-                    <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h2>
-                                        ORDEN COMPRA
-                                        <small>En este modulo podras realizar la solicitud de productos a proveedores </small>
-                                    </h2>
+        </script>
 
-                                   
-                                </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <h2>Orden de compra</h2>
+                </div>
+                <!-- Bootstrap Default Buttons -->
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>
+                                    ORDEN COMPRA
+                                    <small>En este modulo podras realizar la solicitud de productos a proveedores </small>
+                                </h2>
+
+
                             </div>
                         </div>
                     </div>
-                    <h:form id="formModal">
-                                    <div class="modal-body">
-                                        <div class="col-md-4">
-                                            <label for="exampleInputCorreo">Correo Proveedor</label>
-                                            <h:inputText value="#{ordenCompraRequest.correoing}" requiredMessage="Ingrese un correo valido" required="true" html5:type="Email" class="form-control" id="exampleInputCorreo"  html5:placeholder="Correo"/>
-                                        <h:message style="color: red" for="exampleInputCorreo"></h:message>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputdes">Descripcion</label>
-                                            <h:inputText value="#{ordenCompraRequest.mensaje}" requiredMessage="Ingrese una descripcion valida" required="true" html5:type="text" class="form-control" id="exampleInputdes"  html5:placeholder="Descripcion"/>
-                                        <h:message style="color: red" for="exampleInputdes"></h:message>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputCan">Cantidad</label>
-                                            <h:inputText value="#{ordenCompraRequest.cantidad}" requiredMessage="Ingrese una cantidad valida" required="true" html5:type="text" class="form-control" id="exampleInputCan"  html5:placeholder="Cantidad"/>
-                                        <h:message style="color: red" for="exampleInputCan"></h:message>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputbar">Codigo de barras</label>
-                                            <h:inputText value="#{ordenCompraRequest.codigo}" requiredMessage="Ingrese un codigo de barras valido" required="true" html5:type="number" class="form-control" id="exampleInputbar"  html5:placeholder="Cod. Barras"/>
-                                        <h:message style="color: red" for="exampleInputbar"></h:message>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleInputUsuario">Lo solicita</label>
-                                            <h:inputText value="#{ordenCompraRequest.usuario}" requiredMessage="Ingrese un usuario valido" required="true" html5:type="text" class="form-control" id="exampleInputUsuario"  html5:placeholder="Usuario solicitante"/>
-                                        <h:message style="color: red" for="exampleInputUsuario"></h:message>
-                                        </div>
-                                        <div class="modal-footer" >
-                                            <h:commandButton type="submit" action="#{ordenCompraRequest.enviarOrden()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Enviar" />
-                                        </div> 
-                                    </div>
-                                </h:form>
-                              </div>
-                      </section>
-                              </ui:composition>
-                        </h:body>
+                </div>
+                <h:form id="formModal">
+                    <div class="modal-body">
+                        <div class="col-md-4">
+                            <label for="exampleInputCorreo">Correo Proveedor</label>
+                            <h:inputText value="#{ordenCompraRequest.correoing}" requiredMessage="Ingrese un correo valido" required="true" html5:type="Email" class="form-control" id="exampleInputCorreo"  html5:placeholder="Correo"/>
+                            <h:message style="color: red" for="exampleInputCorreo"></h:message>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="exampleInputdes">Descripcion</label>
+                            <h:inputText value="#{ordenCompraRequest.mensaje}" requiredMessage="Ingrese una descripcion valida" required="true" html5:type="text" class="form-control" id="exampleInputdes"  html5:placeholder="Descripcion"/>
+                            <h:message style="color: red" for="exampleInputdes"></h:message>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="exampleInputCan">Cantidad</label>
+                            <h:inputText value="#{ordenCompraRequest.cantidad}" requiredMessage="Ingrese una cantidad valida" required="true" html5:type="text" class="form-control" id="exampleInputCan"  html5:placeholder="Cantidad"/>
+                            <h:message style="color: red" for="exampleInputCan"></h:message>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="exampleInputbar">Codigo de barras</label>
+                            <h:inputText value="#{ordenCompraRequest.codigo}" requiredMessage="Ingrese un codigo de barras valido" required="true" html5:type="number" class="form-control" id="exampleInputbar"  html5:placeholder="Cod. Barras"/>
+                            <h:message style="color: red" for="exampleInputbar"></h:message>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="exampleInputUsuario">Lo solicita</label>
+                            <h:inputText value="#{ordenCompraRequest.usuario}" requiredMessage="Ingrese un usuario valido" required="true" html5:type="text" class="form-control" id="exampleInputUsuario"  html5:placeholder="Usuario solicitante"/>
+                            <h:message style="color: red" for="exampleInputUsuario"></h:message>
+                        </div>
+                        <div class="modal-footer" >
+                            <h:commandButton type="submit" action="#{ordenCompraRequest.enviarOrden()}"  class="btn btn-primary btn-flat m-b-30 m-t-30" value="Enviar" onclick="desarrollo()" />
+                        </div> 
+                    </div>
+                </h:form>
+            </div>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Validation Plugin Js -->
+        <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+        <!-- Custom Js -->
+        <script src="js/admin.js"></script>
+        <script src="js/pages/examples/sign-in.js"></script>
+    </h:body>
 
 
 

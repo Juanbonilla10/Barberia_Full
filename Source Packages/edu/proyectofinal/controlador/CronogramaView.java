@@ -96,7 +96,6 @@ public class CronogramaView implements Serializable {
 
         try {
             listahoras.addAll(horariosCronogramaFacadeLocal.listardisponibles(disponibles));
-            //listahoras.addAll(horariosCronogramaFacadeLocal.findAll());
             listacronograma.addAll(cronogramaFacadeLocal.findAll());
             listacategoria.addAll(categoriaServicioFacadeLocal.findAll());
             listausuarios.addAll(usuariosFacadeLocal.lista(3)); //FUNCION RETORNA UNA LISTA DE SOLO PERSONAS DE UN ROL//
@@ -109,7 +108,9 @@ public class CronogramaView implements Serializable {
     }
 
     public void registrarDatos() {
-
+        
+        String mensajeSw = "";
+        
         try {
                                  //ACTUALIZA ESTADO DE LA CITA CUANDO SE CREA//
             horariosCronogramaFacadeLocal.actualizaEstadoCita(cronograma.getTurno());
@@ -124,22 +125,31 @@ public class CronogramaView implements Serializable {
             
             System.out.println("variable hora:" + horariosCronograma.getHora());
             
+             mensajeSw = "swal('¡Cronograma creado con exito!','','success')";
+            
 
 
         }catch (Exception e) {
             System.out.println("Error al registrar" + e.getMessage());
+            mensajeSw = "swal(¡Error al crear cronograma!','','warning')";
         }
+        
+        PrimeFaces.current().executeScript(mensajeSw);
 
     }
 
     public void eliminarCrono() {
+        String mensajeSw = "";
         try {
             cronogramaFacadeLocal.eliminarDatos(idcronogram);
             listacronograma.clear();
             listacronograma.addAll(cronogramaFacadeLocal.findAll());
+            mensajeSw = "swal('¡Cronograma creado con exito!','','success')";
         } catch (Exception e) {
             System.out.println("Error al eliminar cronograma" + e.getMessage());
+            mensajeSw = "swal('¡Error al crear cronograma!','','warning')";
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     public void retornarDatos(Cronograma objcronm) {
@@ -147,6 +157,9 @@ public class CronogramaView implements Serializable {
     }
 
     public void actualizarDatos() {
+        
+        String mensajeSw = "";
+        
         try {
             //ACTUALIZA DATSO DE LAS CITAS
             cronograma.setUsuariosidUsuarios(usuariosFacadeLocal.find(cronograma.getUsuariosidUsuarios().getIdUsuarios()));
@@ -154,10 +167,15 @@ public class CronogramaView implements Serializable {
             cronogramaFacadeLocal.edit(cronograma);
             listacronograma.clear();
             listacronograma.addAll(cronogramaFacadeLocal.findAll());
+            mensajeSw = "swal(¡Cronograma actualizado con exito!','','success')";
         } catch (Exception e) {
 
             System.out.println("Error al actulizar los datos" + e.getMessage());
+            
+            mensajeSw = "swal(¡Error al actualizar cronograma!','','warning')";
+            
         }
+        PrimeFaces.current().executeScript(mensajeSw);
     }
 
     //INSERTAR ARCHIVO EXCEL//
